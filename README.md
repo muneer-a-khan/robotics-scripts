@@ -24,7 +24,7 @@ This system provides real-time analysis of Snap Circuit boards through:
 1. **Clone and setup environment:**
 ```bash
 git clone <repository-url>
-cd snap-circuit-vision
+cd robotics-scripts
 pip install -r requirements.txt
 ```
 
