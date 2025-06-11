@@ -1,0 +1,19 @@
+{
+  "connection_graph": {
+    "components": [],
+    "edges": [],
+    "state": {
+      "is_circuit_closed": false,
+      "power_on": false,
+      "active_components": [],
+      "power_flow_path": [],
+      "estimated_voltage": null,
+      "estimated_current": null
+    },
+    "timestamp": 1749496795.8888574,
+    "frame_id": null
+  },
+  "raw_detections": [],
+  "processing_time": 0.0015423297882080078,
+  "error_message": "Invalid CUDA 'device=auto' requested. Use 'device=cpu' or pass valid CUDA device(s) if available, i.e. 'device=0' or 'device=0,1,2,3' for Multi-GPU.\n\ntorch.cuda.is_available(): False\ntorch.cuda.device_count(): 0\nos.environ['CUDA_VISIBLE_DEVICES']: None\nSee https://pytorch.org/get-started/locally/ for up-to-date torch install instructions if no CUDA devices are seen by torch.\n"
+}

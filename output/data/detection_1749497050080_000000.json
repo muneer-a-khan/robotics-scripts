@@ -1,0 +1,59 @@
+{
+  "connection_graph": {
+    "components": [
+      {
+        "id": "battery_holder-0",
+        "label": "battery_holder",
+        "bbox": [
+          1551.46826171875,
+          1028.9228515625,
+          2700.697998046875,
+          1986.8017578125
+        ],
+        "orientation": 0.0,
+        "confidence": 0.9603895545005798,
+        "component_type": "battery_holder",
+        "switch_state": null,
+        "connection_points": [],
+        "metadata": {
+          "yolo_class_id": 3,
+          "detection_index": 0
+        }
+      }
+    ],
+    "edges": [],
+    "state": {
+      "is_circuit_closed": false,
+      "power_on": true,
+      "active_components": [],
+      "power_flow_path": [],
+      "estimated_voltage": 1.5,
+      "estimated_current": null
+    },
+    "timestamp": 1749497047.6304197,
+    "frame_id": 0
+  },
+  "raw_detections": [
+    {
+      "id": "battery_holder-0",
+      "label": "battery_holder",
+      "bbox": [
+        1551.46826171875,
+        1028.9228515625,
+        2700.697998046875,
+        1986.8017578125
+      ],
+      "orientation": 0.0,
+      "confidence": 0.9603895545005798,
+      "component_type": "battery_holder",
+      "switch_state": null,
+      "connection_points": [],
+      "metadata": {
+        "yolo_class_id": 3,
+        "detection_index": 0
+      }
+    }
+  ],
+  "processing_time": 2.4503135681152344,
+  "error_message": null
+}

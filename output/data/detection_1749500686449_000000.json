@@ -1,0 +1,19 @@
+{
+  "connection_graph": {
+    "components": [],
+    "edges": [],
+    "state": {
+      "is_circuit_closed": false,
+      "power_on": true,
+      "active_components": [],
+      "power_flow_path": [],
+      "estimated_voltage": null,
+      "estimated_current": null
+    },
+    "timestamp": 1749500686.0099173,
+    "frame_id": 0
+  },
+  "raw_detections": [],
+  "processing_time": 0.4398641586303711,
+  "error_message": null
+}

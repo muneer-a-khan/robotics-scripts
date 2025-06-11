@@ -1,0 +1,27 @@
+# Snap Circuit Dataset Configuration
+path: data/training  # dataset root dir
+train: images/train  # train images (relative to 'path')
+val: images/val      # val images (relative to 'path')
+test: images/test    # test images (relative to 'path')
+
+# Number of classes
+nc: 16
+
+# Class names
+names:
+  0: wire
+  1: switch
+  2: button
+  3: battery_holder
+  4: led
+  5: speaker
+  6: music_circuit
+  7: motor
+  8: resistor
+  9: connection_node
+  10: lamp
+  11: fan
+  12: buzzer
+  13: photoresistor
+  14: microphone
+  15: alarm
