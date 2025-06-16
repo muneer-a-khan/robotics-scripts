@@ -1,0 +1,59 @@
+{
+  "connection_graph": {
+    "components": [
+      {
+        "id": "wire-0",
+        "label": "wire",
+        "bbox": [
+          1430.4129638671875,
+          166.380615234375,
+          1918.3245849609375,
+          1069.4649658203125
+        ],
+        "orientation": 90.0,
+        "confidence": 0.917828381061554,
+        "component_type": "wire",
+        "switch_state": null,
+        "connection_points": [],
+        "metadata": {
+          "yolo_class_id": 0,
+          "detection_index": 0
+        }
+      }
+    ],
+    "edges": [],
+    "state": {
+      "is_circuit_closed": false,
+      "power_on": true,
+      "active_components": [],
+      "power_flow_path": [],
+      "estimated_voltage": null,
+      "estimated_current": null
+    },
+    "timestamp": 1749675455.682924,
+    "frame_id": 52
+  },
+  "raw_detections": [
+    {
+      "id": "wire-0",
+      "label": "wire",
+      "bbox": [
+        1430.4129638671875,
+        166.380615234375,
+        1918.3245849609375,
+        1069.4649658203125
+      ],
+      "orientation": 90.0,
+      "confidence": 0.917828381061554,
+      "component_type": "wire",
+      "switch_state": null,
+      "connection_points": [],
+      "metadata": {
+        "yolo_class_id": 0,
+        "detection_index": 0
+      }
+    }
+  ],
+  "processing_time": 0.026425838470458984,
+  "error_message": null
+}
