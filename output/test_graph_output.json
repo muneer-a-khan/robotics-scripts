@@ -1,0 +1,2120 @@
+{
+  "graph": {
+    "directed": true,
+    "timestamp": 1750170744.399807,
+    "nodes": [
+      {
+        "id": "battery_holder_0",
+        "component_type": "battery_holder",
+        "state": "powered_on",
+        "position": {
+          "x": 2244.2640380859375,
+          "y": 1436.8084106445312,
+          "width": 1413.423095703125,
+          "height": 1316.0887451171875
+        },
+        "placement_correctness": 0.6809716820716858,
+        "functional_state": 1.0,
+        "learning_context": {
+          "skill_level": "beginner",
+          "session_id": "demo",
+          "attempts": 1,
+          "component_familiarity": 0.5
+        },
+        "accessibility": 0.8600000000000001,
+        "placement_confidence": 0.6809716820716858,
+        "recommended_action": null,
+        "electrical_props": {
+          "voltage": 3.0,
+          "current_capacity": 1.0,
+          "internal_resistance": 0.1
+        },
+        "timestamp": 1750170744.399807,
+        "detection_confidence": 0.6809716820716858
+      },
+      {
+        "id": "connection_node_1",
+        "component_type": "connection_node",
+        "state": "unknown",
+        "position": {
+          "x": 1465.619384765625,
+          "y": 2294.251220703125,
+          "width": 144.53662109375,
+          "height": 194.4375
+        },
+        "placement_correctness": 0.6472671627998352,
+        "functional_state": 0.0,
+        "learning_context": {
+          "skill_level": "beginner",
+          "session_id": "demo",
+          "attempts": 1,
+          "component_familiarity": 0.5
+        },
+        "accessibility": 0.8600000000000001,
+        "placement_confidence": 0.6472671627998352,
+        "recommended_action": null,
+        "electrical_props": {
+          "resistance": 1.0
+        },
+        "timestamp": 1750170744.399807,
+        "detection_confidence": 0.6472671627998352
+      },
+      {
+        "id": "connection_node_2",
+        "component_type": "connection_node",
+        "state": "unknown",
+        "position": {
+          "x": 1683.6304321289062,
+          "y": 2268.086669921875,
+          "width": 145.3978271484375,
+          "height": 203.09423828125
+        },
+        "placement_correctness": 0.5876977443695068,
+        "functional_state": 0.0,
+        "learning_context": {
+          "skill_level": "beginner",
+          "session_id": "demo",
+          "attempts": 1,
+          "component_familiarity": 0.5
+        },
+        "accessibility": 0.8600000000000001,
+        "placement_confidence": 0.5876977443695068,
+        "recommended_action": null,
+        "electrical_props": {
+          "resistance": 1.0
+        },
+        "timestamp": 1750170744.399807,
+        "detection_confidence": 0.5876977443695068
+      },
+      {
+        "id": "connection_node_3",
+        "component_type": "connection_node",
+        "state": "unknown",
+        "position": {
+          "x": 1465.0305786132812,
+          "y": 2379.5943603515625,
+          "width": 136.1827392578125,
+          "height": 156.882568359375
+        },
+        "placement_correctness": 0.5266035795211792,
+        "functional_state": 0.0,
+        "learning_context": {
+          "skill_level": "beginner",
+          "session_id": "demo",
+          "attempts": 1,
+          "component_familiarity": 0.5
+        },
+        "accessibility": 0.8600000000000001,
+        "placement_confidence": 0.5266035795211792,
+        "recommended_action": null,
+        "electrical_props": {
+          "resistance": 1.0
+        },
+        "timestamp": 1750170744.399807,
+        "detection_confidence": 0.5266035795211792
+      },
+      {
+        "id": "connection_node_4",
+        "component_type": "connection_node",
+        "state": "unknown",
+        "position": {
+          "x": 1970.1663208007812,
+          "y": 2290.0218505859375,
+          "width": 165.7244873046875,
+          "height": 232.248291015625
+        },
+        "placement_correctness": 0.4936564862728119,
+        "functional_state": 0.0,
+        "learning_context": {
+          "skill_level": "beginner",
+          "session_id": "demo",
+          "attempts": 1,
+          "component_familiarity": 0.5
+        },
+        "accessibility": 0.8600000000000001,
+        "placement_confidence": 0.4936564862728119,
+        "recommended_action": null,
+        "electrical_props": {
+          "resistance": 1.0
+        },
+        "timestamp": 1750170744.399807,
+        "detection_confidence": 0.4936564862728119
+      },
+      {
+        "id": "connection_node_5",
+        "component_type": "connection_node",
+        "state": "unknown",
+        "position": {
+          "x": 2543.41748046875,
+          "y": 2860.3885498046875,
+          "width": 151.41357421875,
+          "height": 245.412353515625
+        },
+        "placement_correctness": 0.470491886138916,
+        "functional_state": 0.0,
+        "learning_context": {
+          "skill_level": "beginner",
+          "session_id": "demo",
+          "attempts": 1,
+          "component_familiarity": 0.5
+        },
+        "accessibility": 0.8600000000000001,
+        "placement_confidence": 0.470491886138916,
+        "recommended_action": null,
+        "electrical_props": {
+          "resistance": 1.0
+        },
+        "timestamp": 1750170744.399807,
+        "detection_confidence": 0.470491886138916
+      },
+      {
+        "id": "connection_node_6",
+        "component_type": "connection_node",
+        "state": "unknown",
+        "position": {
+          "x": 2609.7747802734375,
+          "y": 2875.3955078125,
+          "width": 160.567138671875,
+          "height": 273.63427734375
+        },
+        "placement_correctness": 0.447039932012558,
+        "functional_state": 0.0,
+        "learning_context": {
+          "skill_level": "beginner",
+          "session_id": "demo",
+          "attempts": 1,
+          "component_familiarity": 0.5
+        },
+        "accessibility": 0.8600000000000001,
+        "placement_confidence": 0.447039932012558,
+        "recommended_action": null,
+        "electrical_props": {
+          "resistance": 1.0
+        },
+        "timestamp": 1750170744.399807,
+        "detection_confidence": 0.447039932012558
+      },
+      {
+        "id": "connection_node_7",
+        "component_type": "connection_node",
+        "state": "unknown",
+        "position": {
+          "x": 1749.9603881835938,
+          "y": 2261.4969482421875,
+          "width": 134.7498779296875,
+          "height": 193.861572265625
+        },
+        "placement_correctness": 0.42712852358818054,
+        "functional_state": 0.0,
+        "learning_context": {
+          "skill_level": "beginner",
+          "session_id": "demo",
+          "attempts": 1,
+          "component_familiarity": 0.5
+        },
+        "accessibility": 0.8600000000000001,
+        "placement_confidence": 0.42712852358818054,
+        "recommended_action": null,
+        "electrical_props": {
+          "resistance": 1.0
+        },
+        "timestamp": 1750170744.399807,
+        "detection_confidence": 0.42712852358818054
+      },
+      {
+        "id": "connection_node_8",
+        "component_type": "connection_node",
+        "state": "unknown",
+        "position": {
+          "x": 1420.5139770507812,
+          "y": 2302.06640625,
+          "width": 100.7630615234375,
+          "height": 163.1259765625
+        },
+        "placement_correctness": 0.4199759364128113,
+        "functional_state": 0.0,
+        "learning_context": {
+          "skill_level": "beginner",
+          "session_id": "demo",
+          "attempts": 1,
+          "component_familiarity": 0.5
+        },
+        "accessibility": 0.8600000000000001,
+        "placement_confidence": 0.4199759364128113,
+        "recommended_action": null,
+        "electrical_props": {
+          "resistance": 1.0
+        },
+        "timestamp": 1750170744.399807,
+        "detection_confidence": 0.4199759364128113
+      },
+      {
+        "id": "connection_node_9",
+        "component_type": "connection_node",
+        "state": "unknown",
+        "position": {
+          "x": 2753.15966796875,
+          "y": 2866.5804443359375,
+          "width": 161.9765625,
+          "height": 231.782470703125
+        },
+        "placement_correctness": 0.3773036003112793,
+        "functional_state": 0.0,
+        "learning_context": {
+          "skill_level": "beginner",
+          "session_id": "demo",
+          "attempts": 1,
+          "component_familiarity": 0.5
+        },
+        "accessibility": 0.8600000000000001,
+        "placement_confidence": 0.3773036003112793,
+        "recommended_action": null,
+        "electrical_props": {
+          "resistance": 1.0
+        },
+        "timestamp": 1750170744.399807,
+        "detection_confidence": 0.3773036003112793
+      },
+      {
+        "id": "led_10",
+        "component_type": "led",
+        "state": "inactive",
+        "position": {
+          "x": 2129.6131591796875,
+          "y": 3701.7225341796875,
+          "width": 268.713623046875,
+          "height": 343.938720703125
+        },
+        "placement_correctness": 0.36460188031196594,
+        "functional_state": 0.0,
+        "learning_context": {
+          "skill_level": "beginner",
+          "session_id": "demo",
+          "attempts": 1,
+          "component_familiarity": 0.5
+        },
+        "accessibility": 0.8600000000000001,
+        "placement_confidence": 0.36460188031196594,
+        "recommended_action": null,
+        "electrical_props": {
+          "forward_voltage": 2.0,
+          "current_draw": 0.02,
+          "resistance": 100.0
+        },
+        "timestamp": 1750170744.399807,
+        "detection_confidence": 0.36460188031196594
+      },
+      {
+        "id": "connection_node_11",
+        "component_type": "connection_node",
+        "state": "unknown",
+        "position": {
+          "x": 1699.0867919921875,
+          "y": 2161.808349609375,
+          "width": 216.969970703125,
+          "height": 381.06640625
+        },
+        "placement_correctness": 0.3435978591442108,
+        "functional_state": 0.0,
+        "learning_context": {
+          "skill_level": "beginner",
+          "session_id": "demo",
+          "attempts": 1,
+          "component_familiarity": 0.5
+        },
+        "accessibility": 0.8600000000000001,
+        "placement_confidence": 0.3435978591442108,
+        "recommended_action": null,
+        "electrical_props": {
+          "resistance": 1.0
+        },
+        "timestamp": 1750170744.399807,
+        "detection_confidence": 0.3435978591442108
+      },
+      {
+        "id": "connection_node_12",
+        "component_type": "connection_node",
+        "state": "unknown",
+        "position": {
+          "x": 1675.2916870117188,
+          "y": 2449.5684814453125,
+          "width": 145.9764404296875,
+          "height": 187.636962890625
+        },
+        "placement_correctness": 0.3151480257511139,
+        "functional_state": 0.0,
+        "learning_context": {
+          "skill_level": "beginner",
+          "session_id": "demo",
+          "attempts": 1,
+          "component_familiarity": 0.5
+        },
+        "accessibility": 0.8600000000000001,
+        "placement_confidence": 0.3151480257511139,
+        "recommended_action": null,
+        "electrical_props": {
+          "resistance": 1.0
+        },
+        "timestamp": 1750170744.399807,
+        "detection_confidence": 0.3151480257511139
+      },
+      {
+        "id": "led_13",
+        "component_type": "led",
+        "state": "inactive",
+        "position": {
+          "x": 1986.9446411132812,
+          "y": 3703.822998046875,
+          "width": 284.4705810546875,
+          "height": 368.57080078125
+        },
+        "placement_correctness": 0.3128739297389984,
+        "functional_state": 0.0,
+        "learning_context": {
+          "skill_level": "beginner",
+          "session_id": "demo",
+          "attempts": 1,
+          "component_familiarity": 0.5
+        },
+        "accessibility": 0.8600000000000001,
+        "placement_confidence": 0.3128739297389984,
+        "recommended_action": null,
+        "electrical_props": {
+          "forward_voltage": 2.0,
+          "current_draw": 0.02,
+          "resistance": 100.0
+        },
+        "timestamp": 1750170744.399807,
+        "detection_confidence": 0.3128739297389984
+      },
+      {
+        "id": "led_14",
+        "component_type": "led",
+        "state": "inactive",
+        "position": {
+          "x": 2349.5841064453125,
+          "y": 3706.34912109375,
+          "width": 289.396240234375,
+          "height": 385.38037109375
+        },
+        "placement_correctness": 0.2830295264720917,
+        "functional_state": 0.0,
+        "learning_context": {
+          "skill_level": "beginner",
+          "session_id": "demo",
+          "attempts": 1,
+          "component_familiarity": 0.5
+        },
+        "accessibility": 0.8600000000000001,
+        "placement_confidence": 0.2830295264720917,
+        "recommended_action": null,
+        "electrical_props": {
+          "forward_voltage": 2.0,
+          "current_draw": 0.02,
+          "resistance": 100.0
+        },
+        "timestamp": 1750170744.399807,
+        "detection_confidence": 0.2830295264720917
+      },
+      {
+        "id": "connection_node_15",
+        "component_type": "connection_node",
+        "state": "unknown",
+        "position": {
+          "x": 1715.0359497070312,
+          "y": 2858.6251220703125,
+          "width": 184.1053466796875,
+          "height": 218.030517578125
+        },
+        "placement_correctness": 0.2707565724849701,
+        "functional_state": 0.0,
+        "learning_context": {
+          "skill_level": "beginner",
+          "session_id": "demo",
+          "attempts": 1,
+          "component_familiarity": 0.5
+        },
+        "accessibility": 0.8600000000000001,
+        "placement_confidence": 0.2707565724849701,
+        "recommended_action": null,
+        "electrical_props": {
+          "resistance": 1.0
+        },
+        "timestamp": 1750170744.399807,
+        "detection_confidence": 0.2707565724849701
+      },
+      {
+        "id": "connection_node_16",
+        "component_type": "connection_node",
+        "state": "unknown",
+        "position": {
+          "x": 2053.114501953125,
+          "y": 2291.932861328125,
+          "width": 128.04296875,
+          "height": 235.82275390625
+        },
+        "placement_correctness": 0.2677576541900635,
+        "functional_state": 0.0,
+        "learning_context": {
+          "skill_level": "beginner",
+          "session_id": "demo",
+          "attempts": 1,
+          "component_familiarity": 0.5
+        },
+        "accessibility": 0.8600000000000001,
+        "placement_confidence": 0.2677576541900635,
+        "recommended_action": null,
+        "electrical_props": {
+          "resistance": 1.0
+        },
+        "timestamp": 1750170744.399807,
+        "detection_confidence": 0.2677576541900635
+      },
+      {
+        "id": "led_17",
+        "component_type": "led",
+        "state": "inactive",
+        "position": {
+          "x": 1835.571044921875,
+          "y": 3708.413330078125,
+          "width": 254.021240234375,
+          "height": 362.87353515625
+        },
+        "placement_correctness": 0.2655855417251587,
+        "functional_state": 0.0,
+        "learning_context": {
+          "skill_level": "beginner",
+          "session_id": "demo",
+          "attempts": 1,
+          "component_familiarity": 0.5
+        },
+        "accessibility": 0.8600000000000001,
+        "placement_confidence": 0.2655855417251587,
+        "recommended_action": null,
+        "electrical_props": {
+          "forward_voltage": 2.0,
+          "current_draw": 0.02,
+          "resistance": 100.0
+        },
+        "timestamp": 1750170744.399807,
+        "detection_confidence": 0.2655855417251587
+      },
+      {
+        "id": "connection_node_18",
+        "component_type": "connection_node",
+        "state": "unknown",
+        "position": {
+          "x": 2556.7723388671875,
+          "y": 2259.879638671875,
+          "width": 153.721923828125,
+          "height": 189.96728515625
+        },
+        "placement_correctness": 0.2644408941268921,
+        "functional_state": 0.0,
+        "learning_context": {
+          "skill_level": "beginner",
+          "session_id": "demo",
+          "attempts": 1,
+          "component_familiarity": 0.5
+        },
+        "accessibility": 0.8600000000000001,
+        "placement_confidence": 0.2644408941268921,
+        "recommended_action": null,
+        "electrical_props": {
+          "resistance": 1.0
+        },
+        "timestamp": 1750170744.399807,
+        "detection_confidence": 0.2644408941268921
+      },
+      {
+        "id": "led_19",
+        "component_type": "led",
+        "state": "inactive",
+        "position": {
+          "x": 1705.9960327148438,
+          "y": 3708.5350341796875,
+          "width": 277.4442138671875,
+          "height": 335.458251953125
+        },
+        "placement_correctness": 0.25963789224624634,
+        "functional_state": 0.0,
+        "learning_context": {
+          "skill_level": "beginner",
+          "session_id": "demo",
+          "attempts": 1,
+          "component_familiarity": 0.5
+        },
+        "accessibility": 0.8600000000000001,
+        "placement_confidence": 0.25963789224624634,
+        "recommended_action": null,
+        "electrical_props": {
+          "forward_voltage": 2.0,
+          "current_draw": 0.02,
+          "resistance": 100.0
+        },
+        "timestamp": 1750170744.399807,
+        "detection_confidence": 0.25963789224624634
+      },
+      {
+        "id": "connection_node_20",
+        "component_type": "connection_node",
+        "state": "unknown",
+        "position": {
+          "x": 1302.2214965820312,
+          "y": 2301.649658203125,
+          "width": 156.1656494140625,
+          "height": 162.51806640625
+        },
+        "placement_correctness": 0.24295330047607422,
+        "functional_state": 0.0,
+        "learning_context": {
+          "skill_level": "beginner",
+          "session_id": "demo",
+          "attempts": 1,
+          "component_familiarity": 0.5
+        },
+        "accessibility": 0.8600000000000001,
+        "placement_confidence": 0.24295330047607422,
+        "recommended_action": null,
+        "electrical_props": {
+          "resistance": 1.0
+        },
+        "timestamp": 1750170744.399807,
+        "detection_confidence": 0.24295330047607422
+      },
+      {
+        "id": "battery_holder_21",
+        "component_type": "battery_holder",
+        "state": "powered_on",
+        "position": {
+          "x": 391.7646179199219,
+          "y": 4675.718017578125,
+          "width": 783.5292358398438,
+          "height": 910.65478515625
+        },
+        "placement_correctness": 0.23599562048912048,
+        "functional_state": 1.0,
+        "learning_context": {
+          "skill_level": "beginner",
+          "session_id": "demo",
+          "attempts": 1,
+          "component_familiarity": 0.5
+        },
+        "accessibility": 0.8600000000000001,
+        "placement_confidence": 0.23599562048912048,
+        "recommended_action": null,
+        "electrical_props": {
+          "voltage": 3.0,
+          "current_capacity": 1.0,
+          "internal_resistance": 0.1
+        },
+        "timestamp": 1750170744.399807,
+        "detection_confidence": 0.23599562048912048
+      },
+      {
+        "id": "connection_node_22",
+        "component_type": "connection_node",
+        "state": "unknown",
+        "position": {
+          "x": 2115.5285034179688,
+          "y": 2291.2581787109375,
+          "width": 137.5040283203125,
+          "height": 236.997314453125
+        },
+        "placement_correctness": 0.2339622974395752,
+        "functional_state": 0.0,
+        "learning_context": {
+          "skill_level": "beginner",
+          "session_id": "demo",
+          "attempts": 1,
+          "component_familiarity": 0.5
+        },
+        "accessibility": 0.8600000000000001,
+        "placement_confidence": 0.2339622974395752,
+        "recommended_action": null,
+        "electrical_props": {
+          "resistance": 1.0
+        },
+        "timestamp": 1750170744.399807,
+        "detection_confidence": 0.2339622974395752
+      },
+      {
+        "id": "battery_holder_23",
+        "component_type": "battery_holder",
+        "state": "powered_on",
+        "position": {
+          "x": 2408.3501586914062,
+          "y": 1379.2242431640625,
+          "width": 901.8226318359375,
+          "height": 918.298583984375
+        },
+        "placement_correctness": 0.22154684364795685,
+        "functional_state": 1.0,
+        "learning_context": {
+          "skill_level": "beginner",
+          "session_id": "demo",
+          "attempts": 1,
+          "component_familiarity": 0.5
+        },
+        "accessibility": 0.8600000000000001,
+        "placement_confidence": 0.22154684364795685,
+        "recommended_action": null,
+        "electrical_props": {
+          "voltage": 3.0,
+          "current_capacity": 1.0,
+          "internal_resistance": 0.1
+        },
+        "timestamp": 1750170744.399807,
+        "detection_confidence": 0.22154684364795685
+      },
+      {
+        "id": "led_24",
+        "component_type": "led",
+        "state": "inactive",
+        "position": {
+          "x": 2490.7860107421875,
+          "y": 3702.74365234375,
+          "width": 280.166748046875,
+          "height": 356.41162109375
+        },
+        "placement_correctness": 0.2149813026189804,
+        "functional_state": 0.0,
+        "learning_context": {
+          "skill_level": "beginner",
+          "session_id": "demo",
+          "attempts": 1,
+          "component_familiarity": 0.5
+        },
+        "accessibility": 0.8600000000000001,
+        "placement_confidence": 0.2149813026189804,
+        "recommended_action": null,
+        "electrical_props": {
+          "forward_voltage": 2.0,
+          "current_draw": 0.02,
+          "resistance": 100.0
+        },
+        "timestamp": 1750170744.399807,
+        "detection_confidence": 0.2149813026189804
+      },
+      {
+        "id": "led_25",
+        "component_type": "led",
+        "state": "inactive",
+        "position": {
+          "x": 2700.479248046875,
+          "y": 3703.6309814453125,
+          "width": 279.490234375,
+          "height": 381.242431640625
+        },
+        "placement_correctness": 0.2072877287864685,
+        "functional_state": 0.0,
+        "learning_context": {
+          "skill_level": "beginner",
+          "session_id": "demo",
+          "attempts": 1,
+          "component_familiarity": 0.5
+        },
+        "accessibility": 0.8600000000000001,
+        "placement_confidence": 0.2072877287864685,
+        "recommended_action": null,
+        "electrical_props": {
+          "forward_voltage": 2.0,
+          "current_draw": 0.02,
+          "resistance": 100.0
+        },
+        "timestamp": 1750170744.399807,
+        "detection_confidence": 0.2072877287864685
+      },
+      {
+        "id": "connection_node_26",
+        "component_type": "connection_node",
+        "state": "unknown",
+        "position": {
+          "x": 2180.6763916015625,
+          "y": 2275.79443359375,
+          "width": 133.609619140625,
+          "height": 211.35791015625
+        },
+        "placement_correctness": 0.20311275124549866,
+        "functional_state": 0.0,
+        "learning_context": {
+          "skill_level": "beginner",
+          "session_id": "demo",
+          "attempts": 1,
+          "component_familiarity": 0.5
+        },
+        "accessibility": 0.8600000000000001,
+        "placement_confidence": 0.20311275124549866,
+        "recommended_action": null,
+        "electrical_props": {
+          "resistance": 1.0
+        },
+        "timestamp": 1750170744.399807,
+        "detection_confidence": 0.20311275124549866
+      },
+      {
+        "id": "connection_node_27",
+        "component_type": "connection_node",
+        "state": "unknown",
+        "position": {
+          "x": 2827.3841552734375,
+          "y": 2863.73046875,
+          "width": 133.056396484375,
+          "height": 202.1025390625
+        },
+        "placement_correctness": 0.19118162989616394,
+        "functional_state": 0.0,
+        "learning_context": {
+          "skill_level": "beginner",
+          "session_id": "demo",
+          "attempts": 1,
+          "component_familiarity": 0.5
+        },
+        "accessibility": 0.8600000000000001,
+        "placement_confidence": 0.19118162989616394,
+        "recommended_action": null,
+        "electrical_props": {
+          "resistance": 1.0
+        },
+        "timestamp": 1750170744.399807,
+        "detection_confidence": 0.19118162989616394
+      },
+      {
+        "id": "led_28",
+        "component_type": "led",
+        "state": "inactive",
+        "position": {
+          "x": 1556.2021484375,
+          "y": 3700.33203125,
+          "width": 251.9296875,
+          "height": 347.9912109375
+        },
+        "placement_correctness": 0.18226057291030884,
+        "functional_state": 0.0,
+        "learning_context": {
+          "skill_level": "beginner",
+          "session_id": "demo",
+          "attempts": 1,
+          "component_familiarity": 0.5
+        },
+        "accessibility": 0.8600000000000001,
+        "placement_confidence": 0.18226057291030884,
+        "recommended_action": null,
+        "electrical_props": {
+          "forward_voltage": 2.0,
+          "current_draw": 0.02,
+          "resistance": 100.0
+        },
+        "timestamp": 1750170744.399807,
+        "detection_confidence": 0.18226057291030884
+      },
+      {
+        "id": "connection_node_29",
+        "component_type": "connection_node",
+        "state": "unknown",
+        "position": {
+          "x": 1521.4390869140625,
+          "y": 2253.6827392578125,
+          "width": 140.177001953125,
+          "height": 148.884521484375
+        },
+        "placement_correctness": 0.17211897671222687,
+        "functional_state": 0.0,
+        "learning_context": {
+          "skill_level": "beginner",
+          "session_id": "demo",
+          "attempts": 1,
+          "component_familiarity": 0.5
+        },
+        "accessibility": 0.8600000000000001,
+        "placement_confidence": 0.17211897671222687,
+        "recommended_action": null,
+        "electrical_props": {
+          "resistance": 1.0
+        },
+        "timestamp": 1750170744.399807,
+        "detection_confidence": 0.17211897671222687
+      },
+      {
+        "id": "connection_node_30",
+        "component_type": "connection_node",
+        "state": "unknown",
+        "position": {
+          "x": 1521.3619995117188,
+          "y": 2311.5380859375,
+          "width": 143.5758056640625,
+          "height": 142.41650390625
+        },
+        "placement_correctness": 0.17165811359882355,
+        "functional_state": 0.0,
+        "learning_context": {
+          "skill_level": "beginner",
+          "session_id": "demo",
+          "attempts": 1,
+          "component_familiarity": 0.5
+        },
+        "accessibility": 0.8600000000000001,
+        "placement_confidence": 0.17165811359882355,
+        "recommended_action": null,
+        "electrical_props": {
+          "resistance": 1.0
+        },
+        "timestamp": 1750170744.399807,
+        "detection_confidence": 0.17165811359882355
+      },
+      {
+        "id": "connection_node_31",
+        "component_type": "connection_node",
+        "state": "unknown",
+        "position": {
+          "x": 2966.0579833984375,
+          "y": 2271.378662109375,
+          "width": 180.931884765625,
+          "height": 256.71142578125
+        },
+        "placement_correctness": 0.17119388282299042,
+        "functional_state": 0.0,
+        "learning_context": {
+          "skill_level": "beginner",
+          "session_id": "demo",
+          "attempts": 1,
+          "component_familiarity": 0.5
+        },
+        "accessibility": 0.8600000000000001,
+        "placement_confidence": 0.17119388282299042,
+        "recommended_action": null,
+        "electrical_props": {
+          "resistance": 1.0
+        },
+        "timestamp": 1750170744.399807,
+        "detection_confidence": 0.17119388282299042
+      },
+      {
+        "id": "connection_node_32",
+        "component_type": "connection_node",
+        "state": "unknown",
+        "position": {
+          "x": 1403.4154052734375,
+          "y": 2241.71044921875,
+          "width": 105.94677734375,
+          "height": 150.08056640625
+        },
+        "placement_correctness": 0.16950319707393646,
+        "functional_state": 0.0,
+        "learning_context": {
+          "skill_level": "beginner",
+          "session_id": "demo",
+          "attempts": 1,
+          "component_familiarity": 0.5
+        },
+        "accessibility": 0.8600000000000001,
+        "placement_confidence": 0.16950319707393646,
+        "recommended_action": null,
+        "electrical_props": {
+          "resistance": 1.0
+        },
+        "timestamp": 1750170744.399807,
+        "detection_confidence": 0.16950319707393646
+      },
+      {
+        "id": "switch_33",
+        "component_type": "switch",
+        "state": "unknown",
+        "position": {
+          "x": 3324.77392578125,
+          "y": 3369.0889892578125,
+          "width": 456.0888671875,
+          "height": 1091.117431640625
+        },
+        "placement_correctness": 0.16715693473815918,
+        "functional_state": 0.0,
+        "learning_context": {
+          "skill_level": "beginner",
+          "session_id": "demo",
+          "attempts": 1,
+          "component_familiarity": 0.5
+        },
+        "accessibility": 0.8600000000000001,
+        "placement_confidence": 0.16715693473815918,
+        "recommended_action": null,
+        "electrical_props": {
+          "contact_resistance": 0.01,
+          "current_rating": 1.0
+        },
+        "timestamp": 1750170744.399807,
+        "detection_confidence": 0.16715693473815918
+      },
+      {
+        "id": "led_34",
+        "component_type": "led",
+        "state": "inactive",
+        "position": {
+          "x": 2846.1397705078125,
+          "y": 3708.5472412109375,
+          "width": 299.267333984375,
+          "height": 379.181884765625
+        },
+        "placement_correctness": 0.16616711020469666,
+        "functional_state": 0.0,
+        "learning_context": {
+          "skill_level": "beginner",
+          "session_id": "demo",
+          "attempts": 1,
+          "component_familiarity": 0.5
+        },
+        "accessibility": 0.8600000000000001,
+        "placement_confidence": 0.16616711020469666,
+        "recommended_action": null,
+        "electrical_props": {
+          "forward_voltage": 2.0,
+          "current_draw": 0.02,
+          "resistance": 100.0
+        },
+        "timestamp": 1750170744.399807,
+        "detection_confidence": 0.16616711020469666
+      },
+      {
+        "id": "connection_node_35",
+        "component_type": "connection_node",
+        "state": "unknown",
+        "position": {
+          "x": 1710.5247192382812,
+          "y": 1643.1824951171875,
+          "width": 179.0828857421875,
+          "height": 236.365478515625
+        },
+        "placement_correctness": 0.1655282825231552,
+        "functional_state": 0.0,
+        "learning_context": {
+          "skill_level": "beginner",
+          "session_id": "demo",
+          "attempts": 1,
+          "component_familiarity": 0.5
+        },
+        "accessibility": 0.8600000000000001,
+        "placement_confidence": 0.1655282825231552,
+        "recommended_action": null,
+        "electrical_props": {
+          "resistance": 1.0
+        },
+        "timestamp": 1750170744.399807,
+        "detection_confidence": 0.1655282825231552
+      },
+      {
+        "id": "switch_36",
+        "component_type": "switch",
+        "state": "unknown",
+        "position": {
+          "x": 1144.5431823730469,
+          "y": 3223.2335205078125,
+          "width": 488.18756103515625,
+          "height": 1161.439697265625
+        },
+        "placement_correctness": 0.1628645658493042,
+        "functional_state": 0.0,
+        "learning_context": {
+          "skill_level": "beginner",
+          "session_id": "demo",
+          "attempts": 1,
+          "component_familiarity": 0.5
+        },
+        "accessibility": 0.8600000000000001,
+        "placement_confidence": 0.1628645658493042,
+        "recommended_action": null,
+        "electrical_props": {
+          "contact_resistance": 0.01,
+          "current_rating": 1.0
+        },
+        "timestamp": 1750170744.399807,
+        "detection_confidence": 0.1628645658493042
+      },
+      {
+        "id": "connection_node_37",
+        "component_type": "connection_node",
+        "state": "unknown",
+        "position": {
+          "x": 1302.0341186523438,
+          "y": 2372.1766357421875,
+          "width": 155.8116455078125,
+          "height": 152.355224609375
+        },
+        "placement_correctness": 0.16158311069011688,
+        "functional_state": 0.0,
+        "learning_context": {
+          "skill_level": "beginner",
+          "session_id": "demo",
+          "attempts": 1,
+          "component_familiarity": 0.5
+        },
+        "accessibility": 0.8600000000000001,
+        "placement_confidence": 0.16158311069011688,
+        "recommended_action": null,
+        "electrical_props": {
+          "resistance": 1.0
+        },
+        "timestamp": 1750170744.399807,
+        "detection_confidence": 0.16158311069011688
+      },
+      {
+        "id": "connection_node_38",
+        "component_type": "connection_node",
+        "state": "unknown",
+        "position": {
+          "x": 2958.2420654296875,
+          "y": 2398.3284912109375,
+          "width": 151.700927734375,
+          "height": 152.336181640625
+        },
+        "placement_correctness": 0.16008733212947845,
+        "functional_state": 0.0,
+        "learning_context": {
+          "skill_level": "beginner",
+          "session_id": "demo",
+          "attempts": 1,
+          "component_familiarity": 0.5
+        },
+        "accessibility": 0.8600000000000001,
+        "placement_confidence": 0.16008733212947845,
+        "recommended_action": null,
+        "electrical_props": {
+          "resistance": 1.0
+        },
+        "timestamp": 1750170744.399807,
+        "detection_confidence": 0.16008733212947845
+      },
+      {
+        "id": "switch_39",
+        "component_type": "switch",
+        "state": "unknown",
+        "position": {
+          "x": 3322.0386962890625,
+          "y": 3797.2779541015625,
+          "width": 478.529052734375,
+          "height": 1110.297607421875
+        },
+        "placement_correctness": 0.1587829440832138,
+        "functional_state": 0.0,
+        "learning_context": {
+          "skill_level": "beginner",
+          "session_id": "demo",
+          "attempts": 1,
+          "component_familiarity": 0.5
+        },
+        "accessibility": 0.8600000000000001,
+        "placement_confidence": 0.1587829440832138,
+        "recommended_action": null,
+        "electrical_props": {
+          "contact_resistance": 0.01,
+          "current_rating": 1.0
+        },
+        "timestamp": 1750170744.399807,
+        "detection_confidence": 0.1587829440832138
+      },
+      {
+        "id": "connection_node_40",
+        "component_type": "connection_node",
+        "state": "unknown",
+        "position": {
+          "x": 2943.2408447265625,
+          "y": 2872.345703125,
+          "width": 175.128662109375,
+          "height": 231.81298828125
+        },
+        "placement_correctness": 0.15869073569774628,
+        "functional_state": 0.0,
+        "learning_context": {
+          "skill_level": "beginner",
+          "session_id": "demo",
+          "attempts": 1,
+          "component_familiarity": 0.5
+        },
+        "accessibility": 0.8600000000000001,
+        "placement_confidence": 0.15869073569774628,
+        "recommended_action": null,
+        "electrical_props": {
+          "resistance": 1.0
+        },
+        "timestamp": 1750170744.399807,
+        "detection_confidence": 0.15869073569774628
+      },
+      {
+        "id": "connection_node_41",
+        "component_type": "connection_node",
+        "state": "unknown",
+        "position": {
+          "x": 1464.075927734375,
+          "y": 2474.2830810546875,
+          "width": 152.28125,
+          "height": 248.237548828125
+        },
+        "placement_correctness": 0.1572175770998001,
+        "functional_state": 0.0,
+        "learning_context": {
+          "skill_level": "beginner",
+          "session_id": "demo",
+          "attempts": 1,
+          "component_familiarity": 0.5
+        },
+        "accessibility": 0.8600000000000001,
+        "placement_confidence": 0.1572175770998001,
+        "recommended_action": null,
+        "electrical_props": {
+          "resistance": 1.0
+        },
+        "timestamp": 1750170744.399807,
+        "detection_confidence": 0.1572175770998001
+      },
+      {
+        "id": "switch_42",
+        "component_type": "switch",
+        "state": "unknown",
+        "position": {
+          "x": 3324.654052734375,
+          "y": 2940.5723876953125,
+          "width": 445.41650390625,
+          "height": 1081.408935546875
+        },
+        "placement_correctness": 0.15268734097480774,
+        "functional_state": 0.0,
+        "learning_context": {
+          "skill_level": "beginner",
+          "session_id": "demo",
+          "attempts": 1,
+          "component_familiarity": 0.5
+        },
+        "accessibility": 0.8600000000000001,
+        "placement_confidence": 0.15268734097480774,
+        "recommended_action": null,
+        "electrical_props": {
+          "contact_resistance": 0.01,
+          "current_rating": 1.0
+        },
+        "timestamp": 1750170744.399807,
+        "detection_confidence": 0.15268734097480774
+      },
+      {
+        "id": "connection_node_43",
+        "component_type": "connection_node",
+        "state": "unknown",
+        "position": {
+          "x": 1966.7153930664062,
+          "y": 2889.6630859375,
+          "width": 162.6160888671875,
+          "height": 230.1259765625
+        },
+        "placement_correctness": 0.1490505337715149,
+        "functional_state": 0.0,
+        "learning_context": {
+          "skill_level": "beginner",
+          "session_id": "demo",
+          "attempts": 1,
+          "component_familiarity": 0.5
+        },
+        "accessibility": 0.8600000000000001,
+        "placement_confidence": 0.1490505337715149,
+        "recommended_action": null,
+        "electrical_props": {
+          "resistance": 1.0
+        },
+        "timestamp": 1750170744.399807,
+        "detection_confidence": 0.1490505337715149
+      },
+      {
+        "id": "switch_44",
+        "component_type": "switch",
+        "state": "unknown",
+        "position": {
+          "x": 1145.9230041503906,
+          "y": 2786.490966796875,
+          "width": 446.59075927734375,
+          "height": 1058.544921875
+        },
+        "placement_correctness": 0.14807726442813873,
+        "functional_state": 0.0,
+        "learning_context": {
+          "skill_level": "beginner",
+          "session_id": "demo",
+          "attempts": 1,
+          "component_familiarity": 0.5
+        },
+        "accessibility": 0.8600000000000001,
+        "placement_confidence": 0.14807726442813873,
+        "recommended_action": null,
+        "electrical_props": {
+          "contact_resistance": 0.01,
+          "current_rating": 1.0
+        },
+        "timestamp": 1750170744.399807,
+        "detection_confidence": 0.14807726442813873
+      },
+      {
+        "id": "connection_node_45",
+        "component_type": "connection_node",
+        "state": "unknown",
+        "position": {
+          "x": 1425.9893798828125,
+          "y": 2437.0638427734375,
+          "width": 108.489013671875,
+          "height": 167.204345703125
+        },
+        "placement_correctness": 0.13732218742370605,
+        "functional_state": 0.0,
+        "learning_context": {
+          "skill_level": "beginner",
+          "session_id": "demo",
+          "attempts": 1,
+          "component_familiarity": 0.5
+        },
+        "accessibility": 0.8600000000000001,
+        "placement_confidence": 0.13732218742370605,
+        "recommended_action": null,
+        "electrical_props": {
+          "resistance": 1.0
+        },
+        "timestamp": 1750170744.399807,
+        "detection_confidence": 0.13732218742370605
+      },
+      {
+        "id": "switch_46",
+        "component_type": "switch",
+        "state": "unknown",
+        "position": {
+          "x": 3330.4248046875,
+          "y": 2510.0827026367188,
+          "width": 432.8076171875,
+          "height": 1052.4976806640625
+        },
+        "placement_correctness": 0.13425098359584808,
+        "functional_state": 0.0,
+        "learning_context": {
+          "skill_level": "beginner",
+          "session_id": "demo",
+          "attempts": 1,
+          "component_familiarity": 0.5
+        },
+        "accessibility": 0.8600000000000001,
+        "placement_confidence": 0.13425098359584808,
+        "recommended_action": null,
+        "electrical_props": {
+          "contact_resistance": 0.01,
+          "current_rating": 1.0
+        },
+        "timestamp": 1750170744.399807,
+        "detection_confidence": 0.13425098359584808
+      },
+      {
+        "id": "connection_node_47",
+        "component_type": "connection_node",
+        "state": "unknown",
+        "position": {
+          "x": 1493.4073486328125,
+          "y": 2125.5510864257812,
+          "width": 193.646484375,
+          "height": 288.3787841796875
+        },
+        "placement_correctness": 0.13024283945560455,
+        "functional_state": 0.0,
+        "learning_context": {
+          "skill_level": "beginner",
+          "session_id": "demo",
+          "attempts": 1,
+          "component_familiarity": 0.5
+        },
+        "accessibility": 0.8600000000000001,
+        "placement_confidence": 0.13024283945560455,
+        "recommended_action": null,
+        "electrical_props": {
+          "resistance": 1.0
+        },
+        "timestamp": 1750170744.399807,
+        "detection_confidence": 0.13024283945560455
+      },
+      {
+        "id": "connection_node_48",
+        "component_type": "connection_node",
+        "state": "unknown",
+        "position": {
+          "x": 2258.708984375,
+          "y": 2273.1456298828125,
+          "width": 131.0,
+          "height": 211.981201171875
+        },
+        "placement_correctness": 0.1290445178747177,
+        "functional_state": 0.0,
+        "learning_context": {
+          "skill_level": "beginner",
+          "session_id": "demo",
+          "attempts": 1,
+          "component_familiarity": 0.5
+        },
+        "accessibility": 0.8600000000000001,
+        "placement_confidence": 0.1290445178747177,
+        "recommended_action": null,
+        "electrical_props": {
+          "resistance": 1.0
+        },
+        "timestamp": 1750170744.399807,
+        "detection_confidence": 0.1290445178747177
+      },
+      {
+        "id": "switch_49",
+        "component_type": "switch",
+        "state": "unknown",
+        "position": {
+          "x": 977.6347045898438,
+          "y": 3298.256103515625,
+          "width": 397.4085693359375,
+          "height": 976.5859375
+        },
+        "placement_correctness": 0.12703856825828552,
+        "functional_state": 0.0,
+        "learning_context": {
+          "skill_level": "beginner",
+          "session_id": "demo",
+          "attempts": 1,
+          "component_familiarity": 0.5
+        },
+        "accessibility": 0.8600000000000001,
+        "placement_confidence": 0.12703856825828552,
+        "recommended_action": null,
+        "electrical_props": {
+          "contact_resistance": 0.01,
+          "current_rating": 1.0
+        },
+        "timestamp": 1750170744.399807,
+        "detection_confidence": 0.12703856825828552
+      },
+      {
+        "id": "connection_node_50",
+        "component_type": "connection_node",
+        "state": "unknown",
+        "position": {
+          "x": 1527.5171508789062,
+          "y": 2441.19873046875,
+          "width": 136.7825927734375,
+          "height": 147.82958984375
+        },
+        "placement_correctness": 0.12662656605243683,
+        "functional_state": 0.0,
+        "learning_context": {
+          "skill_level": "beginner",
+          "session_id": "demo",
+          "attempts": 1,
+          "component_familiarity": 0.5
+        },
+        "accessibility": 0.8600000000000001,
+        "placement_confidence": 0.12662656605243683,
+        "recommended_action": null,
+        "electrical_props": {
+          "resistance": 1.0
+        },
+        "timestamp": 1750170744.399807,
+        "detection_confidence": 0.12662656605243683
+      },
+      {
+        "id": "connection_node_51",
+        "component_type": "connection_node",
+        "state": "unknown",
+        "position": {
+          "x": 1837.393310546875,
+          "y": 2288.2452392578125,
+          "width": 161.975830078125,
+          "height": 231.875732421875
+        },
+        "placement_correctness": 0.11952591687440872,
+        "functional_state": 0.0,
+        "learning_context": {
+          "skill_level": "beginner",
+          "session_id": "demo",
+          "attempts": 1,
+          "component_familiarity": 0.5
+        },
+        "accessibility": 0.8600000000000001,
+        "placement_confidence": 0.11952591687440872,
+        "recommended_action": null,
+        "electrical_props": {
+          "resistance": 1.0
+        },
+        "timestamp": 1750170744.399807,
+        "detection_confidence": 0.11952591687440872
+      },
+      {
+        "id": "alarm_52",
+        "component_type": "alarm",
+        "state": "unknown",
+        "position": {
+          "x": 2781.829833984375,
+          "y": 5324.184814453125,
+          "width": 2503.2255859375,
+          "height": 775.63037109375
+        },
+        "placement_correctness": 0.11816554516553879,
+        "functional_state": 0.0,
+        "learning_context": {
+          "skill_level": "beginner",
+          "session_id": "demo",
+          "attempts": 1,
+          "component_familiarity": 0.5
+        },
+        "accessibility": 0.8600000000000001,
+        "placement_confidence": 0.11816554516553879,
+        "recommended_action": null,
+        "electrical_props": {
+          "resistance": 1.0
+        },
+        "timestamp": 1750170744.399807,
+        "detection_confidence": 0.11816554516553879
+      },
+      {
+        "id": "connection_node_53",
+        "component_type": "connection_node",
+        "state": "unknown",
+        "position": {
+          "x": 2472.6025390625,
+          "y": 2251.85205078125,
+          "width": 115.8701171875,
+          "height": 170.0732421875
+        },
+        "placement_correctness": 0.11698440462350845,
+        "functional_state": 0.0,
+        "learning_context": {
+          "skill_level": "beginner",
+          "session_id": "demo",
+          "attempts": 1,
+          "component_familiarity": 0.5
+        },
+        "accessibility": 0.8600000000000001,
+        "placement_confidence": 0.11698440462350845,
+        "recommended_action": null,
+        "electrical_props": {
+          "resistance": 1.0
+        },
+        "timestamp": 1750170744.399807,
+        "detection_confidence": 0.11698440462350845
+      },
+      {
+        "id": "connection_node_54",
+        "component_type": "connection_node",
+        "state": "unknown",
+        "position": {
+          "x": 1762.2929077148438,
+          "y": 2362.6932373046875,
+          "width": 125.6668701171875,
+          "height": 187.816162109375
+        },
+        "placement_correctness": 0.10939393937587738,
+        "functional_state": 0.0,
+        "learning_context": {
+          "skill_level": "beginner",
+          "session_id": "demo",
+          "attempts": 1,
+          "component_familiarity": 0.5
+        },
+        "accessibility": 0.8600000000000001,
+        "placement_confidence": 0.10939393937587738,
+        "recommended_action": null,
+        "electrical_props": {
+          "resistance": 1.0
+        },
+        "timestamp": 1750170744.399807,
+        "detection_confidence": 0.10939393937587738
+      },
+      {
+        "id": "connection_node_55",
+        "component_type": "connection_node",
+        "state": "unknown",
+        "position": {
+          "x": 2600.637451171875,
+          "y": 2282.5537109375,
+          "width": 140.09375,
+          "height": 170.0361328125
+        },
+        "placement_correctness": 0.1033196747303009,
+        "functional_state": 0.0,
+        "learning_context": {
+          "skill_level": "beginner",
+          "session_id": "demo",
+          "attempts": 1,
+          "component_familiarity": 0.5
+        },
+        "accessibility": 0.8600000000000001,
+        "placement_confidence": 0.1033196747303009,
+        "recommended_action": null,
+        "electrical_props": {
+          "resistance": 1.0
+        },
+        "timestamp": 1750170744.399807,
+        "detection_confidence": 0.1033196747303009
+      },
+      {
+        "id": "connection_node_56",
+        "component_type": "connection_node",
+        "state": "unknown",
+        "position": {
+          "x": 2177.3358154296875,
+          "y": 2831.2811279296875,
+          "width": 129.564208984375,
+          "height": 183.034912109375
+        },
+        "placement_correctness": 0.10196975618600845,
+        "functional_state": 0.0,
+        "learning_context": {
+          "skill_level": "beginner",
+          "session_id": "demo",
+          "attempts": 1,
+          "component_familiarity": 0.5
+        },
+        "accessibility": 0.8600000000000001,
+        "placement_confidence": 0.10196975618600845,
+        "recommended_action": null,
+        "electrical_props": {
+          "resistance": 1.0
+        },
+        "timestamp": 1750170744.399807,
+        "detection_confidence": 0.10196975618600845
+      }
+    ],
+    "edges": [],
+    "circuit_analysis": {
+      "connectivity": {
+        "connected_components": [
+          "{'battery_holder_0'}",
+          "{'connection_node_1'}",
+          "{'connection_node_2'}",
+          "{'connection_node_3'}",
+          "{'connection_node_4'}",
+          "{'connection_node_5'}",
+          "{'connection_node_6'}",
+          "{'connection_node_7'}",
+          "{'connection_node_8'}",
+          "{'connection_node_9'}",
+          "{'led_10'}",
+          "{'connection_node_11'}",
+          "{'connection_node_12'}",
+          "{'led_13'}",
+          "{'led_14'}",
+          "{'connection_node_15'}",
+          "{'connection_node_16'}",
+          "{'led_17'}",
+          "{'connection_node_18'}",
+          "{'led_19'}",
+          "{'connection_node_20'}",
+          "{'battery_holder_21'}",
+          "{'connection_node_22'}",
+          "{'battery_holder_23'}",
+          "{'led_24'}",
+          "{'led_25'}",
+          "{'connection_node_26'}",
+          "{'connection_node_27'}",
+          "{'led_28'}",
+          "{'connection_node_29'}",
+          "{'connection_node_30'}",
+          "{'connection_node_31'}",
+          "{'connection_node_32'}",
+          "{'switch_33'}",
+          "{'led_34'}",
+          "{'connection_node_35'}",
+          "{'switch_36'}",
+          "{'connection_node_37'}",
+          "{'connection_node_38'}",
+          "{'switch_39'}",
+          "{'connection_node_40'}",
+          "{'connection_node_41'}",
+          "{'switch_42'}",
+          "{'connection_node_43'}",
+          "{'switch_44'}",
+          "{'connection_node_45'}",
+          "{'switch_46'}",
+          "{'connection_node_47'}",
+          "{'connection_node_48'}",
+          "{'switch_49'}",
+          "{'connection_node_50'}",
+          "{'connection_node_51'}",
+          "{'alarm_52'}",
+          "{'connection_node_53'}",
+          "{'connection_node_54'}",
+          "{'connection_node_55'}",
+          "{'connection_node_56'}"
+        ],
+        "strongly_connected": [
+          "{'battery_holder_0'}",
+          "{'connection_node_1'}",
+          "{'connection_node_2'}",
+          "{'connection_node_3'}",
+          "{'connection_node_4'}",
+          "{'connection_node_5'}",
+          "{'connection_node_6'}",
+          "{'connection_node_7'}",
+          "{'connection_node_8'}",
+          "{'connection_node_9'}",
+          "{'led_10'}",
+          "{'connection_node_11'}",
+          "{'connection_node_12'}",
+          "{'led_13'}",
+          "{'led_14'}",
+          "{'connection_node_15'}",
+          "{'connection_node_16'}",
+          "{'led_17'}",
+          "{'connection_node_18'}",
+          "{'led_19'}",
+          "{'connection_node_20'}",
+          "{'battery_holder_21'}",
+          "{'connection_node_22'}",
+          "{'battery_holder_23'}",
+          "{'led_24'}",
+          "{'led_25'}",
+          "{'connection_node_26'}",
+          "{'connection_node_27'}",
+          "{'led_28'}",
+          "{'connection_node_29'}",
+          "{'connection_node_30'}",
+          "{'connection_node_31'}",
+          "{'connection_node_32'}",
+          "{'switch_33'}",
+          "{'led_34'}",
+          "{'connection_node_35'}",
+          "{'switch_36'}",
+          "{'connection_node_37'}",
+          "{'connection_node_38'}",
+          "{'switch_39'}",
+          "{'connection_node_40'}",
+          "{'connection_node_41'}",
+          "{'switch_42'}",
+          "{'connection_node_43'}",
+          "{'switch_44'}",
+          "{'connection_node_45'}",
+          "{'switch_46'}",
+          "{'connection_node_47'}",
+          "{'connection_node_48'}",
+          "{'switch_49'}",
+          "{'connection_node_50'}",
+          "{'connection_node_51'}",
+          "{'alarm_52'}",
+          "{'connection_node_53'}",
+          "{'connection_node_54'}",
+          "{'connection_node_55'}",
+          "{'connection_node_56'}"
+        ],
+        "power_paths": [],
+        "isolated_components": [
+          "battery_holder_0",
+          "connection_node_1",
+          "connection_node_2",
+          "connection_node_3",
+          "connection_node_4",
+          "connection_node_5",
+          "connection_node_6",
+          "connection_node_7",
+          "connection_node_8",
+          "connection_node_9",
+          "led_10",
+          "connection_node_11",
+          "connection_node_12",
+          "led_13",
+          "led_14",
+          "connection_node_15",
+          "connection_node_16",
+          "led_17",
+          "connection_node_18",
+          "led_19",
+          "connection_node_20",
+          "battery_holder_21",
+          "connection_node_22",
+          "battery_holder_23",
+          "led_24",
+          "led_25",
+          "connection_node_26",
+          "connection_node_27",
+          "led_28",
+          "connection_node_29",
+          "connection_node_30",
+          "connection_node_31",
+          "connection_node_32",
+          "switch_33",
+          "led_34",
+          "connection_node_35",
+          "switch_36",
+          "connection_node_37",
+          "connection_node_38",
+          "switch_39",
+          "connection_node_40",
+          "connection_node_41",
+          "switch_42",
+          "connection_node_43",
+          "switch_44",
+          "connection_node_45",
+          "switch_46",
+          "connection_node_47",
+          "connection_node_48",
+          "switch_49",
+          "connection_node_50",
+          "connection_node_51",
+          "alarm_52",
+          "connection_node_53",
+          "connection_node_54",
+          "connection_node_55",
+          "connection_node_56"
+        ],
+        "potential_connections": [
+          {
+            "from": "connection_node_1",
+            "to": "connection_node_3",
+            "connection_type": "wire",
+            "confidence": 0.8,
+            "robot_feasible": true
+          },
+          {
+            "from": "connection_node_1",
+            "to": "connection_node_8",
+            "connection_type": "wire",
+            "confidence": 0.8,
+            "robot_feasible": true
+          },
+          {
+            "from": "connection_node_1",
+            "to": "connection_node_29",
+            "connection_type": "wire",
+            "confidence": 0.8,
+            "robot_feasible": true
+          },
+          {
+            "from": "connection_node_1",
+            "to": "connection_node_30",
+            "connection_type": "wire",
+            "confidence": 0.8,
+            "robot_feasible": true
+          },
+          {
+            "from": "connection_node_1",
+            "to": "connection_node_32",
+            "connection_type": "wire",
+            "confidence": 0.8,
+            "robot_feasible": true
+          },
+          {
+            "from": "connection_node_2",
+            "to": "connection_node_7",
+            "connection_type": "wire",
+            "confidence": 0.8,
+            "robot_feasible": true
+          },
+          {
+            "from": "connection_node_3",
+            "to": "connection_node_1",
+            "connection_type": "wire",
+            "confidence": 0.8,
+            "robot_feasible": true
+          },
+          {
+            "from": "connection_node_3",
+            "to": "connection_node_8",
+            "connection_type": "wire",
+            "confidence": 0.8,
+            "robot_feasible": true
+          },
+          {
+            "from": "connection_node_3",
+            "to": "connection_node_30",
+            "connection_type": "wire",
+            "confidence": 0.8,
+            "robot_feasible": true
+          },
+          {
+            "from": "connection_node_3",
+            "to": "connection_node_41",
+            "connection_type": "wire",
+            "confidence": 0.8,
+            "robot_feasible": true
+          },
+          {
+            "from": "connection_node_3",
+            "to": "connection_node_45",
+            "connection_type": "wire",
+            "confidence": 0.8,
+            "robot_feasible": true
+          },
+          {
+            "from": "connection_node_3",
+            "to": "connection_node_50",
+            "connection_type": "wire",
+            "confidence": 0.8,
+            "robot_feasible": true
+          },
+          {
+            "from": "connection_node_4",
+            "to": "connection_node_16",
+            "connection_type": "wire",
+            "confidence": 0.8,
+            "robot_feasible": true
+          },
+          {
+            "from": "connection_node_5",
+            "to": "connection_node_6",
+            "connection_type": "wire",
+            "confidence": 0.8,
+            "robot_feasible": true
+          },
+          {
+            "from": "connection_node_6",
+            "to": "connection_node_5",
+            "connection_type": "wire",
+            "confidence": 0.8,
+            "robot_feasible": true
+          },
+          {
+            "from": "connection_node_7",
+            "to": "connection_node_2",
+            "connection_type": "wire",
+            "confidence": 0.8,
+            "robot_feasible": true
+          },
+          {
+            "from": "connection_node_7",
+            "to": "connection_node_51",
+            "connection_type": "wire",
+            "confidence": 0.8,
+            "robot_feasible": true
+          },
+          {
+            "from": "connection_node_8",
+            "to": "connection_node_1",
+            "connection_type": "wire",
+            "confidence": 0.8,
+            "robot_feasible": true
+          },
+          {
+            "from": "connection_node_8",
+            "to": "connection_node_3",
+            "connection_type": "wire",
+            "confidence": 0.8,
+            "robot_feasible": true
+          },
+          {
+            "from": "connection_node_8",
+            "to": "connection_node_32",
+            "connection_type": "wire",
+            "confidence": 0.8,
+            "robot_feasible": true
+          },
+          {
+            "from": "connection_node_9",
+            "to": "connection_node_27",
+            "connection_type": "wire",
+            "confidence": 0.8,
+            "robot_feasible": true
+          },
+          {
+            "from": "connection_node_16",
+            "to": "connection_node_4",
+            "connection_type": "wire",
+            "confidence": 0.8,
+            "robot_feasible": true
+          },
+          {
+            "from": "connection_node_16",
+            "to": "connection_node_22",
+            "connection_type": "wire",
+            "confidence": 0.8,
+            "robot_feasible": true
+          },
+          {
+            "from": "connection_node_18",
+            "to": "connection_node_53",
+            "connection_type": "wire",
+            "confidence": 0.8,
+            "robot_feasible": true
+          },
+          {
+            "from": "connection_node_18",
+            "to": "connection_node_55",
+            "connection_type": "wire",
+            "confidence": 0.8,
+            "robot_feasible": true
+          },
+          {
+            "from": "connection_node_20",
+            "to": "connection_node_37",
+            "connection_type": "wire",
+            "confidence": 0.8,
+            "robot_feasible": true
+          },
+          {
+            "from": "connection_node_22",
+            "to": "connection_node_16",
+            "connection_type": "wire",
+            "confidence": 0.8,
+            "robot_feasible": true
+          },
+          {
+            "from": "connection_node_22",
+            "to": "connection_node_26",
+            "connection_type": "wire",
+            "confidence": 0.8,
+            "robot_feasible": true
+          },
+          {
+            "from": "connection_node_26",
+            "to": "connection_node_22",
+            "connection_type": "wire",
+            "confidence": 0.8,
+            "robot_feasible": true
+          },
+          {
+            "from": "connection_node_26",
+            "to": "connection_node_48",
+            "connection_type": "wire",
+            "confidence": 0.8,
+            "robot_feasible": true
+          },
+          {
+            "from": "connection_node_27",
+            "to": "connection_node_9",
+            "connection_type": "wire",
+            "confidence": 0.8,
+            "robot_feasible": true
+          },
+          {
+            "from": "connection_node_29",
+            "to": "connection_node_1",
+            "connection_type": "wire",
+            "confidence": 0.8,
+            "robot_feasible": true
+          },
+          {
+            "from": "connection_node_29",
+            "to": "connection_node_30",
+            "connection_type": "wire",
+            "confidence": 0.8,
+            "robot_feasible": true
+          },
+          {
+            "from": "connection_node_30",
+            "to": "connection_node_1",
+            "connection_type": "wire",
+            "confidence": 0.8,
+            "robot_feasible": true
+          },
+          {
+            "from": "connection_node_30",
+            "to": "connection_node_3",
+            "connection_type": "wire",
+            "confidence": 0.8,
+            "robot_feasible": true
+          },
+          {
+            "from": "connection_node_30",
+            "to": "connection_node_29",
+            "connection_type": "wire",
+            "confidence": 0.8,
+            "robot_feasible": true
+          },
+          {
+            "from": "connection_node_32",
+            "to": "connection_node_1",
+            "connection_type": "wire",
+            "confidence": 0.8,
+            "robot_feasible": true
+          },
+          {
+            "from": "connection_node_32",
+            "to": "connection_node_8",
+            "connection_type": "wire",
+            "confidence": 0.8,
+            "robot_feasible": true
+          },
+          {
+            "from": "connection_node_37",
+            "to": "connection_node_20",
+            "connection_type": "wire",
+            "confidence": 0.8,
+            "robot_feasible": true
+          },
+          {
+            "from": "connection_node_41",
+            "to": "connection_node_3",
+            "connection_type": "wire",
+            "confidence": 0.8,
+            "robot_feasible": true
+          },
+          {
+            "from": "connection_node_41",
+            "to": "connection_node_45",
+            "connection_type": "wire",
+            "confidence": 0.8,
+            "robot_feasible": true
+          },
+          {
+            "from": "connection_node_41",
+            "to": "connection_node_50",
+            "connection_type": "wire",
+            "confidence": 0.8,
+            "robot_feasible": true
+          },
+          {
+            "from": "connection_node_45",
+            "to": "connection_node_3",
+            "connection_type": "wire",
+            "confidence": 0.8,
+            "robot_feasible": true
+          },
+          {
+            "from": "connection_node_45",
+            "to": "connection_node_41",
+            "connection_type": "wire",
+            "confidence": 0.8,
+            "robot_feasible": true
+          },
+          {
+            "from": "connection_node_48",
+            "to": "connection_node_26",
+            "connection_type": "wire",
+            "confidence": 0.8,
+            "robot_feasible": true
+          },
+          {
+            "from": "connection_node_50",
+            "to": "connection_node_3",
+            "connection_type": "wire",
+            "confidence": 0.8,
+            "robot_feasible": true
+          },
+          {
+            "from": "connection_node_50",
+            "to": "connection_node_41",
+            "connection_type": "wire",
+            "confidence": 0.8,
+            "robot_feasible": true
+          },
+          {
+            "from": "connection_node_51",
+            "to": "connection_node_7",
+            "connection_type": "wire",
+            "confidence": 0.8,
+            "robot_feasible": true
+          },
+          {
+            "from": "connection_node_53",
+            "to": "connection_node_18",
+            "connection_type": "wire",
+            "confidence": 0.8,
+            "robot_feasible": true
+          },
+          {
+            "from": "connection_node_55",
+            "to": "connection_node_18",
+            "connection_type": "wire",
+            "confidence": 0.8,
+            "robot_feasible": true
+          }
+        ]
+      },
+      "circuit_complete": false,
+      "power_sources": [
+        "battery_holder_0",
+        "battery_holder_21",
+        "battery_holder_23"
+      ],
+      "active_paths": []
+    }
+  }
+}

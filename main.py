@@ -16,6 +16,7 @@ from models.component_detector import ComponentDetector
 from vision.connection_detector import ConnectionDetector
 from circuit.graph_builder import CircuitGraphBuilder
 from data_structures import DetectionResult
+from graph_output_converter import DetectionToGraphConverter
 
 
 class SnapCircuitVisionSystem:
@@ -44,6 +45,7 @@ class SnapCircuitVisionSystem:
         self.component_detector = ComponentDetector(model_path)
         self.connection_detector = ConnectionDetector()
         self.graph_builder = CircuitGraphBuilder()
+        self.graph_converter = DetectionToGraphConverter()
         
         # Video capture setup
         self.cap = None
@@ -221,9 +223,16 @@ class SnapCircuitVisionSystem:
         
         # Save detection data
         if OUTPUT_CONFIG["save_detection_data"]:
+            # Save traditional format
             data_path = self.data_dir / f"detection_{timestamp}_{self.frame_count:06d}.json"
-            with open(data_path, 'w') as f:
+            with open(data_path, 'w', encoding='utf-8') as f:
                 json.dump(result.to_dict(), f, indent=2)
+            
+            # Save graph format for TD-BKT pipeline
+            graph_path = self.data_dir / f"graph_{timestamp}_{self.frame_count:06d}.json"
+            circuit_graph = self.graph_converter.convert_detection_result(result)
+            with open(graph_path, 'w', encoding='utf-8') as f:
+                f.write(circuit_graph.to_json())
     
     def run_real_time(self, camera_id: Optional[int] = None) -> None:
         """

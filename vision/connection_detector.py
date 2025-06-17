@@ -292,8 +292,15 @@ class ConnectionDetector:
         """
         connections = []
         
-        for path in wire_paths:
+        # Performance safeguard: limit number of paths processed
+        max_paths = 50  # Reasonable limit to prevent infinite loops
+        paths_to_process = wire_paths[:max_paths]
+        
+        for path in paths_to_process:
             connected_components = []
+            
+            # Limit processing for performance - sample path points if too many
+            sampled_path = path[::max(1, len(path)//20)] if len(path) > 100 else path
             
             # Find which components this wire path connects
             for component in components:
@@ -301,11 +308,13 @@ class ConnectionDetector:
                 
                 # Check if any component connection points are near this wire path
                 for comp_point in comp_points:
-                    for path_point in path:
+                    min_distance = float('inf')
+                    for path_point in sampled_path:
                         distance = np.sqrt(
                             (comp_point[0] - path_point[0])**2 + 
                             (comp_point[1] - path_point[1])**2
                         )
+                        min_distance = min(min_distance, distance)
                         if distance < self.proximity_threshold:
                             connected_components.append(component)
                             break

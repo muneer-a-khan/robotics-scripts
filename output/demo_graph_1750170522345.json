@@ -1,0 +1,54 @@
+{
+  "graph": {
+    "directed": true,
+    "timestamp": 1750170522.344114,
+    "nodes": [
+      {
+        "id": "wire_0",
+        "component_type": "wire",
+        "state": "unknown",
+        "position": {
+          "x": 200.0,
+          "y": 300.0,
+          "width": 200,
+          "height": 200
+        },
+        "placement_correctness": 0.85,
+        "functional_state": 0.0,
+        "learning_context": {
+          "skill_level": "beginner",
+          "session_id": "demo",
+          "attempts": 1,
+          "component_familiarity": 0.5
+        },
+        "accessibility": 0.9459309997306825,
+        "placement_confidence": 0.85,
+        "recommended_action": null,
+        "electrical_props": {
+          "resistance_per_cm": 0.001
+        },
+        "timestamp": 1750170522.344114,
+        "detection_confidence": 0.85
+      }
+    ],
+    "edges": [],
+    "circuit_analysis": {
+      "connectivity": {
+        "connected_components": [
+          "{'wire_0'}"
+        ],
+        "strongly_connected": [
+          "{'wire_0'}"
+        ],
+        "power_paths": [],
+        "isolated_components": [
+          "wire_0"
+        ],
+        "potential_connections": []
+      },
+      "circuit_complete": false,
+      "power_sources": [],
+      "active_paths": []
+    }
+  }
+}
