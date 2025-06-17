@@ -227,7 +227,7 @@ class SnapCircuitVisionSystem:
     
     def run_real_time(self, camera_id: Optional[int] = None) -> None:
         """
-        Run real-time detection on camera feed.
+        Run real-time detection on camera feed with optimized processing interval.
         
         Args:
             camera_id: Camera device ID
@@ -235,52 +235,93 @@ class SnapCircuitVisionSystem:
         if not self.start_camera(camera_id):
             return
         
-        print("Starting real-time detection...")
-        print("Press 'q' to quit, 's' to save current frame, 'p' to pause")
+        processing_interval = VIDEO_CONFIG.get("processing_interval", 1.0)
+        print(f"Starting real-time detection (processing every {processing_interval}s)...")
+        print("Press 'q' to quit, 's' to save current frame, 'p' to pause, '+'/'-' to adjust interval")
         
         paused = False
+        last_process_time = 0
+        last_frame = None
+        last_result = None
         
         try:
             while True:
-                if not paused:
-                    ret, frame = self.cap.read()
-                    if not ret:
-                        print("Failed to read frame from camera")
-                        break
-                    
+                current_time = time.time()
+                
+                # Always read frame to keep camera buffer fresh
+                ret, frame = self.cap.read()
+                if not ret:
+                    print("Failed to read frame from camera")
+                    break
+                
+                # Process frame only at specified intervals
+                should_process = (current_time - last_process_time) >= processing_interval
+                
+                if not paused and should_process:
                     # Process frame
                     result = self.process_frame(frame)
                     
-                    # Save results
-                    self.save_results(frame, result)
+                    # Save results (only for processed frames)
+                    if self.save_outputs:
+                        self.save_results(frame, result)
                     
-                    # Update frame counter
+                    # Update counters and cache
                     self.frame_count += 1
+                    last_process_time = current_time
+                    last_frame = frame
+                    last_result = result
                     
                     # Print status
-                    if self.frame_count % 30 == 0:  # Every 30 frames
-                        print(f"Processed {self.frame_count} frames. "
-                              f"Components: {len(result.connection_graph.components)}, "
-                              f"Circuit closed: {result.connection_graph.state.is_circuit_closed}")
+                    print(f"Processed frame {self.frame_count}. "
+                          f"Components: {len(result.connection_graph.components)}, "
+                          f"Circuit closed: {result.connection_graph.state.is_circuit_closed}")
                 
-                # Display results
-                if self.display_results and 'frame' in locals():
-                    annotated = self.annotate_frame(frame, result)
-                    cv2.imshow("Snap Circuit Vision", annotated)
+                # Display results (show latest processed frame with live camera overlay)
+                if self.display_results:
+                    if last_frame is not None and last_result is not None:
+                        # Show last processed result on current live frame
+                        display_frame = frame.copy()
+                        
+                        # Add processing status overlay
+                        status_text = f"Processing every {processing_interval:.1f}s"
+                        if should_process and not paused:
+                            status_text += " - PROCESSING"
+                            color = (0, 255, 0)  # Green when processing
+                        else:
+                            status_text += " - WAITING"
+                            color = (0, 255, 255)  # Yellow when waiting
+                        
+                        cv2.putText(display_frame, status_text, (10, display_frame.shape[0] - 10),
+                                  cv2.FONT_HERSHEY_SIMPLEX, 0.6, color, 2)
+                        
+                        # Annotate with last detection results
+                        annotated = self.annotate_frame(display_frame, last_result)
+                        cv2.imshow("Snap Circuit Vision", annotated)
+                    else:
+                        # Show raw frame if no processing done yet
+                        cv2.imshow("Snap Circuit Vision", frame)
                 
                 # Handle keyboard input
                 key = cv2.waitKey(1) & 0xFF
                 if key == ord('q'):
                     break
-                elif key == ord('s') and 'frame' in locals():
-                    # Save current frame manually
+                elif key == ord('s') and last_frame is not None:
+                    # Save current processed frame
                     save_path = self.output_dir / f"manual_save_{int(time.time())}.jpg"
-                    annotated = self.annotate_frame(frame, result)
+                    annotated = self.annotate_frame(last_frame, last_result)
                     cv2.imwrite(str(save_path), annotated)
                     print(f"Frame saved to {save_path}")
                 elif key == ord('p'):
                     paused = not paused
                     print(f"Detection {'paused' if paused else 'resumed'}")
+                elif key == ord('+') or key == ord('='):
+                    # Increase processing interval
+                    processing_interval = min(processing_interval + 0.5, 5.0)
+                    print(f"Processing interval: {processing_interval}s")
+                elif key == ord('-') or key == ord('_'):
+                    # Decrease processing interval
+                    processing_interval = max(processing_interval - 0.5, 0.5)
+                    print(f"Processing interval: {processing_interval}s")
         
         except KeyboardInterrupt:
             print("\nStopping detection...")

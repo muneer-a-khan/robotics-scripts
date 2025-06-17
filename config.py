@@ -23,7 +23,7 @@ YOLO_CONFIG = {
     "confidence_threshold": 0.1,  # Lowered for better detection
     "iou_threshold": 0.45,
     "image_size": 640,
-    "device": "cpu"   # Use CPU for compatibility
+    "device": "cuda"  # GPU acceleration with RTX 4070 Ti
 }
 
 # Training Configuration
@@ -96,7 +96,9 @@ VIDEO_CONFIG = {
     "camera_id": 0,
     "fps": 30,
     "resolution": (1920, 1080),
-    "buffer_size": 1  # Minimize latency
+    "buffer_size": 1,  # Minimize latency
+    "processing_interval": 1.0,  # Process every 1 second (adjustable 1-2 seconds)
+    "skip_frames": True  # Skip frames between processing intervals
 }
 
 # Output Format Settings
