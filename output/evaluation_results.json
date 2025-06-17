@@ -1,0 +1,70 @@
+{
+  "overall_metrics": {
+    "mse_pixels": 563.1385677420889,
+    "rmse_pixels": 23.73054082278971,
+    "mae_pixels": 20.224822387695312,
+    "precision": 0.4,
+    "recall": 0.06451612903225806,
+    "f1_score": 0.1111111111111111
+  },
+  "detection_counts": {
+    "total_predictions": 5,
+    "matched_predictions": 2
+  },
+  "per_class_metrics": {
+    "mse": {
+      "wire": Infinity,
+      "switch": 570.1418243503136,
+      "button": Infinity,
+      "battery_holder": Infinity,
+      "led": 556.1353111338641,
+      "speaker": Infinity,
+      "music_circuit": Infinity,
+      "motor": Infinity,
+      "resistor": Infinity,
+      "connection_node": Infinity,
+      "lamp": Infinity,
+      "fan": Infinity,
+      "buzzer": Infinity,
+      "photoresistor": Infinity,
+      "microphone": Infinity,
+      "alarm": Infinity
+    },
+    "rmse": {
+      "wire": Infinity,
+      "switch": 23.87764277206428,
+      "button": Infinity,
+      "battery_holder": Infinity,
+      "led": 23.582521305701476,
+      "speaker": Infinity,
+      "music_circuit": Infinity,
+      "motor": Infinity,
+      "resistor": Infinity,
+      "connection_node": Infinity,
+      "lamp": Infinity,
+      "fan": Infinity,
+      "buzzer": Infinity,
+      "photoresistor": Infinity,
+      "microphone": Infinity,
+      "alarm": Infinity
+    },
+    "mae": {
+      "wire": Infinity,
+      "switch": 20.278038330078033,
+      "button": Infinity,
+      "battery_holder": Infinity,
+      "led": 20.17160644531259,
+      "speaker": Infinity,
+      "music_circuit": Infinity,
+      "motor": Infinity,
+      "resistor": Infinity,
+      "connection_node": Infinity,
+      "lamp": Infinity,
+      "fan": Infinity,
+      "buzzer": Infinity,
+      "photoresistor": Infinity,
+      "microphone": Infinity,
+      "alarm": Infinity
+    }
+  }
+}

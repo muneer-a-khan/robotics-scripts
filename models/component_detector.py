@@ -23,15 +23,16 @@ class ComponentDetector:
     YOLOv8-based detector for Snap Circuit components.
     """
     
-    def __init__(self, model_path: Optional[str] = None):
+    def __init__(self, model_path: Optional[str] = None, conf_threshold: Optional[float] = None):
         """
         Initialize the component detector.
         
         Args:
             model_path: Path to trained YOLOv8 model. If None, uses config default.
+            conf_threshold: Confidence threshold override. If None, uses config default.
         """
         self.model_path = model_path or YOLO_CONFIG["model_path"]
-        self.confidence_threshold = YOLO_CONFIG["confidence_threshold"]
+        self.confidence_threshold = conf_threshold or YOLO_CONFIG["confidence_threshold"]
         self.iou_threshold = YOLO_CONFIG["iou_threshold"]
         self.image_size = YOLO_CONFIG["image_size"]
         self.device = YOLO_CONFIG["device"]

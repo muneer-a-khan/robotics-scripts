@@ -1,0 +1,70 @@
+{
+  "overall_metrics": {
+    "mse_pixels": 8731.495738393014,
+    "rmse_pixels": 93.44247288248002,
+    "mae_pixels": 63.205393737793095,
+    "precision": 0.30612244897959184,
+    "recall": 0.967741935483871,
+    "f1_score": 0.4651162790697674
+  },
+  "detection_counts": {
+    "total_predictions": 98,
+    "matched_predictions": 30
+  },
+  "per_class_metrics": {
+    "mse": {
+      "wire": 24255.231170437473,
+      "switch": 6128.441811878415,
+      "button": 5277.047709644477,
+      "battery_holder": 3534.074707823722,
+      "led": 7529.34925460302,
+      "speaker": 17700.491517211645,
+      "music_circuit": 7925.355632879247,
+      "motor": Infinity,
+      "resistor": 6232.280404847376,
+      "connection_node": 142.59763239610547,
+      "lamp": Infinity,
+      "fan": Infinity,
+      "buzzer": 3988.98970790084,
+      "photoresistor": 3110.095122312402,
+      "microphone": Infinity,
+      "alarm": Infinity
+    },
+    "rmse": {
+      "wire": 155.7409103942746,
+      "switch": 78.28436505381144,
+      "button": 72.64329087840444,
+      "battery_holder": 59.4480841392195,
+      "led": 86.77182293004464,
+      "speaker": 133.04319417847591,
+      "music_circuit": 89.02446648466503,
+      "motor": Infinity,
+      "resistor": 78.9447933992317,
+      "connection_node": 11.9414250571741,
+      "lamp": Infinity,
+      "fan": Infinity,
+      "buzzer": 63.158449220202044,
+      "photoresistor": 55.7682268170004,
+      "microphone": Infinity,
+      "alarm": Infinity
+    },
+    "mae": {
+      "wire": 127.09163600376691,
+      "switch": 64.59133590698261,
+      "button": 62.56551666259787,
+      "battery_holder": 45.35101181030271,
+      "led": 81.87418670654318,
+      "speaker": 116.26752014160178,
+      "music_circuit": 63.95103149414075,
+      "motor": Infinity,
+      "resistor": 66.51736297607437,
+      "connection_node": 8.852395697699674,
+      "lamp": Infinity,
+      "fan": Infinity,
+      "buzzer": 54.225199890136935,
+      "photoresistor": 50.50642700195334,
+      "microphone": Infinity,
+      "alarm": Infinity
+    }
+  }
+}

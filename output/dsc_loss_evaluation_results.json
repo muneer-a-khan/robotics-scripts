@@ -1,0 +1,70 @@
+{
+  "overall_metrics": {
+    "mse_pixels": 48160.4853417982,
+    "rmse_pixels": 219.45497338132532,
+    "mae_pixels": 171.4795840493565,
+    "precision": 0.3333333333333333,
+    "recall": 0.9354838709677419,
+    "f1_score": 0.49152542372881347
+  },
+  "detection_counts": {
+    "total_predictions": 87,
+    "matched_predictions": 29
+  },
+  "per_class_metrics": {
+    "mse": {
+      "wire": 104494.88357360939,
+      "switch": 40411.221251597744,
+      "button": 65531.73833817787,
+      "battery_holder": 15899.161126497642,
+      "led": 40207.453969422124,
+      "speaker": 25215.38364918941,
+      "music_circuit": 35569.62993085025,
+      "motor": Infinity,
+      "resistor": 63998.367817475955,
+      "connection_node": 750.2853107855565,
+      "lamp": Infinity,
+      "fan": Infinity,
+      "buzzer": 69922.35504095601,
+      "photoresistor": 85634.84877708122,
+      "microphone": Infinity,
+      "alarm": Infinity
+    },
+    "rmse": {
+      "wire": 323.25668372612097,
+      "switch": 201.02542439104002,
+      "button": 255.9916763064336,
+      "battery_holder": 126.09187573550344,
+      "led": 200.5179642062579,
+      "speaker": 158.79352521179638,
+      "music_circuit": 188.59912494720183,
+      "motor": Infinity,
+      "resistor": 252.9789869089446,
+      "connection_node": 27.391336418392523,
+      "lamp": Infinity,
+      "fan": Infinity,
+      "buzzer": 264.42835521357387,
+      "photoresistor": 292.6343260403352,
+      "microphone": Infinity,
+      "alarm": Infinity
+    },
+    "mae": {
+      "wire": 301.7062086922784,
+      "switch": 165.33489006042493,
+      "button": 240.1789390563967,
+      "battery_holder": 112.66442855834978,
+      "led": 164.7770789591473,
+      "speaker": 132.6949073791506,
+      "music_circuit": 174.2956611633303,
+      "motor": Infinity,
+      "resistor": 233.84508628845236,
+      "connection_node": 23.63375627790179,
+      "lamp": Infinity,
+      "fan": Infinity,
+      "buzzer": 254.05783195495627,
+      "photoresistor": 279.4561025619509,
+      "microphone": Infinity,
+      "alarm": Infinity
+    }
+  }
+}

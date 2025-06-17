@@ -1,0 +1,70 @@
+{
+  "overall_metrics": {
+    "mse_pixels": 5462.974981638475,
+    "rmse_pixels": 73.91194072434085,
+    "mae_pixels": 49.53839367282011,
+    "precision": 0.8378378378378378,
+    "recall": 1.0,
+    "f1_score": 0.911764705882353
+  },
+  "detection_counts": {
+    "total_predictions": 37,
+    "matched_predictions": 31
+  },
+  "per_class_metrics": {
+    "mse": {
+      "wire": 8821.854742581188,
+      "switch": 5282.623357342371,
+      "button": 6972.329714188748,
+      "battery_holder": 943.2267073101527,
+      "led": 7660.810482678742,
+      "speaker": 6388.737388721125,
+      "music_circuit": 7843.297086210058,
+      "motor": Infinity,
+      "resistor": 15212.073060380744,
+      "connection_node": 308.2310024517085,
+      "lamp": Infinity,
+      "fan": Infinity,
+      "buzzer": 14580.323537646636,
+      "photoresistor": 7829.023131485679,
+      "microphone": Infinity,
+      "alarm": Infinity
+    },
+    "rmse": {
+      "wire": 93.92472913232803,
+      "switch": 72.68165764030407,
+      "button": 83.50047732910721,
+      "battery_holder": 30.711996146622457,
+      "led": 87.52605602149991,
+      "speaker": 79.92957768386572,
+      "music_circuit": 88.56239092419568,
+      "motor": Infinity,
+      "resistor": 123.33723306601597,
+      "connection_node": 17.556508834381297,
+      "lamp": Infinity,
+      "fan": Infinity,
+      "buzzer": 120.74901050379931,
+      "photoresistor": 88.48176722628047,
+      "microphone": Infinity,
+      "alarm": Infinity
+    },
+    "mae": {
+      "wire": 67.07377035958434,
+      "switch": 51.03410552978519,
+      "button": 72.12501831054709,
+      "battery_holder": 23.485557403564513,
+      "led": 68.7208778889975,
+      "speaker": 59.230749511718784,
+      "music_circuit": 68.19080657959006,
+      "motor": Infinity,
+      "resistor": 105.64434661865238,
+      "connection_node": 15.316784667968705,
+      "lamp": Infinity,
+      "fan": Infinity,
+      "buzzer": 93.67395629882816,
+      "photoresistor": 72.18770141601584,
+      "microphone": Infinity,
+      "alarm": Infinity
+    }
+  }
+}

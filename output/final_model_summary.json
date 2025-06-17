@@ -1,0 +1,11 @@
+{
+  "precision": 0.838,
+  "recall": 1.0,
+  "f1_score": 0.912,
+  "rmse": 73.91,
+  "total_matched": 31,
+  "total_predictions": 37,
+  "total_ground_truth": 31,
+  "false_positives": 6,
+  "false_negatives": 0
+}
