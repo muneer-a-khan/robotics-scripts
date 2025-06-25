@@ -1,0 +1,16 @@
+wire
+switch
+button
+battery_holder
+led
+speaker
+music_circuit
+motor
+resistor
+connection_node
+lamp
+fan
+buzzer
+photoresistor
+microphone
+alarm 
