@@ -1,0 +1,16 @@
+names:
+- battery_holder
+- switch
+- led
+- connection
+- buzzer
+- resistor
+- speaker
+- button
+- motor
+- lamp
+nc: 10
+path: C:\Users\munee\OneDrive\Desktop\robotics-research\data\improved_training
+test: images/test
+train: images/train
+val: images/val

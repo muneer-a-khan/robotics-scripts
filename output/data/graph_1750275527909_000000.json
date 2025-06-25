@@ -1,0 +1,54 @@
+{
+  "graph": {
+    "directed": true,
+    "timestamp": 1750275527.9481552,
+    "nodes": [
+      {
+        "id": "buzzer_0",
+        "component_type": "buzzer",
+        "state": "inactive",
+        "position": {
+          "x": 1405.4355163574219,
+          "y": 2035.4787292480469,
+          "width": 2325.5991821289062,
+          "height": 2983.9668579101562
+        },
+        "placement_correctness": 0.95,
+        "functional_state": 0.0,
+        "learning_context": {
+          "skill_level": "beginner",
+          "session_id": "demo",
+          "attempts": 1,
+          "component_familiarity": 0.5
+        },
+        "accessibility": 0.8600000000000001,
+        "placement_confidence": 0.9871838092803955,
+        "recommended_action": null,
+        "electrical_props": {
+          "resistance": 1.0
+        },
+        "timestamp": 1750275527.9481552,
+        "detection_confidence": 0.9871838092803955
+      }
+    ],
+    "edges": [],
+    "circuit_analysis": {
+      "connectivity": {
+        "connected_components": [
+          "{'buzzer_0'}"
+        ],
+        "strongly_connected": [
+          "{'buzzer_0'}"
+        ],
+        "power_paths": [],
+        "isolated_components": [
+          "buzzer_0"
+        ],
+        "potential_connections": []
+      },
+      "circuit_complete": false,
+      "power_sources": [],
+      "active_paths": []
+    }
+  }
+}

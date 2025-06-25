@@ -1,0 +1,59 @@
+{
+  "connection_graph": {
+    "components": [
+      {
+        "id": "led-0",
+        "label": "led",
+        "bbox": [
+          269.23809814453125,
+          510.4472351074219,
+          2570.455078125,
+          3539.70361328125
+        ],
+        "orientation": 90.0,
+        "confidence": 0.9898995757102966,
+        "component_type": "led",
+        "switch_state": null,
+        "connection_points": [],
+        "metadata": {
+          "yolo_class_id": 4,
+          "detection_index": 0
+        }
+      }
+    ],
+    "edges": [],
+    "state": {
+      "is_circuit_closed": false,
+      "power_on": true,
+      "active_components": [],
+      "power_flow_path": [],
+      "estimated_voltage": null,
+      "estimated_current": null
+    },
+    "timestamp": 1750275506.471519,
+    "frame_id": 0
+  },
+  "raw_detections": [
+    {
+      "id": "led-0",
+      "label": "led",
+      "bbox": [
+        269.23809814453125,
+        510.4472351074219,
+        2570.455078125,
+        3539.70361328125
+      ],
+      "orientation": 90.0,
+      "confidence": 0.9898995757102966,
+      "component_type": "led",
+      "switch_state": null,
+      "connection_points": [],
+      "metadata": {
+        "yolo_class_id": 4,
+        "detection_index": 0
+      }
+    }
+  ],
+  "processing_time": 1.8394322395324707,
+  "error_message": null
+}

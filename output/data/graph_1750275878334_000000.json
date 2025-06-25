@@ -1,0 +1,89 @@
+{
+  "graph": {
+    "directed": true,
+    "timestamp": 1750275878.4336147,
+    "nodes": [
+      {
+        "id": "battery_holder_0",
+        "component_type": "battery_holder",
+        "state": "powered_on",
+        "position": {
+          "x": 2127.6668701171875,
+          "y": 1431.6510314941406,
+          "width": 1166.141845703125,
+          "height": 1166.9176635742188
+        },
+        "placement_correctness": 0.95,
+        "functional_state": 1.0,
+        "learning_context": {
+          "skill_level": "beginner",
+          "session_id": "demo",
+          "attempts": 1,
+          "component_familiarity": 0.5
+        },
+        "accessibility": 0.8600000000000001,
+        "placement_confidence": 0.9653409123420715,
+        "recommended_action": null,
+        "electrical_props": {
+          "voltage": 3.0,
+          "current_capacity": 1.0,
+          "internal_resistance": 0.1
+        },
+        "timestamp": 1750275878.4336147,
+        "detection_confidence": 0.9653409123420715
+      },
+      {
+        "id": "switch_1",
+        "component_type": "switch",
+        "state": "unknown",
+        "position": {
+          "x": 3325.376708984375,
+          "y": 3201.765869140625,
+          "width": 453.7275390625,
+          "height": 1278.40283203125
+        },
+        "placement_correctness": 0.914291501045227,
+        "functional_state": 0.0,
+        "learning_context": {
+          "skill_level": "beginner",
+          "session_id": "demo",
+          "attempts": 1,
+          "component_familiarity": 0.5
+        },
+        "accessibility": 0.8600000000000001,
+        "placement_confidence": 0.914291501045227,
+        "recommended_action": null,
+        "electrical_props": {
+          "contact_resistance": 0.01,
+          "current_rating": 1.0
+        },
+        "timestamp": 1750275878.4336147,
+        "detection_confidence": 0.914291501045227
+      }
+    ],
+    "edges": [],
+    "circuit_analysis": {
+      "connectivity": {
+        "connected_components": [
+          "{'battery_holder_0'}",
+          "{'switch_1'}"
+        ],
+        "strongly_connected": [
+          "{'battery_holder_0'}",
+          "{'switch_1'}"
+        ],
+        "power_paths": [],
+        "isolated_components": [
+          "battery_holder_0",
+          "switch_1"
+        ],
+        "potential_connections": []
+      },
+      "circuit_complete": false,
+      "power_sources": [
+        "battery_holder_0"
+      ],
+      "active_paths": []
+    }
+  }
+}

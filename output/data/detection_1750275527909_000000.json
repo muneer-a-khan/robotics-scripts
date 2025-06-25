@@ -1,0 +1,59 @@
+{
+  "connection_graph": {
+    "components": [
+      {
+        "id": "buzzer-0",
+        "label": "buzzer",
+        "bbox": [
+          242.63592529296875,
+          543.4953002929688,
+          2568.235107421875,
+          3527.462158203125
+        ],
+        "orientation": 90.0,
+        "confidence": 0.9871838092803955,
+        "component_type": "buzzer",
+        "switch_state": null,
+        "connection_points": [],
+        "metadata": {
+          "yolo_class_id": 12,
+          "detection_index": 0
+        }
+      }
+    ],
+    "edges": [],
+    "state": {
+      "is_circuit_closed": false,
+      "power_on": true,
+      "active_components": [],
+      "power_flow_path": [],
+      "estimated_voltage": null,
+      "estimated_current": null
+    },
+    "timestamp": 1750275526.0465586,
+    "frame_id": 0
+  },
+  "raw_detections": [
+    {
+      "id": "buzzer-0",
+      "label": "buzzer",
+      "bbox": [
+        242.63592529296875,
+        543.4953002929688,
+        2568.235107421875,
+        3527.462158203125
+      ],
+      "orientation": 90.0,
+      "confidence": 0.9871838092803955,
+      "component_type": "buzzer",
+      "switch_state": null,
+      "connection_points": [],
+      "metadata": {
+        "yolo_class_id": 12,
+        "detection_index": 0
+      }
+    }
+  ],
+  "processing_time": 1.8626623153686523,
+  "error_message": null
+}

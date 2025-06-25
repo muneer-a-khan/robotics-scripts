@@ -3,7 +3,16 @@ Configuration settings for the Snap Circuit computer vision system.
 """
 
 import os
+import torch
 from pathlib import Path
+
+# Smart device detection
+def get_optimal_device():
+    """Get the best available device for inference."""
+    if torch.cuda.is_available():
+        return "0"  # Use first GPU
+    else:
+        return "cpu"
 
 # Project paths
 PROJECT_ROOT = Path(__file__).parent
@@ -18,12 +27,12 @@ for dir_path in [MODELS_DIR, DATA_DIR, TRAINING_DATA_DIR, OUTPUT_DIR]:
 
 # YOLOv8 Model Configuration
 YOLO_CONFIG = {
-    "model_path": MODELS_DIR / "snap_circuit_yolov8.pt",
+    "model_path": MODELS_DIR / "dsc_enhanced_builtin.pt",  # Best performing model
     "pretrained_model": "yolov8x.pt",
-    "confidence_threshold": 0.1,  # Lowered for better detection
-    "iou_threshold": 0.45,
+    "confidence_threshold": 0.85,  # Optimal balance found through testing
+    "iou_threshold": 0.4,          # Balanced NMS
     "image_size": 640,
-    "device": "cuda"  # GPU acceleration with RTX 4070 Ti
+    "device": get_optimal_device()  # Smart device detection
 }
 
 # Training Configuration

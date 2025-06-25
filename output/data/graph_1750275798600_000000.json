@@ -1,0 +1,210 @@
+{
+  "graph": {
+    "directed": true,
+    "timestamp": 1750275798.701241,
+    "nodes": [
+      {
+        "id": "battery_holder_0",
+        "component_type": "battery_holder",
+        "state": "powered_on",
+        "position": {
+          "x": 2127.6668701171875,
+          "y": 1431.6510314941406,
+          "width": 1166.141845703125,
+          "height": 1166.9176635742188
+        },
+        "placement_correctness": 0.95,
+        "functional_state": 1.0,
+        "learning_context": {
+          "skill_level": "beginner",
+          "session_id": "demo",
+          "attempts": 1,
+          "component_familiarity": 0.5
+        },
+        "accessibility": 0.8600000000000001,
+        "placement_confidence": 0.9653409123420715,
+        "recommended_action": null,
+        "electrical_props": {
+          "voltage": 3.0,
+          "current_capacity": 1.0,
+          "internal_resistance": 0.1
+        },
+        "timestamp": 1750275798.701241,
+        "detection_confidence": 0.9653409123420715
+      },
+      {
+        "id": "switch_1",
+        "component_type": "switch",
+        "state": "unknown",
+        "position": {
+          "x": 3325.376708984375,
+          "y": 3201.765869140625,
+          "width": 453.7275390625,
+          "height": 1278.40283203125
+        },
+        "placement_correctness": 0.914291501045227,
+        "functional_state": 0.0,
+        "learning_context": {
+          "skill_level": "beginner",
+          "session_id": "demo",
+          "attempts": 1,
+          "component_familiarity": 0.5
+        },
+        "accessibility": 0.8600000000000001,
+        "placement_confidence": 0.914291501045227,
+        "recommended_action": null,
+        "electrical_props": {
+          "contact_resistance": 0.01,
+          "current_rating": 1.0
+        },
+        "timestamp": 1750275798.701241,
+        "detection_confidence": 0.914291501045227
+      },
+      {
+        "id": "connection_node_2",
+        "component_type": "connection_node",
+        "state": "unknown",
+        "position": {
+          "x": 2766.5897216796875,
+          "y": 2877.38330078125,
+          "width": 170.945556640625,
+          "height": 207.53125
+        },
+        "placement_correctness": 0.8148404359817505,
+        "functional_state": 0.0,
+        "learning_context": {
+          "skill_level": "beginner",
+          "session_id": "demo",
+          "attempts": 1,
+          "component_familiarity": 0.5
+        },
+        "accessibility": 0.8600000000000001,
+        "placement_confidence": 0.8148404359817505,
+        "recommended_action": null,
+        "electrical_props": {
+          "resistance": 1.0
+        },
+        "timestamp": 1750275798.701241,
+        "detection_confidence": 0.8148404359817505
+      },
+      {
+        "id": "connection_node_3",
+        "component_type": "connection_node",
+        "state": "unknown",
+        "position": {
+          "x": 1284.117919921875,
+          "y": 2304.2493896484375,
+          "width": 166.070068359375,
+          "height": 229.592041015625
+        },
+        "placement_correctness": 0.8106085062026978,
+        "functional_state": 0.0,
+        "learning_context": {
+          "skill_level": "beginner",
+          "session_id": "demo",
+          "attempts": 1,
+          "component_familiarity": 0.5
+        },
+        "accessibility": 0.8600000000000001,
+        "placement_confidence": 0.8106085062026978,
+        "recommended_action": null,
+        "electrical_props": {
+          "resistance": 1.0
+        },
+        "timestamp": 1750275798.701241,
+        "detection_confidence": 0.8106085062026978
+      },
+      {
+        "id": "connection_node_4",
+        "component_type": "connection_node",
+        "state": "unknown",
+        "position": {
+          "x": 1705.9741821289062,
+          "y": 2308.4564208984375,
+          "width": 163.4156494140625,
+          "height": 206.978759765625
+        },
+        "placement_correctness": 0.7649224996566772,
+        "functional_state": 0.0,
+        "learning_context": {
+          "skill_level": "beginner",
+          "session_id": "demo",
+          "attempts": 1,
+          "component_familiarity": 0.5
+        },
+        "accessibility": 0.8600000000000001,
+        "placement_confidence": 0.7649224996566772,
+        "recommended_action": null,
+        "electrical_props": {
+          "resistance": 1.0
+        },
+        "timestamp": 1750275798.701241,
+        "detection_confidence": 0.7649224996566772
+      },
+      {
+        "id": "switch_5",
+        "component_type": "switch",
+        "state": "unknown",
+        "position": {
+          "x": 958.8612976074219,
+          "y": 3189.8448486328125,
+          "width": 516.5330200195312,
+          "height": 1276.132080078125
+        },
+        "placement_correctness": 0.734198272228241,
+        "functional_state": 0.0,
+        "learning_context": {
+          "skill_level": "beginner",
+          "session_id": "demo",
+          "attempts": 1,
+          "component_familiarity": 0.5
+        },
+        "accessibility": 0.8600000000000001,
+        "placement_confidence": 0.734198272228241,
+        "recommended_action": null,
+        "electrical_props": {
+          "contact_resistance": 0.01,
+          "current_rating": 1.0
+        },
+        "timestamp": 1750275798.701241,
+        "detection_confidence": 0.734198272228241
+      }
+    ],
+    "edges": [],
+    "circuit_analysis": {
+      "connectivity": {
+        "connected_components": [
+          "{'battery_holder_0'}",
+          "{'switch_1'}",
+          "{'connection_node_2'}",
+          "{'connection_node_3'}",
+          "{'connection_node_4'}",
+          "{'switch_5'}"
+        ],
+        "strongly_connected": [
+          "{'battery_holder_0'}",
+          "{'switch_1'}",
+          "{'connection_node_2'}",
+          "{'connection_node_3'}",
+          "{'connection_node_4'}",
+          "{'switch_5'}"
+        ],
+        "power_paths": [],
+        "isolated_components": [
+          "battery_holder_0",
+          "switch_1",
+          "connection_node_2",
+          "connection_node_3",
+          "connection_node_4",
+          "switch_5"
+        ],
+        "potential_connections": []
+      },
+      "circuit_complete": false,
+      "power_sources": [
+        "battery_holder_0"
+      ],
+      "active_paths": []
+    }
+  }
+}
