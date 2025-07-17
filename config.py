@@ -27,9 +27,9 @@ for dir_path in [MODELS_DIR, DATA_DIR, TRAINING_DATA_DIR, OUTPUT_DIR]:
 
 # YOLOv8 Model Configuration
 YOLO_CONFIG = {
-    "model_path": MODELS_DIR / "dsc_enhanced_builtin.pt",  # Best performing model
+    "model_path": MODELS_DIR / "latest_trained_model.pt",  # Your freshly trained model
     "pretrained_model": "yolov8x.pt",
-    "confidence_threshold": 0.85,  # Optimal balance found through testing
+    "confidence_threshold": 0.25,  # Lower threshold for better recall
     "iou_threshold": 0.4,          # Balanced NMS
     "image_size": 640,
     "device": get_optimal_device()  # Smart device detection
@@ -106,7 +106,7 @@ VIDEO_CONFIG = {
     "fps": 30,
     "resolution": (1920, 1080),
     "buffer_size": 1,  # Minimize latency
-    "processing_interval": 1.0,  # Process every 1 second (adjustable 1-2 seconds)
+    "processing_interval": 3.0,  # Process every 3 seconds for live visualization
     "skip_frames": True  # Skip frames between processing intervals
 }
 

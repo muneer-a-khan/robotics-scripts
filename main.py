@@ -17,6 +17,7 @@ from vision.connection_detector import ConnectionDetector
 from circuit.graph_builder import CircuitGraphBuilder
 from data_structures import DetectionResult
 from graph_output_converter import DetectionToGraphConverter
+from live_circuit_visualizer import create_live_visualization
 
 
 class SnapCircuitVisionSystem:
@@ -233,6 +234,22 @@ class SnapCircuitVisionSystem:
             circuit_graph = self.graph_converter.convert_detection_result(result)
             with open(graph_path, 'w', encoding='utf-8') as f:
                 f.write(circuit_graph.to_json())
+            
+            # Generate live circuit visualization
+            try:
+                graph_data = json.loads(circuit_graph.to_json())
+                visualization_path = create_live_visualization(
+                    graph_data, 
+                    timestamp=timestamp, 
+                    output_dir=str(self.output_dir)
+                )
+                if visualization_path:
+                    # Also save as "latest" for easy access
+                    latest_path = self.output_dir / "latest_circuit_visual.png"
+                    import shutil
+                    shutil.copy2(visualization_path, latest_path)
+            except Exception as e:
+                print(f"Warning: Could not generate live visualization: {e}")
     
     def run_real_time(self, camera_id: Optional[int] = None) -> None:
         """
@@ -246,6 +263,8 @@ class SnapCircuitVisionSystem:
         
         processing_interval = VIDEO_CONFIG.get("processing_interval", 1.0)
         print(f"Starting real-time detection (processing every {processing_interval}s)...")
+        print("🔄 Live circuit visualization will be generated automatically every 3 seconds")
+        print("📁 Latest visualization saved as: output/latest_circuit_visual.png")
         print("Press 'q' to quit, 's' to save current frame, 'p' to pause, '+'/'-' to adjust interval")
         
         paused = False
@@ -283,7 +302,8 @@ class SnapCircuitVisionSystem:
                     # Print status
                     print(f"Processed frame {self.frame_count}. "
                           f"Components: {len(result.connection_graph.components)}, "
-                          f"Circuit closed: {result.connection_graph.state.is_circuit_closed}")
+                          f"Circuit closed: {result.connection_graph.state.is_circuit_closed}, "
+                          f"Live visualization generated ✅")
                 
                 # Display results (show latest processed frame with live camera overlay)
                 if self.display_results:
