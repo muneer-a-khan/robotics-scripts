@@ -9,6 +9,7 @@ This system provides real-time analysis of Snap Circuit boards through:
 - **Component Detection**: YOLOv8-based identification of circuit pieces (LEDs, batteries, wires, etc.)
 - **Connection Analysis**: OpenCV-based wire tracing and component connection detection  
 - **Circuit State Inference**: NetworkX graph analysis to determine if circuits are closed, powered, and functional
+- **Live Circuit Visualization**: Automatic generation of beautiful circuit board visualizations in real-time
 - **Graph Format Output**: TD-BKT compatible graph format for downstream algorithms
 - **Real-time Processing**: Live camera feed analysis with annotated output
 
@@ -57,6 +58,8 @@ robotics-research/
 ├── circuit/                   # Circuit Analysis
 │   └── graph_builder.py      # NetworkX circuit analysis
 │
+├── live_circuit_visualizer.py # Live visualization generator
+│
 ├── utils/                     # Utilities (Less frequently used)
 │   ├── setup_improved_training.py
 │   ├── create_individual_component_dataset.py
@@ -71,9 +74,11 @@ robotics-research/
 │
 ├── output/                    # System Outputs
 │   ├── frames/               # Annotated video frames
-│   └── data/                 # JSON outputs
-│       ├── detection_*.json  # Traditional format
-│       └── graph_*.json      # TD-BKT graph format
+│   ├── data/                 # JSON outputs
+│   │   ├── detection_*.json  # Traditional format
+│   │   └── graph_*.json      # TD-BKT graph format
+│   ├── live_circuit_visual_*.png  # Timestamped visualizations
+│   └── latest_circuit_visual.png  # Most recent visualization
 │
 ├── snap_circuit_training/     # Training Results
 │   └── expanded_snap_circuit_model/
@@ -90,7 +95,7 @@ robotics-research/
 ### Real-time Camera Analysis
 
 ```bash
-# Basic real-time detection (outputs both JSON formats)
+# Basic real-time detection (outputs JSON + live visualizations)
 python main.py --mode camera
 
 # Use specific camera and custom model
@@ -98,6 +103,12 @@ python main.py --mode camera --camera 1 --model models/weights/snap_circuit_yolo
 
 # Disable display for headless operation
 python main.py --mode camera --no-display
+
+# The system will automatically:
+# ✅ Process frames every 3 seconds
+# ✅ Generate live circuit visualizations (PNG files)
+# ✅ Save detection data (JSON files)
+# ✅ Display real-time annotated camera feed
 ```
 
 **Real-time Controls:**
@@ -105,6 +116,38 @@ python main.py --mode camera --no-display
 - `s`: Save current frame
 - `p`: Pause/resume detection
 - `+/-`: Adjust processing interval
+
+### 🎨 Live Circuit Visualization
+
+The system automatically generates beautiful circuit board visualizations in real-time:
+
+**🔄 Automatic Generation**: 
+- Processes camera feed every 3 seconds
+- Creates PNG visualizations automatically
+- No manual intervention required
+
+**📸 Visual Features**:
+- **Hexagonal grid background** mimicking actual snap circuit boards
+- **Color-coded components** with distinct colors for each type:
+  - Battery holders (blue), LEDs (pink), switches (teal)
+  - Buttons (green), wires (gold), motors (purple)
+  - Resistors (red), speakers (magenta), and 10+ other types
+- **Connection lines** showing component relationships
+- **Component labels** with confidence scores
+- **Circuit status** indicating if circuit is complete and powered
+- **Timestamp information** for each visualization
+
+**📁 Output Files**:
+```bash
+output/live_circuit_visual_[timestamp].png  # Timestamped versions
+output/latest_circuit_visual.png           # Always the most recent
+```
+
+**🎯 Features**:
+- Real-time digital twin of your snap circuit board
+- Intelligent connection detection between nearby components
+- High-confidence component filtering (>75% confidence)
+- Actual layout based on camera-detected positions
 
 ### Video File Processing
 
@@ -198,7 +241,7 @@ Key settings in `config.py`:
 ```python
 # Performance optimized for real-time
 VIDEO_CONFIG = {
-    "processing_interval": 1.0,  # Process every 1 second
+    "processing_interval": 3.0,  # Process every 3 seconds (optimized for visualization)
     "resolution": [1920, 1080],
     "fps": 30
 }
@@ -207,6 +250,13 @@ VIDEO_CONFIG = {
 YOLO_CONFIG = {
     "confidence_threshold": 0.5,
     "device": "cuda"  # Uses GPU if available
+}
+
+# Live Visualization
+VISUALIZATION_CONFIG = {
+    "confidence_threshold": 0.75,  # Only show high-confidence components
+    "connection_tolerance": 35,     # Pixel distance for connection detection
+    "save_latest": True            # Always save latest_circuit_visual.png
 }
 ```
 
@@ -250,4 +300,4 @@ The graph format outputs are designed for TD-BKT (Temporal Difference - Bayesian
 
 ---
 
-**System Status**: ✅ Production Ready | Graph Integration Complete | Performance Optimized
+**System Status**: ✅ Production Ready | Graph Integration Complete | Live Visualization Active | Performance Optimized
