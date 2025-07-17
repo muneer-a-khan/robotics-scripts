@@ -128,9 +128,29 @@ class DetectionToGraphConverter:
     def _convert_edge_to_connection(self, edge, components: List[ComponentDetection]) -> ConnectionEdge:
         """Convert an edge to a ConnectionEdge."""
         
+        # Find component types by looking up component IDs in components list
+        component1_type = None
+        component2_type = None
+        
+        # Look up component types from the components list
+        for component in components:
+            if component.id == edge.component_id_1:
+                component1_type = component.component_type
+            elif component.id == edge.component_id_2:
+                component2_type = component.component_type
+        
+        # Handle cases where component types might be None or not found
+        if component1_type is None or component2_type is None:
+            print(f"Warning: Could not find component types for edge {edge.component_id_1} -> {edge.component_id_2}")
+            return None
+        
+        # Get string values from component types (handle both enum and string cases)
+        comp1_type_str = component1_type.value if hasattr(component1_type, 'value') else str(component1_type)
+        comp2_type_str = component2_type.value if hasattr(component2_type, 'value') else str(component2_type)
+        
         # Find source and target component IDs
-        source_id = f"{edge.component1_type.value}_{edge.component1_id}"
-        target_id = f"{edge.component2_type.value}_{edge.component2_id}"
+        source_id = f"{comp1_type_str}_{edge.component_id_1}"
+        target_id = f"{comp2_type_str}_{edge.component_id_2}"
         
         # Determine connection type
         connection_type = ConnectionType.WIRE  # Default
@@ -144,7 +164,7 @@ class DetectionToGraphConverter:
         
         # Determine if this connection is expected
         expected_connection = self._is_expected_connection(
-            edge.component1_type.value, edge.component2_type.value
+            comp1_type_str, comp2_type_str
         )
         
         # Calculate connection quality
@@ -152,9 +172,9 @@ class DetectionToGraphConverter:
         
         # Determine current direction (simplified)
         current_direction = "forward"  # Default
-        if edge.component1_type.value == "battery_holder":
+        if comp1_type_str == "battery_holder":
             current_direction = "forward"
-        elif edge.component2_type.value == "battery_holder":
+        elif comp2_type_str == "battery_holder":
             current_direction = "reverse"
         else:
             current_direction = "none"
