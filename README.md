@@ -109,6 +109,15 @@ python main.py --mode camera --no-display
 # ✅ Generate live circuit visualizations (PNG files)
 # ✅ Save detection data (JSON files)
 # ✅ Display real-time annotated camera feed
+
+# Enable circuit validation for correctness checking
+python main.py --mode camera --validate
+
+# The system will additionally:
+# ✅ Validate circuit correctness in real-time
+# ✅ Check component orientations and polarity
+# ✅ Display validation scores on visualizations
+# ✅ Show specific issues and suggestions
 ```
 
 **Real-time Controls:**
@@ -135,6 +144,10 @@ The system automatically generates beautiful circuit board visualizations in rea
 - **Connection lines** showing component relationships
 - **Component labels** with confidence scores
 - **Circuit status** indicating if circuit is complete and powered
+- **Validation scores** (when validation is enabled) showing:
+  - Overall result (✅ Correct, ⚠️ Partial, ❌ Incorrect)
+  - Quality score (0-100%)
+  - Issue counts (errors and warnings)
 - **Timestamp information** for each visualization
 
 **📁 Output Files**:

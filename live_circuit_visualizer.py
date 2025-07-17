@@ -128,7 +128,7 @@ class LiveCircuitVisualizer:
                                           linewidth=0.5, alpha=0.7)
                     ax.add_patch(circle)
     
-    def visualize_from_graph_data(self, graph_data, timestamp=None, save_path=None):
+    def visualize_from_graph_data(self, graph_data, timestamp=None, save_path=None, validation_data=None):
         """
         Create visualization from graph data dictionary.
         
@@ -136,6 +136,7 @@ class LiveCircuitVisualizer:
             graph_data: Dictionary containing connection graph data
             timestamp: Optional timestamp for filename
             save_path: Optional specific save path
+            validation_data: Optional validation results to display
         """
         if timestamp is None:
             timestamp = int(time.time() * 1000)
@@ -307,6 +308,10 @@ class LiveCircuitVisualizer:
         ax.set_title(f"Live Snap Circuit Board - {time_str}\n(High Confidence Components: {len(G.nodes())}, Tolerance-Based Connections)", 
                     fontsize=16, fontweight='bold', pad=20)
         
+        # Add validation scores in top right if available
+        if validation_data:
+            self._add_validation_display(ax, validation_data)
+        
         # Add statistics
         total_components = len(G.nodes())
         total_connections = len(G.edges())
@@ -327,6 +332,97 @@ class LiveCircuitVisualizer:
         
         print(f"Live circuit visualization saved to: {save_path}")
         return save_path
+    
+    def _add_validation_display(self, ax, validation_data):
+        """Add validation scores and status to the top right of the visualization."""
+        # Extract validation information
+        overall_result = validation_data.get("overall_result", "unknown")
+        summary = validation_data.get("summary", {})
+        score = summary.get("score", 0)
+        errors = summary.get("errors", 0)
+        warnings = summary.get("warnings", 0)
+        total_issues = summary.get("total_issues", 0)
+        
+        # Choose colors and symbols based on result
+        if overall_result == "correct":
+            status_color = '#4CAF50'  # Green
+            status_symbol = '✅'
+            border_color = '#2E7D32'
+        elif overall_result == "partial":
+            status_color = '#FF9800'  # Orange
+            status_symbol = '⚠️'
+            border_color = '#F57C00'
+        elif overall_result == "incorrect":
+            status_color = '#F44336'  # Red
+            status_symbol = '❌'
+            border_color = '#C62828'
+        else:
+            status_color = '#9E9E9E'  # Gray
+            status_symbol = '❓'
+            border_color = '#616161'
+        
+        # Create validation info box - simplified
+        validation_text = [
+            f"{status_symbol} {overall_result.upper()}",
+            f"Score: {score}%"
+        ]
+        
+        # Position in top right (using axes coordinates)
+        box_x = 0.98
+        box_y = 0.98
+        
+        # Create background box
+        from matplotlib.patches import FancyBboxPatch
+        
+        # Calculate box size based on text - smaller for simplified display
+        box_width = 0.15
+        box_height = 0.08
+        
+        # Create rounded rectangle background
+        validation_box = FancyBboxPatch(
+            (box_x - box_width, box_y - box_height), 
+            box_width, box_height,
+            boxstyle="round,pad=0.01",
+            facecolor='white',
+            edgecolor=border_color,
+            linewidth=2,
+            alpha=0.95,
+            transform=ax.transAxes,
+            zorder=10
+        )
+        ax.add_patch(validation_box)
+        
+        # Add validation text
+        text_y_start = box_y - 0.02
+        text_spacing = 0.025
+        
+        for i, text_line in enumerate(validation_text):
+            text_y = text_y_start - (i * text_spacing)
+            
+            # First line (status) gets special formatting
+            if i == 0:
+                ax.text(box_x - 0.01, text_y, text_line,
+                       ha='right', va='top', transform=ax.transAxes,
+                       fontsize=11, fontweight='bold', color=status_color,
+                       zorder=11)
+            else:
+                # Regular formatting for other lines
+                ax.text(box_x - 0.01, text_y, text_line,
+                       ha='right', va='top', transform=ax.transAxes,
+                       fontsize=9, color='black',
+                       zorder=11)
+        
+        # Add a subtle drop shadow effect
+        shadow_box = FancyBboxPatch(
+            (box_x - box_width + 0.002, box_y - box_height - 0.002), 
+            box_width, box_height,
+            boxstyle="round,pad=0.01",
+            facecolor='gray',
+            alpha=0.3,
+            transform=ax.transAxes,
+            zorder=9
+        )
+        ax.add_patch(shadow_box)
     
     def visualize_from_file(self, json_file_path):
         """
@@ -349,7 +445,7 @@ class LiveCircuitVisualizer:
                 except:
                     timestamp = int(time.time() * 1000)
             
-            return self.visualize_from_graph_data(data, timestamp)
+            return self.visualize_from_graph_data(data, timestamp, save_path=None, validation_data=None)
             
         except Exception as e:
             print(f"Error creating visualization from {json_file_path}: {e}")
@@ -411,7 +507,7 @@ class LiveCircuitVisualizer:
 
 
 # Function to integrate with main system
-def create_live_visualization(graph_data, timestamp=None, output_dir="output"):
+def create_live_visualization(graph_data, timestamp=None, output_dir="output", validation_data=None):
     """
     Convenience function to create a live visualization from graph data.
     This can be called directly from the main detection system.
@@ -420,12 +516,13 @@ def create_live_visualization(graph_data, timestamp=None, output_dir="output"):
         graph_data: Dictionary containing connection graph data
         timestamp: Optional timestamp
         output_dir: Output directory for visualization
+        validation_data: Optional validation results to display
     
     Returns:
         Path to saved visualization or None if failed
     """
     visualizer = LiveCircuitVisualizer(output_dir=output_dir)
-    return visualizer.visualize_from_graph_data(graph_data, timestamp)
+    return visualizer.visualize_from_graph_data(graph_data, timestamp, save_path=None, validation_data=validation_data)
 
 
 if __name__ == "__main__":

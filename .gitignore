@@ -1,1 +1,5 @@
 *.pt
+
+# Output folders that shouldn't be committed
+output/frames/
+output/data/

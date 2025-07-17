@@ -1,0 +1,68 @@
+{
+  "name": "simple_led_circuit",
+  "description": "Basic LED circuit with battery and switch",
+  "components": [
+    {
+      "type": "battery_holder",
+      "position": {
+        "x": 100,
+        "y": 100
+      },
+      "orientation": 0,
+      "required": true
+    },
+    {
+      "type": "switch",
+      "position": {
+        "x": 200,
+        "y": 100
+      },
+      "orientation": 0,
+      "required": true
+    },
+    {
+      "type": "led",
+      "position": {
+        "x": 300,
+        "y": 100
+      },
+      "orientation": 0,
+      "polarity": "correct",
+      "required": true
+    }
+  ],
+  "connections": [
+    {
+      "from": "battery_holder",
+      "to": "switch",
+      "type": "positive"
+    },
+    {
+      "from": "switch",
+      "to": "led",
+      "type": "positive"
+    },
+    {
+      "from": "led",
+      "to": "battery_holder",
+      "type": "negative"
+    }
+  ],
+  "electrical_rules": {
+    "voltage_range": {
+      "min": 1.5,
+      "max": 9.0
+    },
+    "current_limit": 0.1,
+    "polarity_sensitive": [
+      "led",
+      "battery_holder"
+    ]
+  },
+  "learning_objectives": [
+    "Basic circuit closure",
+    "Switch operation",
+    "LED polarity"
+  ],
+  "difficulty_level": "beginner"
+}

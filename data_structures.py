@@ -211,6 +211,7 @@ class DetectionResult:
     connection_graph: ConnectionGraph
     raw_detections: List[Dict[str, Any]]
     processing_time: float
+    validation_result: Optional[Dict[str, Any]] = None
     error_message: Optional[str] = None
     
     def to_dict(self) -> Dict[str, Any]:
@@ -219,6 +220,7 @@ class DetectionResult:
             "connection_graph": self.connection_graph.to_dict(),
             "raw_detections": self.raw_detections,
             "processing_time": float(self.processing_time) if hasattr(self.processing_time, 'item') else float(self.processing_time),
+            "validation_result": self.validation_result,
             "error_message": str(self.error_message) if self.error_message else None
         }
 

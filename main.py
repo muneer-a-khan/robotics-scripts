@@ -18,6 +18,8 @@ from circuit.graph_builder import CircuitGraphBuilder
 from data_structures import DetectionResult
 from graph_output_converter import DetectionToGraphConverter
 from live_circuit_visualizer import create_live_visualization
+from circuit_validator import CircuitValidator
+from enhanced_orientation_detector import EnhancedOrientationDetector
 
 
 class SnapCircuitVisionSystem:
@@ -28,7 +30,8 @@ class SnapCircuitVisionSystem:
     def __init__(self, 
                  model_path: Optional[str] = None,
                  save_outputs: bool = True,
-                 display_results: bool = True):
+                 display_results: bool = True,
+                 enable_validation: bool = False):
         """
         Initialize the vision system.
         
@@ -39,6 +42,7 @@ class SnapCircuitVisionSystem:
         """
         self.save_outputs = save_outputs
         self.display_results = display_results
+        self.enable_validation = enable_validation
         
         # Initialize pipeline components
         print("Initializing Snap Circuit Vision System...")
@@ -47,6 +51,15 @@ class SnapCircuitVisionSystem:
         self.connection_detector = ConnectionDetector()
         self.graph_builder = CircuitGraphBuilder()
         self.graph_converter = DetectionToGraphConverter()
+        
+        # Initialize validation components if enabled
+        if self.enable_validation:
+            print("Initializing circuit validation system...")
+            self.circuit_validator = CircuitValidator()
+            self.orientation_detector = EnhancedOrientationDetector()
+        else:
+            self.circuit_validator = None
+            self.orientation_detector = None
         
         # Video capture setup
         self.cap = None
@@ -116,6 +129,30 @@ class SnapCircuitVisionSystem:
                 components, connections, start_time, self.frame_count
             )
             
+            # Step 4: Validate circuit (if validation is enabled)
+            validation_result = None
+            if self.enable_validation and self.circuit_validator:
+                # Perform enhanced orientation detection
+                orientation_results = self.orientation_detector.validate_all_orientations(
+                    components, image
+                )
+                
+                # Auto-detect best matching reference design
+                reference_design = self.circuit_validator.find_matching_reference_design(
+                    connection_graph
+                )
+                
+                # Validate circuit (using same confidence threshold as visualizer)
+                validation_result = self.circuit_validator.validate_circuit(
+                    connection_graph, reference_design, confidence_threshold=0.75
+                )
+                
+                # Add orientation issues to validation result
+                orientation_issues = self.orientation_detector.get_orientation_issues(
+                    orientation_results
+                )
+                validation_result["issues"].extend(orientation_issues)
+            
             # Calculate processing time
             processing_time = time.time() - start_time
             
@@ -123,7 +160,8 @@ class SnapCircuitVisionSystem:
             result = DetectionResult(
                 connection_graph=connection_graph,
                 raw_detections=[comp.to_dict() for comp in components],
-                processing_time=processing_time
+                processing_time=processing_time,
+                validation_result=validation_result
             )
             
             return result
@@ -184,6 +222,35 @@ class SnapCircuitVisionSystem:
             f"Processing: {result.processing_time:.3f}s"
         ]
         
+        # Add validation information if available
+        if result.validation_result:
+            validation = result.validation_result
+            overall_result = validation.get("overall_result", "unknown")
+            score = validation.get("summary", {}).get("score", 0)
+            error_count = validation.get("summary", {}).get("errors", 0)
+            warning_count = validation.get("summary", {}).get("warnings", 0)
+            
+            # Add validation status with color coding
+            if overall_result == "correct":
+                status_symbol = "✅"
+                color = (0, 255, 0)  # Green
+            elif overall_result == "partial":
+                status_symbol = "⚠️"
+                color = (0, 255, 255)  # Yellow
+            elif overall_result == "incorrect":
+                status_symbol = "❌"
+                color = (0, 0, 255)  # Red
+            else:
+                status_symbol = "❓"
+                color = (128, 128, 128)  # Gray
+            
+            text_lines.extend([
+                f"",  # Empty line for spacing
+                f"Validation: {status_symbol} {overall_result.title()}",
+                f"Score: {score}%",
+                f"Issues: {error_count} errors, {warning_count} warnings"
+            ])
+        
         # Draw text background
         text_height = 25
         background_height = len(text_lines) * text_height + 20
@@ -241,7 +308,8 @@ class SnapCircuitVisionSystem:
                 visualization_path = create_live_visualization(
                     graph_data, 
                     timestamp=timestamp, 
-                    output_dir=str(self.output_dir)
+                    output_dir=str(self.output_dir),
+                    validation_data=result.validation_result
                 )
                 if visualization_path:
                     # Also save as "latest" for easy access
@@ -265,6 +333,12 @@ class SnapCircuitVisionSystem:
         print(f"Starting real-time detection (processing every {processing_interval}s)...")
         print("🔄 Live circuit visualization will be generated automatically every 3 seconds")
         print("📁 Latest visualization saved as: output/latest_circuit_visual.png")
+        
+        if self.enable_validation:
+            print("✅ Circuit validation is ENABLED - checking correctness and orientation")
+        else:
+            print("⚠️ Circuit validation is DISABLED - use --validate to enable")
+        
         print("Press 'q' to quit, 's' to save current frame, 'p' to pause, '+'/'-' to adjust interval")
         
         paused = False
@@ -300,9 +374,16 @@ class SnapCircuitVisionSystem:
                     last_result = result
                     
                     # Print status
+                    validation_status = ""
+                    if result.validation_result:
+                        overall_result = result.validation_result.get("overall_result", "unknown")
+                        score = result.validation_result.get("summary", {}).get("score", 0)
+                        validation_status = f", Validation: {overall_result} ({score}%)"
+                    
                     print(f"Processed frame {self.frame_count}. "
                           f"Components: {len(result.connection_graph.components)}, "
-                          f"Circuit closed: {result.connection_graph.state.is_circuit_closed}, "
+                          f"Circuit closed: {result.connection_graph.state.is_circuit_closed}"
+                          f"{validation_status}, "
                           f"Live visualization generated ✅")
                 
                 # Display results (show latest processed frame with live camera overlay)
@@ -475,6 +556,8 @@ def main():
     parser.add_argument("--model", type=str, help="Path to trained YOLOv8 model")
     parser.add_argument("--no-display", action="store_true", help="Disable display")
     parser.add_argument("--no-save", action="store_true", help="Disable saving outputs")
+    parser.add_argument("--validate", action="store_true", help="Enable circuit validation")
+    parser.add_argument("--reference-design", type=str, help="Specific reference design to validate against")
     
     args = parser.parse_args()
     
@@ -482,7 +565,8 @@ def main():
     system = SnapCircuitVisionSystem(
         model_path=args.model,
         save_outputs=not args.no_save,
-        display_results=not args.no_display
+        display_results=not args.no_display,
+        enable_validation=args.validate
     )
     
     try:
