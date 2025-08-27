@@ -1,0 +1,74 @@
+2025-08-27 09:00:37,572 - INFO - Starting high camera GPU training: high_camera_gpu_20250827_090037
+2025-08-27 09:00:37,573 - INFO - Validating high camera training dataset...
+2025-08-27 09:00:37,576 - INFO - Training images: 342
+2025-08-27 09:00:37,576 - INFO - Validation images: 76
+2025-08-27 09:00:37,576 - INFO - Training labels: 342
+2025-08-27 09:00:37,576 - INFO - Validation labels: 76
+2025-08-27 09:00:37,576 - INFO - Component classes: 16
+2025-08-27 09:00:37,735 - INFO - GPU Available: NVIDIA GeForce RTX 4070 Ti
+2025-08-27 09:00:37,735 - INFO - GPU Memory: 12.0 GB
+2025-08-27 09:00:37,735 - INFO - GPU Count: 1
+2025-08-27 09:00:38,190 - INFO - Training Parameters:
+2025-08-27 09:00:38,190 - INFO -   data: C:\Users\munee\OneDrive\Desktop\robotics-research\data\high_camera_training\data.yaml
+2025-08-27 09:00:38,190 - INFO -   epochs: 150
+2025-08-27 09:00:38,190 - INFO -   batch: 16
+2025-08-27 09:00:38,190 - INFO -   imgsz: 640
+2025-08-27 09:00:38,190 - INFO -   patience: 25
+2025-08-27 09:00:38,190 - INFO -   save: True
+2025-08-27 09:00:38,191 - INFO -   save_period: 10
+2025-08-27 09:00:38,191 - INFO -   cache: False
+2025-08-27 09:00:38,191 - INFO -   device: 0
+2025-08-27 09:00:38,191 - INFO -   workers: 8
+2025-08-27 09:00:38,191 - INFO -   project: C:\Users\munee\OneDrive\Desktop\robotics-research\output\results
+2025-08-27 09:00:38,191 - INFO -   name: high_camera_gpu_20250827_090037
+2025-08-27 09:00:38,191 - INFO -   exist_ok: True
+2025-08-27 09:00:38,191 - INFO -   pretrained: True
+2025-08-27 09:00:38,192 - INFO -   optimizer: AdamW
+2025-08-27 09:00:38,192 - INFO -   verbose: True
+2025-08-27 09:00:38,192 - INFO -   seed: 42
+2025-08-27 09:00:38,192 - INFO -   deterministic: True
+2025-08-27 09:00:38,192 - INFO -   single_cls: False
+2025-08-27 09:00:38,192 - INFO -   rect: False
+2025-08-27 09:00:38,192 - INFO -   cos_lr: True
+2025-08-27 09:00:38,192 - INFO -   close_mosaic: 10
+2025-08-27 09:00:38,192 - INFO -   resume: False
+2025-08-27 09:00:38,192 - INFO -   amp: True
+2025-08-27 09:00:38,193 - INFO -   fraction: 1.0
+2025-08-27 09:00:38,193 - INFO -   profile: False
+2025-08-27 09:00:38,193 - INFO -   freeze: None
+2025-08-27 09:00:38,193 - INFO -   lr0: 0.001
+2025-08-27 09:00:38,193 - INFO -   lrf: 0.01
+2025-08-27 09:00:38,193 - INFO -   momentum: 0.937
+2025-08-27 09:00:38,193 - INFO -   weight_decay: 0.0005
+2025-08-27 09:00:38,193 - INFO -   warmup_epochs: 3.0
+2025-08-27 09:00:38,193 - INFO -   warmup_momentum: 0.8
+2025-08-27 09:00:38,194 - INFO -   warmup_bias_lr: 0.1
+2025-08-27 09:00:38,194 - INFO -   box: 7.5
+2025-08-27 09:00:38,194 - INFO -   cls: 0.5
+2025-08-27 09:00:38,194 - INFO -   dfl: 1.5
+2025-08-27 09:00:38,194 - INFO -   hsv_h: 0.015
+2025-08-27 09:00:38,194 - INFO -   hsv_s: 0.7
+2025-08-27 09:00:38,194 - INFO -   hsv_v: 0.4
+2025-08-27 09:00:38,194 - INFO -   degrees: 5.0
+2025-08-27 09:00:38,194 - INFO -   translate: 0.1
+2025-08-27 09:00:38,195 - INFO -   scale: 0.5
+2025-08-27 09:00:38,195 - INFO -   shear: 2.0
+2025-08-27 09:00:38,195 - INFO -   perspective: 0.0
+2025-08-27 09:00:38,195 - INFO -   flipud: 0.0
+2025-08-27 09:00:38,195 - INFO -   fliplr: 0.5
+2025-08-27 09:00:38,195 - INFO -   mosaic: 0.8
+2025-08-27 09:00:38,195 - INFO -   mixup: 0.1
+2025-08-27 09:00:38,195 - INFO -   copy_paste: 0.1
+2025-08-27 09:00:38,195 - INFO -   label_smoothing: 0.0
+2025-08-27 09:00:38,195 - INFO -   nbs: 64
+2025-08-27 09:00:38,196 - INFO -   overlap_mask: True
+2025-08-27 09:00:38,196 - INFO -   mask_ratio: 4
+2025-08-27 09:00:38,196 - INFO -   plots: True
+2025-08-27 09:00:38,196 - INFO -   val: True
+2025-08-27 09:00:38,196 - INFO - Starting training...
+2025-08-27 09:13:13,617 - INFO - Training completed!
+2025-08-27 09:13:13,617 - INFO - Results saved to: C:\Users\munee\OneDrive\Desktop\robotics-research\output\results\high_camera_gpu_20250827_090037
+2025-08-27 09:13:13,617 - INFO - Running validation...
+2025-08-27 09:13:29,339 - INFO - Validation completed!
+2025-08-27 09:13:29,339 - INFO - mAP50: 0.9911
+2025-08-27 09:13:29,340 - INFO - mAP50-95: 0.9412

@@ -1,0 +1,37 @@
+{
+  "image_path": "data/augmented_training/images/val/battery_holder_002.jpg",
+  "total_components": 1,
+  "total_connections": 0,
+  "components": [
+    {
+      "class_id": 3,
+      "class_name": "battery_holder",
+      "confidence": 0.9927124977111816,
+      "bbox": [
+        442.3119812011719,
+        616.7693481445312,
+        2573.06884765625,
+        3416.696533203125
+      ],
+      "center": [
+        1507.6904296875,
+        2016.73291015625
+      ],
+      "area": 5965964.0
+    }
+  ],
+  "connections": [],
+  "component_summary": {
+    "battery_holder": {
+      "count": 1,
+      "avg_confidence": 0.9927124977111816
+    }
+  },
+  "connection_summary": {
+    "wire": 0,
+    "direct": 0,
+    "aligned": 0,
+    "proximity": 0,
+    "avg_distance": 0.0
+  }
+}

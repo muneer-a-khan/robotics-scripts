@@ -16,7 +16,7 @@ names:
 - microphone
 - alarm
 nc: 16
-path: /Users/mk/robotics-scripts/robotics-scripts/data/high_camera_training
+path: data/high_camera_training
 test: images/test
 train: images/train
 val: images/val

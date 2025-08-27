@@ -29,12 +29,16 @@ from pathlib import Path
 from concurrent.futures import ThreadPoolExecutor
 
 
-def start_dual_camera(validate=False, camera_id=0, no_display=False):
+def start_dual_camera(validate=False, camera_id=0, no_display=False, model_path=None):
     """Start the dual camera system."""
     print("🎥 Starting Dual Camera System...")
     print("=" * 50)
     
     cmd = [sys.executable, "dual_camera_system.py", "--camera", str(camera_id)]
+    
+    if model_path:
+        cmd.extend(["--model", model_path])
+        print(f"🎯 Using model: {model_path}")
     
     if validate:
         cmd.append("--validate")
