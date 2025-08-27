@@ -1,0 +1,22 @@
+names:
+- wire
+- switch
+- button
+- battery_holder
+- led
+- speaker
+- music_circuit
+- motor
+- resistor
+- connection_node
+- lamp
+- fan
+- buzzer
+- photoresistor
+- microphone
+- alarm
+nc: 16
+path: /Users/mk/robotics-scripts/robotics-scripts/data/high_camera_training
+test: images/test
+train: images/train
+val: images/val

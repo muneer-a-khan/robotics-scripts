@@ -391,7 +391,7 @@ class HighCameraTrainingPrep:
             data=str(data_yaml),
             epochs=epochs,
             imgsz=img_size,
-            device='auto',
+            device='cpu',  # Force CPU training
             project='high_camera_training',
             name='high_camera_model',
             patience=20,
