@@ -1,0 +1,93 @@
+2025-09-16 14:49:51,829 - DualBoardTrainer_dual_board_1758048591 - INFO - Logging setup complete: C:\Users\munee\OneDrive\Desktop\robotics-research\logs\dual_board_training_dual_board_1758048591.log
+2025-09-16 14:49:51,829 - DualBoardTrainer_dual_board_1758048591 - INFO - Dual Board Model Trainer Initialized
+2025-09-16 14:49:51,830 - DualBoardTrainer_dual_board_1758048591 - INFO -    Base model: yolov8x.pt
+2025-09-16 14:49:51,830 - DualBoardTrainer_dual_board_1758048591 - INFO -    Experiment: dual_board_1758048591
+2025-09-16 14:49:51,830 - DualBoardTrainer_dual_board_1758048591 - INFO -    GPU available: True
+2025-09-16 14:49:51,830 - DualBoardTrainer_dual_board_1758048591 - INFO -    Using GPU: True
+2025-09-16 14:49:51,831 - DualBoardTrainer_dual_board_1758048591 - INFO -    GPU: NVIDIA GeForce RTX 4070 Ti (12.0GB)
+2025-09-16 14:49:51,832 - DualBoardTrainer_dual_board_1758048591 - INFO - Starting dual board model training...
+2025-09-16 14:49:51,832 - DualBoardTrainer_dual_board_1758048591 - INFO - Validating dataset...
+2025-09-16 14:49:51,838 - DualBoardTrainer_dual_board_1758048591 - INFO -    Dataset statistics:
+2025-09-16 14:49:51,838 - DualBoardTrainer_dual_board_1758048591 - INFO -      Classes: 16
+2025-09-16 14:49:51,838 - DualBoardTrainer_dual_board_1758048591 - INFO -      Training images: 342
+2025-09-16 14:49:51,838 - DualBoardTrainer_dual_board_1758048591 - INFO -      Training labels: 684
+2025-09-16 14:49:51,839 - DualBoardTrainer_dual_board_1758048591 - INFO -      Validation images: 38
+2025-09-16 14:49:51,839 - DualBoardTrainer_dual_board_1758048591 - INFO -      Validation labels: 76
+2025-09-16 14:49:51,839 - DualBoardTrainer_dual_board_1758048591 - INFO - Dataset validation passed
+2025-09-16 14:49:52,171 - DualBoardTrainer_dual_board_1758048591 - INFO - Calculated optimal batch size: 12 (GPU: 12.0GB)
+2025-09-16 14:49:52,171 - DualBoardTrainer_dual_board_1758048591 - INFO - Training Parameters:
+2025-09-16 14:49:52,171 - DualBoardTrainer_dual_board_1758048591 - INFO -    epochs: 50
+2025-09-16 14:49:52,171 - DualBoardTrainer_dual_board_1758048591 - INFO -    imgsz: 640
+2025-09-16 14:49:52,171 - DualBoardTrainer_dual_board_1758048591 - INFO -    batch: 12
+2025-09-16 14:49:52,171 - DualBoardTrainer_dual_board_1758048591 - INFO -    device: 0
+2025-09-16 14:49:52,171 - DualBoardTrainer_dual_board_1758048591 - INFO -    workers: 8
+2025-09-16 14:49:52,171 - DualBoardTrainer_dual_board_1758048591 - INFO -    project: dual_board_training
+2025-09-16 14:49:52,171 - DualBoardTrainer_dual_board_1758048591 - INFO -    name: dual_board_1758048591
+2025-09-16 14:49:52,172 - DualBoardTrainer_dual_board_1758048591 - INFO -    exist_ok: True
+2025-09-16 14:49:52,172 - DualBoardTrainer_dual_board_1758048591 - INFO -    optimizer: AdamW
+2025-09-16 14:49:52,172 - DualBoardTrainer_dual_board_1758048591 - INFO -    lr0: 0.001
+2025-09-16 14:49:52,172 - DualBoardTrainer_dual_board_1758048591 - INFO -    lrf: 0.01
+2025-09-16 14:49:52,172 - DualBoardTrainer_dual_board_1758048591 - INFO -    momentum: 0.937
+2025-09-16 14:49:52,172 - DualBoardTrainer_dual_board_1758048591 - INFO -    weight_decay: 0.0005
+2025-09-16 14:49:52,172 - DualBoardTrainer_dual_board_1758048591 - INFO -    warmup_epochs: 5
+2025-09-16 14:49:52,172 - DualBoardTrainer_dual_board_1758048591 - INFO -    warmup_momentum: 0.8
+2025-09-16 14:49:52,172 - DualBoardTrainer_dual_board_1758048591 - INFO -    warmup_bias_lr: 0.1
+2025-09-16 14:49:52,173 - DualBoardTrainer_dual_board_1758048591 - INFO -    cos_lr: True
+2025-09-16 14:49:52,173 - DualBoardTrainer_dual_board_1758048591 - INFO -    patience: 30
+2025-09-16 14:49:52,173 - DualBoardTrainer_dual_board_1758048591 - INFO -    close_mosaic: 15
+2025-09-16 14:49:52,173 - DualBoardTrainer_dual_board_1758048591 - INFO -    box: 7.5
+2025-09-16 14:49:52,173 - DualBoardTrainer_dual_board_1758048591 - INFO -    cls: 0.5
+2025-09-16 14:49:52,173 - DualBoardTrainer_dual_board_1758048591 - INFO -    dfl: 1.5
+2025-09-16 14:49:52,173 - DualBoardTrainer_dual_board_1758048591 - INFO -    hsv_h: 0.015
+2025-09-16 14:49:52,173 - DualBoardTrainer_dual_board_1758048591 - INFO -    hsv_s: 0.5
+2025-09-16 14:49:52,173 - DualBoardTrainer_dual_board_1758048591 - INFO -    hsv_v: 0.4
+2025-09-16 14:49:52,173 - DualBoardTrainer_dual_board_1758048591 - INFO -    degrees: 5.0
+2025-09-16 14:49:52,173 - DualBoardTrainer_dual_board_1758048591 - INFO -    translate: 0.1
+2025-09-16 14:49:52,173 - DualBoardTrainer_dual_board_1758048591 - INFO -    scale: 0.3
+2025-09-16 14:49:52,174 - DualBoardTrainer_dual_board_1758048591 - INFO -    shear: 2.0
+2025-09-16 14:49:52,174 - DualBoardTrainer_dual_board_1758048591 - INFO -    perspective: 0.0
+2025-09-16 14:49:52,174 - DualBoardTrainer_dual_board_1758048591 - INFO -    flipud: 0.0
+2025-09-16 14:49:52,174 - DualBoardTrainer_dual_board_1758048591 - INFO -    fliplr: 0.5
+2025-09-16 14:49:52,174 - DualBoardTrainer_dual_board_1758048591 - INFO -    mosaic: 0.3
+2025-09-16 14:49:52,174 - DualBoardTrainer_dual_board_1758048591 - INFO -    mixup: 0.05
+2025-09-16 14:49:52,174 - DualBoardTrainer_dual_board_1758048591 - INFO -    copy_paste: 0.05
+2025-09-16 14:49:52,174 - DualBoardTrainer_dual_board_1758048591 - INFO -    val: True
+2025-09-16 14:49:52,174 - DualBoardTrainer_dual_board_1758048591 - INFO -    save: True
+2025-09-16 14:49:52,174 - DualBoardTrainer_dual_board_1758048591 - INFO -    save_period: 10
+2025-09-16 14:49:52,174 - DualBoardTrainer_dual_board_1758048591 - INFO -    plots: True
+2025-09-16 14:49:52,174 - DualBoardTrainer_dual_board_1758048591 - INFO -    verbose: True
+2025-09-16 14:49:52,174 - DualBoardTrainer_dual_board_1758048591 - INFO -    amp: True
+2025-09-16 14:49:52,174 - DualBoardTrainer_dual_board_1758048591 - INFO -    fraction: 1.0
+2025-09-16 14:49:52,175 - DualBoardTrainer_dual_board_1758048591 - INFO -    profile: False
+2025-09-16 14:49:52,175 - DualBoardTrainer_dual_board_1758048591 - INFO -    freeze: None
+2025-09-16 14:49:52,175 - DualBoardTrainer_dual_board_1758048591 - INFO -    multi_scale: False
+2025-09-16 14:49:52,175 - DualBoardTrainer_dual_board_1758048591 - INFO -    overlap_mask: True
+2025-09-16 14:49:52,175 - DualBoardTrainer_dual_board_1758048591 - INFO -    mask_ratio: 4
+2025-09-16 14:49:52,175 - DualBoardTrainer_dual_board_1758048591 - INFO -    dropout: 0.0
+2025-09-16 14:49:52,175 - DualBoardTrainer_dual_board_1758048591 - INFO -    label_smoothing: 0.0
+2025-09-16 14:49:52,175 - DualBoardTrainer_dual_board_1758048591 - INFO -    nbs: 64
+2025-09-16 14:49:52,175 - DualBoardTrainer_dual_board_1758048591 - INFO - Beginning training process...
+2025-09-16 14:51:32,453 - DualBoardTrainer_dual_board_1758048591 - ERROR - Training failed: torch.cat(): expected a non-empty list of Tensors
+2025-09-16 14:51:32,455 - DualBoardTrainer_dual_board_1758048591 - ERROR - Traceback (most recent call last):
+  File "C:\Users\munee\OneDrive\Desktop\robotics-research\train_dual_board_model.py", line 354, in train_model
+    results = self.model.train(data=data_yaml_path, **train_params)
+  File "C:\Users\munee\AppData\Roaming\Python\Python313\site-packages\ultralytics\engine\model.py", line 797, in train
+    self.trainer.train()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\munee\AppData\Roaming\Python\Python313\site-packages\ultralytics\engine\trainer.py", line 227, in train
+    self._do_train(world_size)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\munee\AppData\Roaming\Python\Python313\site-packages\ultralytics\engine\trainer.py", line 460, in _do_train
+    self.metrics, self.fitness = self.validate()
+                                 ~~~~~~~~~~~~~^^
+  File "C:\Users\munee\AppData\Roaming\Python\Python313\site-packages\ultralytics\engine\trainer.py", line 660, in validate
+    metrics = self.validator(self)
+  File "C:\Users\munee\AppData\Roaming\Python\Python313\site-packages\torch\utils\_contextlib.py", line 116, in decorate_context
+    return func(*args, **kwargs)
+  File "C:\Users\munee\AppData\Roaming\Python\Python313\site-packages\ultralytics\engine\validator.py", line 228, in __call__
+    stats = self.get_stats()
+  File "C:\Users\munee\AppData\Roaming\Python\Python313\site-packages\ultralytics\models\yolo\detect\val.py", line 244, in get_stats
+    stats = {k: torch.cat(v, 0).cpu().numpy() for k, v in self.stats.items()}  # to numpy
+                ~~~~~~~~~^^^^^^
+RuntimeError: torch.cat(): expected a non-empty list of Tensors
+

@@ -1,0 +1,76 @@
+2025-09-16 15:00:57,593 - DualBoardTrainer_dual_board_1758049257 - INFO - Logging setup complete: C:\Users\munee\OneDrive\Desktop\robotics-research\logs\dual_board_training_dual_board_1758049257.log
+2025-09-16 15:00:57,593 - DualBoardTrainer_dual_board_1758049257 - INFO - Dual Board Model Trainer Initialized
+2025-09-16 15:00:57,593 - DualBoardTrainer_dual_board_1758049257 - INFO -    Base model: yolov8x.pt
+2025-09-16 15:00:57,594 - DualBoardTrainer_dual_board_1758049257 - INFO -    Experiment: dual_board_1758049257
+2025-09-16 15:00:57,594 - DualBoardTrainer_dual_board_1758049257 - INFO -    GPU available: True
+2025-09-16 15:00:57,594 - DualBoardTrainer_dual_board_1758049257 - INFO -    Using GPU: True
+2025-09-16 15:00:57,596 - DualBoardTrainer_dual_board_1758049257 - INFO -    GPU: NVIDIA GeForce RTX 4070 Ti (12.0GB)
+2025-09-16 15:00:57,596 - DualBoardTrainer_dual_board_1758049257 - INFO - Starting dual board model training...
+2025-09-16 15:00:57,596 - DualBoardTrainer_dual_board_1758049257 - INFO - Validating dataset...
+2025-09-16 15:00:57,601 - DualBoardTrainer_dual_board_1758049257 - INFO -    Dataset statistics:
+2025-09-16 15:00:57,601 - DualBoardTrainer_dual_board_1758049257 - INFO -      Classes: 16
+2025-09-16 15:00:57,601 - DualBoardTrainer_dual_board_1758049257 - INFO -      Training images: 342
+2025-09-16 15:00:57,601 - DualBoardTrainer_dual_board_1758049257 - INFO -      Training labels: 342
+2025-09-16 15:00:57,602 - DualBoardTrainer_dual_board_1758049257 - INFO -      Validation images: 38
+2025-09-16 15:00:57,602 - DualBoardTrainer_dual_board_1758049257 - INFO -      Validation labels: 38
+2025-09-16 15:00:57,602 - DualBoardTrainer_dual_board_1758049257 - INFO - Dataset validation passed
+2025-09-16 15:00:57,942 - DualBoardTrainer_dual_board_1758049257 - INFO - Calculated optimal batch size: 12 (GPU: 12.0GB)
+2025-09-16 15:00:57,942 - DualBoardTrainer_dual_board_1758049257 - INFO - Training Parameters:
+2025-09-16 15:00:57,942 - DualBoardTrainer_dual_board_1758049257 - INFO -    epochs: 200
+2025-09-16 15:00:57,942 - DualBoardTrainer_dual_board_1758049257 - INFO -    imgsz: 640
+2025-09-16 15:00:57,942 - DualBoardTrainer_dual_board_1758049257 - INFO -    batch: 12
+2025-09-16 15:00:57,943 - DualBoardTrainer_dual_board_1758049257 - INFO -    device: 0
+2025-09-16 15:00:57,943 - DualBoardTrainer_dual_board_1758049257 - INFO -    workers: 8
+2025-09-16 15:00:57,943 - DualBoardTrainer_dual_board_1758049257 - INFO -    project: dual_board_training
+2025-09-16 15:00:57,943 - DualBoardTrainer_dual_board_1758049257 - INFO -    name: dual_board_1758049257
+2025-09-16 15:00:57,943 - DualBoardTrainer_dual_board_1758049257 - INFO -    exist_ok: True
+2025-09-16 15:00:57,943 - DualBoardTrainer_dual_board_1758049257 - INFO -    optimizer: AdamW
+2025-09-16 15:00:57,943 - DualBoardTrainer_dual_board_1758049257 - INFO -    lr0: 0.001
+2025-09-16 15:00:57,943 - DualBoardTrainer_dual_board_1758049257 - INFO -    lrf: 0.01
+2025-09-16 15:00:57,943 - DualBoardTrainer_dual_board_1758049257 - INFO -    momentum: 0.937
+2025-09-16 15:00:57,943 - DualBoardTrainer_dual_board_1758049257 - INFO -    weight_decay: 0.0005
+2025-09-16 15:00:57,943 - DualBoardTrainer_dual_board_1758049257 - INFO -    warmup_epochs: 5
+2025-09-16 15:00:57,943 - DualBoardTrainer_dual_board_1758049257 - INFO -    warmup_momentum: 0.8
+2025-09-16 15:00:57,944 - DualBoardTrainer_dual_board_1758049257 - INFO -    warmup_bias_lr: 0.1
+2025-09-16 15:00:57,944 - DualBoardTrainer_dual_board_1758049257 - INFO -    cos_lr: True
+2025-09-16 15:00:57,944 - DualBoardTrainer_dual_board_1758049257 - INFO -    patience: 30
+2025-09-16 15:00:57,944 - DualBoardTrainer_dual_board_1758049257 - INFO -    close_mosaic: 15
+2025-09-16 15:00:57,944 - DualBoardTrainer_dual_board_1758049257 - INFO -    box: 7.5
+2025-09-16 15:00:57,944 - DualBoardTrainer_dual_board_1758049257 - INFO -    cls: 0.5
+2025-09-16 15:00:57,944 - DualBoardTrainer_dual_board_1758049257 - INFO -    dfl: 1.5
+2025-09-16 15:00:57,944 - DualBoardTrainer_dual_board_1758049257 - INFO -    hsv_h: 0.015
+2025-09-16 15:00:57,944 - DualBoardTrainer_dual_board_1758049257 - INFO -    hsv_s: 0.5
+2025-09-16 15:00:57,944 - DualBoardTrainer_dual_board_1758049257 - INFO -    hsv_v: 0.4
+2025-09-16 15:00:57,944 - DualBoardTrainer_dual_board_1758049257 - INFO -    degrees: 5.0
+2025-09-16 15:00:57,945 - DualBoardTrainer_dual_board_1758049257 - INFO -    translate: 0.1
+2025-09-16 15:00:57,945 - DualBoardTrainer_dual_board_1758049257 - INFO -    scale: 0.3
+2025-09-16 15:00:57,945 - DualBoardTrainer_dual_board_1758049257 - INFO -    shear: 2.0
+2025-09-16 15:00:57,945 - DualBoardTrainer_dual_board_1758049257 - INFO -    perspective: 0.0
+2025-09-16 15:00:57,945 - DualBoardTrainer_dual_board_1758049257 - INFO -    flipud: 0.0
+2025-09-16 15:00:57,945 - DualBoardTrainer_dual_board_1758049257 - INFO -    fliplr: 0.5
+2025-09-16 15:00:57,945 - DualBoardTrainer_dual_board_1758049257 - INFO -    mosaic: 0.3
+2025-09-16 15:00:57,945 - DualBoardTrainer_dual_board_1758049257 - INFO -    mixup: 0.05
+2025-09-16 15:00:57,945 - DualBoardTrainer_dual_board_1758049257 - INFO -    copy_paste: 0.05
+2025-09-16 15:00:57,946 - DualBoardTrainer_dual_board_1758049257 - INFO -    val: True
+2025-09-16 15:00:57,946 - DualBoardTrainer_dual_board_1758049257 - INFO -    save: True
+2025-09-16 15:00:57,946 - DualBoardTrainer_dual_board_1758049257 - INFO -    save_period: 10
+2025-09-16 15:00:57,946 - DualBoardTrainer_dual_board_1758049257 - INFO -    plots: True
+2025-09-16 15:00:57,946 - DualBoardTrainer_dual_board_1758049257 - INFO -    verbose: True
+2025-09-16 15:00:57,946 - DualBoardTrainer_dual_board_1758049257 - INFO -    amp: True
+2025-09-16 15:00:57,946 - DualBoardTrainer_dual_board_1758049257 - INFO -    fraction: 1.0
+2025-09-16 15:00:57,946 - DualBoardTrainer_dual_board_1758049257 - INFO -    profile: False
+2025-09-16 15:00:57,946 - DualBoardTrainer_dual_board_1758049257 - INFO -    freeze: None
+2025-09-16 15:00:57,946 - DualBoardTrainer_dual_board_1758049257 - INFO -    multi_scale: False
+2025-09-16 15:00:57,946 - DualBoardTrainer_dual_board_1758049257 - INFO -    overlap_mask: True
+2025-09-16 15:00:57,947 - DualBoardTrainer_dual_board_1758049257 - INFO -    mask_ratio: 4
+2025-09-16 15:00:57,947 - DualBoardTrainer_dual_board_1758049257 - INFO -    dropout: 0.0
+2025-09-16 15:00:57,947 - DualBoardTrainer_dual_board_1758049257 - INFO -    label_smoothing: 0.0
+2025-09-16 15:00:57,947 - DualBoardTrainer_dual_board_1758049257 - INFO -    nbs: 64
+2025-09-16 15:00:57,947 - DualBoardTrainer_dual_board_1758049257 - INFO - Beginning training process...
+2025-09-16 15:40:37,287 - DualBoardTrainer_dual_board_1758049257 - INFO - Training completed in 2379.34 seconds
+2025-09-16 15:40:37,327 - DualBoardTrainer_dual_board_1758049257 - INFO - Calculated optimal batch size: 12 (GPU: 12.0GB)
+2025-09-16 15:40:57,368 - DualBoardTrainer_dual_board_1758049257 - INFO - Validation Results:
+2025-09-16 15:40:57,368 - DualBoardTrainer_dual_board_1758049257 - INFO -    map50: 0.9925
+2025-09-16 15:40:57,369 - DualBoardTrainer_dual_board_1758049257 - INFO -    map50_95: 0.9558
+2025-09-16 15:40:57,369 - DualBoardTrainer_dual_board_1758049257 - INFO -    precision: 0.9843
+2025-09-16 15:40:57,369 - DualBoardTrainer_dual_board_1758049257 - INFO -    recall: 0.9743

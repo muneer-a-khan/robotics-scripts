@@ -1,0 +1,20 @@
+{
+  "graph": {
+    "directed": true,
+    "timestamp": 1758053634.7938619,
+    "nodes": [],
+    "edges": [],
+    "circuit_analysis": {
+      "connectivity": {
+        "connected_components": [],
+        "strongly_connected": [],
+        "power_paths": [],
+        "isolated_components": [],
+        "potential_connections": []
+      },
+      "circuit_complete": false,
+      "power_sources": [],
+      "active_paths": []
+    }
+  }
+}

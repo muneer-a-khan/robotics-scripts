@@ -1,0 +1,80 @@
+{
+  "left_board": {
+    "board_side": "left",
+    "detection_result": {
+      "connection_graph": {
+        "components": [],
+        "edges": [],
+        "state": {
+          "is_circuit_closed": false,
+          "power_on": false,
+          "active_components": [],
+          "power_flow_path": [],
+          "estimated_voltage": null,
+          "estimated_current": null
+        },
+        "timestamp": 1758053630.7703826,
+        "frame_id": null
+      },
+      "raw_detections": [],
+      "processing_time": 0.0,
+      "validation_result": null,
+      "error_message": null
+    },
+    "orientation_score": 0.0,
+    "connectivity_score": 0.0,
+    "overall_score": 0.0,
+    "component_count": 0,
+    "connection_count": 0,
+    "validation_issues": [
+      "Processing skipped - tape covered"
+    ],
+    "processing_time": 0.0,
+    "timestamp": 1758053630.7703826
+  },
+  "right_board": {
+    "board_side": "right",
+    "detection_result": {
+      "connection_graph": {
+        "components": [],
+        "edges": [],
+        "state": {
+          "is_circuit_closed": false,
+          "power_on": false,
+          "active_components": [],
+          "power_flow_path": [],
+          "estimated_voltage": null,
+          "estimated_current": null
+        },
+        "timestamp": 1758053630.7703826,
+        "frame_id": null
+      },
+      "raw_detections": [],
+      "processing_time": 0.0,
+      "validation_result": null,
+      "error_message": null
+    },
+    "orientation_score": 0.0,
+    "connectivity_score": 0.0,
+    "overall_score": 0.0,
+    "component_count": 0,
+    "connection_count": 0,
+    "validation_issues": [
+      "Processing skipped - tape covered"
+    ],
+    "processing_time": 0.0,
+    "timestamp": 1758053630.7703826
+  },
+  "tape_status": {
+    "left_side_covered": "True",
+    "right_side_covered": "True",
+    "left_coverage_percentage": 0.0,
+    "right_coverage_percentage": 0.010513117283950617,
+    "overall_coverage_percentage": 0.0,
+    "should_skip": "True",
+    "detection_confidence": 0.9999474344135802
+  },
+  "frame_number": 1,
+  "timestamp": 1758053630.7703826,
+  "should_process": false
+}
