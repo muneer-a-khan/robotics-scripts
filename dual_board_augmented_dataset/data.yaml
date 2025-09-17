@@ -1,5 +1,5 @@
 # Dual Board Snap Circuit Augmented Dataset
-path: C:\Users\munee\OneDrive\Desktop\robotics-research\dual_board_augmented_dataset  # dataset root dir
+path: /Users/mk/robotics-scripts/robotics-scripts/dual_board_augmented_dataset  # dataset root dir
 train: images/train  # train images (relative to 'path')
 val: images/val      # val images (relative to 'path')
 test: images/test    # test images (relative to 'path')

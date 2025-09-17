@@ -14,7 +14,7 @@ class LiveCircuitVisualizer:
     Live circuit visualizer that creates snap circuit board visualizations from detection data.
     """
     
-    def __init__(self, confidence_threshold=0.75, output_dir="output"):
+    def __init__(self, confidence_threshold=0.15, output_dir="output"):
         self.confidence_threshold = confidence_threshold
         self.output_dir = Path(output_dir)
         self.output_dir.mkdir(exist_ok=True)

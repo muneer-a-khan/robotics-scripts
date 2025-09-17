@@ -3,3 +3,5 @@
 # Output folders that shouldn't be committed
 output/frames/
 output/data/
+
+dual_board_output/*

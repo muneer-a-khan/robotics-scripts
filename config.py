@@ -29,7 +29,7 @@ for dir_path in [MODELS_DIR, DATA_DIR, TRAINING_DATA_DIR, OUTPUT_DIR]:
 YOLO_CONFIG = {
     "model_path": MODELS_DIR / "latest_trained_model.pt",  # Your freshly trained model
     "pretrained_model": "yolov8x.pt",
-    "confidence_threshold": 0.25,  # Lower threshold for better recall
+    "confidence_threshold": 0.15,  # Very low threshold for debugging
     "iou_threshold": 0.4,          # Balanced NMS
     "image_size": 640,
     "device": get_optimal_device()  # Smart device detection

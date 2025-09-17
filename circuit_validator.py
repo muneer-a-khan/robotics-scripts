@@ -142,7 +142,7 @@ class CircuitValidator:
     
     def validate_circuit(self, circuit_graph: ConnectionGraph, 
                         reference_design: Optional[str] = None,
-                        confidence_threshold: float = 0.75) -> Dict[str, Any]:
+                        confidence_threshold: float = 0.25) -> Dict[str, Any]:
         """
         Validate a circuit against reference design and electrical rules.
         Only validates high-confidence components (same as visualizer).
@@ -150,7 +150,7 @@ class CircuitValidator:
         Args:
             circuit_graph: The detected circuit graph
             reference_design: Name of reference design to validate against
-            confidence_threshold: Minimum confidence threshold for validation (default: 0.75)
+            confidence_threshold: Minimum confidence threshold for validation (default: 0.25)
             
         Returns:
             Validation results with issues and suggestions
