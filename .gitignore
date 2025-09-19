@@ -5,3 +5,4 @@ output/frames/
 output/data/
 
 dual_board_output/*
+graph_output/*
