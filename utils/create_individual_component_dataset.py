@@ -23,9 +23,9 @@ def create_component_directory_structure():
     
     # Component classes from config
     component_classes = [
-        "wire", "switch", "button", "battery_holder", "led", "speaker",
-        "music_circuit", "motor", "resistor", "connection_node", "lamp",
-        "fan", "buzzer", "photoresistor", "microphone", "alarm"
+        "Wire", "Battery Holder", "LED_1 (Yellow)", "LED_2 (Red)", "Resistor", "Lamp",
+        "Photoresistor", "U_1 blue music circuit", "U_2 red alarm circuit", "U_3 green space war circuit", "Speaker",
+        "Slide switch", "Press switch", "Whistle chip", "Green tape"
     ]
     
     # Create subdirectories for each component
@@ -77,10 +77,10 @@ def process_individual_component_images(components_dir: Path):
     
     # Component class mapping
     class_mapping = {
-        "wire": 0, "switch": 1, "button": 2, "battery_holder": 3,
-        "led": 4, "speaker": 5, "music_circuit": 6, "motor": 7,
-        "resistor": 8, "connection_node": 9, "lamp": 10, "fan": 11,
-        "buzzer": 12, "photoresistor": 13, "microphone": 14, "alarm": 15
+        "Wire": 0, "Battery Holder": 1, "LED_1 (Yellow)": 2, "LED_2 (Red)": 3,
+        "Resistor": 4, "Lamp": 5, "Photoresistor": 6, "U_1 blue music circuit": 7,
+        "U_2 red alarm circuit": 8, "U_3 green space war circuit": 9, "Speaker": 10, "Slide switch": 11,
+        "Press switch": 12, "Whistle chip": 13, "Green tape": 14
     }
     
     processed_images = []
@@ -220,29 +220,28 @@ val: images/val      # val images (relative to 'path')
 test: images/test    # test images (relative to 'path')
 
 # Number of classes
-nc: 16
+nc: 15
 
 # Dataset info
 # Original circuit board images + {num_individual_images} individual component images
 
 # Class names
 names:
-  0: wire
-  1: switch
-  2: button
-  3: battery_holder
-  4: led
-  5: speaker
-  6: music_circuit
-  7: motor
-  8: resistor
-  9: connection_node
-  10: lamp
-  11: fan
-  12: buzzer
-  13: photoresistor
-  14: microphone
-  15: alarm
+  0: Wire
+  1: Battery Holder
+  2: LED_1 (Yellow)
+  3: LED_2 (Red)
+  4: Resistor
+  5: Lamp
+  6: Photoresistor
+  7: U_1 blue music circuit
+  8: U_2 red alarm circuit
+  9: U_3 green space war circuit
+  10: Speaker
+  11: Slide switch
+  12: Press switch
+  13: Whistle chip
+  14: Green tape
 """
     
     yaml_file = dataset_dir / "data.yaml"

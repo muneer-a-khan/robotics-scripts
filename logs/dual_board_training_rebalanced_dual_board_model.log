@@ -66,3 +66,25 @@
 2025-09-17 19:02:20,738 - DualBoardTrainer_rebalanced_dual_board_model - INFO -    label_smoothing: 0.0
 2025-09-17 19:02:20,738 - DualBoardTrainer_rebalanced_dual_board_model - INFO -    nbs: 64
 2025-09-17 19:02:20,738 - DualBoardTrainer_rebalanced_dual_board_model - INFO - Beginning training process...
+2025-09-17 19:14:37,823 - DualBoardTrainer_rebalanced_dual_board_model - INFO - Logging setup complete: C:\Users\munee\OneDrive\Desktop\robotics-research\logs\dual_board_training_rebalanced_dual_board_model.log
+2025-09-17 19:14:37,823 - DualBoardTrainer_rebalanced_dual_board_model - INFO - Dual Board Model Trainer Initialized
+2025-09-17 19:14:37,823 - DualBoardTrainer_rebalanced_dual_board_model - INFO -    Base model: yolov8x.pt
+2025-09-17 19:14:37,823 - DualBoardTrainer_rebalanced_dual_board_model - INFO -    Experiment: rebalanced_dual_board_model
+2025-09-17 19:14:37,824 - DualBoardTrainer_rebalanced_dual_board_model - INFO -    GPU available: True
+2025-09-17 19:14:37,824 - DualBoardTrainer_rebalanced_dual_board_model - INFO -    Using GPU: True
+2025-09-17 19:14:37,830 - DualBoardTrainer_rebalanced_dual_board_model - INFO -    GPU: NVIDIA GeForce RTX 4070 Ti (12.0GB)
+2025-09-17 19:14:37,830 - DualBoardTrainer_rebalanced_dual_board_model - INFO - Starting dual board model training...
+2025-09-17 19:14:37,830 - DualBoardTrainer_rebalanced_dual_board_model - INFO - Validating dataset...
+2025-09-17 19:14:37,837 - DualBoardTrainer_rebalanced_dual_board_model - ERROR - Dataset root does not exist: \Users\mk\robotics-scripts\robotics-scripts\dual_board_augmented_dataset
+2025-09-17 19:14:37,837 - DualBoardTrainer_rebalanced_dual_board_model - ERROR - Dataset validation failed!
+2025-09-17 19:16:40,239 - DualBoardTrainer_rebalanced_dual_board_model - INFO - Logging setup complete: C:\Users\munee\OneDrive\Desktop\robotics-research\logs\dual_board_training_rebalanced_dual_board_model.log
+2025-09-17 19:16:40,240 - DualBoardTrainer_rebalanced_dual_board_model - INFO - Dual Board Model Trainer Initialized
+2025-09-17 19:16:40,240 - DualBoardTrainer_rebalanced_dual_board_model - INFO -    Base model: yolov8x.pt
+2025-09-17 19:16:40,240 - DualBoardTrainer_rebalanced_dual_board_model - INFO -    Experiment: rebalanced_dual_board_model
+2025-09-17 19:16:40,240 - DualBoardTrainer_rebalanced_dual_board_model - INFO -    GPU available: True
+2025-09-17 19:16:40,240 - DualBoardTrainer_rebalanced_dual_board_model - INFO -    Using GPU: True
+2025-09-17 19:16:40,241 - DualBoardTrainer_rebalanced_dual_board_model - INFO -    GPU: NVIDIA GeForce RTX 4070 Ti (12.0GB)
+2025-09-17 19:16:40,241 - DualBoardTrainer_rebalanced_dual_board_model - INFO - Starting dual board model training...
+2025-09-17 19:16:40,241 - DualBoardTrainer_rebalanced_dual_board_model - INFO - Validating dataset...
+2025-09-17 19:16:40,242 - DualBoardTrainer_rebalanced_dual_board_model - ERROR - Dataset root does not exist: \Users\mk\robotics-scripts\robotics-scripts\dual_board_augmented_dataset
+2025-09-17 19:16:40,242 - DualBoardTrainer_rebalanced_dual_board_model - ERROR - Dataset validation failed!

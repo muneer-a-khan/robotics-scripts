@@ -91,14 +91,15 @@ class DualBoardAnnotator:
         print("    • Click + drag: Draw bounding box")
         print("    • Right click: Delete last annotation")
         print("  Keyboard:")
-        print("    • Numbers 0-9: Change class")
+        print("    • Numbers 0-9: Change class (0-9)")
+        print("    • UP/DOWN arrows: Cycle through all classes")
+        print("    • +/- keys: Next/Previous class (alternative)")
         print("    • TAB: Switch between left/right side")
-        print("    • SPACE: Toggle green tape detection")
         print("    • 's': Save annotations and continue")
         print("    • 'r': Reset current image")
         print("    • 'q': Quit")
         print("    • 'h': Show this help")
-        print("    • 'v': Toggle side visibility")
+        print("    • 'c': Show current class info")
     
     def detect_green_tape_coverage(self, image: np.ndarray) -> GreenTapeStatus:
         """
@@ -208,16 +209,9 @@ class DualBoardAnnotator:
             self.display_image = self.original_image.copy()
             self.annotations = []
             
-            # Detect green tape status
-            tape_status = self.detect_green_tape_coverage(self.original_image)
-            
             print(f"\n📸 Loaded: {self.image_path.name}")
             print(f"   📐 Size: {self.width}x{self.height}")
-            print(f"   🎭 Green tape status:")
-            print(f"     • Left side: {'🚫 BLOCKED' if tape_status.left_side_covered else '✅ CLEAR'}")
-            print(f"     • Right side: {'🚫 BLOCKED' if tape_status.right_side_covered else '✅ CLEAR'}")
-            print(f"     • Coverage: {tape_status.coverage_percentage:.1f}%")
-            print(f"     • Recommendation: {'⏭️  SKIP' if tape_status.should_skip else '✅ ANNOTATE'}")
+            print(f"   🎯 Ready for annotation")
             
             return True
             
@@ -264,9 +258,10 @@ class DualBoardAnnotator:
             
             self.drawing = True
             self.start_point = (x, y)
+            print(f"🖱️  Started drawing at ({x}, {y}) on {self.current_side} side")
             
         elif event == cv2.EVENT_MOUSEMOVE:
-            if self.drawing:
+            if self.drawing and self.start_point:
                 temp_image = self.display_image.copy()
                 
                 # Draw current rectangle
@@ -285,9 +280,16 @@ class DualBoardAnnotator:
                 cv2.imshow('Dual Board Annotator', temp_image)
                 
         elif event == cv2.EVENT_LBUTTONUP:
-            if self.drawing:
+            if self.drawing and self.start_point:
                 self.drawing = False
-                self._add_annotation(self.start_point, (x, y))
+                print(f"🖱️  Finished drawing at ({x}, {y})")
+                
+                # Only add annotation if we actually dragged (minimum size)
+                if abs(x - self.start_point[0]) > 5 and abs(y - self.start_point[1]) > 5:
+                    self._add_annotation(self.start_point, (x, y))
+                else:
+                    print("   ⚠️  Box too small, not added")
+                
                 self._update_display()
                 
         elif event == cv2.EVENT_RBUTTONDOWN:
@@ -376,23 +378,33 @@ class DualBoardAnnotator:
     
     def _draw_ui_overlay(self, image: np.ndarray) -> np.ndarray:
         """Draw UI information overlay"""
-        # Current class info
-        class_text = f"Class: {self.classes[self.current_class]} ({self.current_class})"
+        # Current class info - make it more prominent
+        class_text = f"Class {self.current_class}: {self.classes[self.current_class]}"
         cv2.putText(image, class_text, (10, 30), 
-                   cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 0), 2)
+                   cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 0), 2)
+        
+        # Class count info
+        class_count_text = f"({self.current_class + 1}/{len(self.classes)} classes)"
+        cv2.putText(image, class_count_text, (10, 60), 
+                   cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
         
         # Current side info
         side_color = (0, 255, 255) if self.current_side == "left" else (255, 0, 255)
         side_text = f"Side: {self.current_side.upper()}"
-        cv2.putText(image, side_text, (10, 60), 
+        cv2.putText(image, side_text, (10, 90), 
                    cv2.FONT_HERSHEY_SIMPLEX, 0.7, side_color, 2)
         
         # Annotation count
         left_count = len([a for a in self.annotations if a.side == "left"])
         right_count = len([a for a in self.annotations if a.side == "right"])
         count_text = f"Annotations: L:{left_count} R:{right_count}"
-        cv2.putText(image, count_text, (10, 90), 
+        cv2.putText(image, count_text, (10, 120), 
                    cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
+        
+        # Controls reminder
+        controls_text = "UP/DOWN: Change class | TAB: Switch side | S: Save | Q: Quit"
+        cv2.putText(image, controls_text, (10, self.height - 20), 
+                   cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 1)
         
         return image
     
@@ -439,6 +451,17 @@ class DualBoardAnnotator:
         
         return str(left_file), str(right_file)
     
+    def _show_class_info(self):
+        """Show detailed class information"""
+        print(f"\n📋 CLASS INFORMATION:")
+        print(f"   Current: {self.current_class} - {self.classes[self.current_class]}")
+        print(f"   Total: {len(self.classes)} classes")
+        print(f"   All classes:")
+        for i, cls in enumerate(self.classes):
+            marker = "👉" if i == self.current_class else "  "
+            print(f"   {marker} {i:2d}: {cls}")
+        print()
+    
     def annotate_image(self, image_path: str, output_dir: str = "annotations") -> bool:
         """
         Annotate a single image
@@ -453,26 +476,19 @@ class DualBoardAnnotator:
         if not self.load_image(image_path):
             return False
         
-        # Check green tape status
-        tape_status = self.detect_green_tape_coverage(self.original_image)
-        
-        if tape_status.should_skip:
-            print(f"⏭️  Skipping image due to green tape coverage (hands detected)")
-            response = input("   Continue anyway? (y/n): ").lower()
-            if response != 'y':
-                return False
-        
         # Setup window and callbacks
         cv2.namedWindow('Dual Board Annotator', cv2.WINDOW_NORMAL)
+        cv2.resizeWindow('Dual Board Annotator', 1200, 800)  # Set a reasonable window size
         cv2.setMouseCallback('Dual Board Annotator', self.mouse_callback)
         
         self._update_display()
         
         print(f"\n🎯 Annotating: {self.image_path.name}")
         print("   Press 'h' for help, 's' to save, 'q' to quit")
+        print("   🖱️  Click and drag to draw bounding boxes")
         
         while True:
-            key = cv2.waitKey(1) & 0xFF
+            key = cv2.waitKey(30) & 0xFF  # Increased wait time for better mouse handling
             
             if key == ord('q'):
                 return False
@@ -491,21 +507,30 @@ class DualBoardAnnotator:
                 self.current_side = "right" if self.current_side == "left" else "left"
                 print(f"🔄 Switched to {self.current_side} side")
                 self._update_display()
-            elif key == ord(' '):  # Space key
-                # Toggle green tape visualization
-                tape_status = self.detect_green_tape_coverage(self.original_image)
-                vis_image = self.visualize_green_tape_detection(self.original_image, tape_status)
-                cv2.imshow('Green Tape Detection', vis_image)
-                print("🟢 Green tape detection overlay displayed")
-            elif key == ord('v'):
-                # Toggle side visibility (dim one side)
-                pass  # TODO: Implement if needed
+            elif key == ord('c'):  # 'c' key - show current class info
+                self._show_class_info()
+            elif key == 82:  # Up arrow key
+                self.current_class = (self.current_class - 1) % len(self.classes)
+                print(f"🔼 Class: {self.classes[self.current_class]} ({self.current_class})")
+                self._update_display()
+            elif key == 84:  # Down arrow key
+                self.current_class = (self.current_class + 1) % len(self.classes)
+                print(f"🔽 Class: {self.classes[self.current_class]} ({self.current_class})")
+                self._update_display()
+            elif key == ord('+') or key == ord('='):  # Plus key (next class)
+                self.current_class = (self.current_class + 1) % len(self.classes)
+                print(f"➕ Class: {self.classes[self.current_class]} ({self.current_class})")
+                self._update_display()
+            elif key == ord('-') or key == ord('_'):  # Minus key (previous class)
+                self.current_class = (self.current_class - 1) % len(self.classes)
+                print(f"➖ Class: {self.classes[self.current_class]} ({self.current_class})")
+                self._update_display()
             elif ord('0') <= key <= ord('9'):
-                # Change class
+                # Change class (direct number input)
                 class_id = key - ord('0')
                 if class_id < len(self.classes):
                     self.current_class = class_id
-                    print(f"📝 Changed class to: {self.classes[self.current_class]}")
+                    print(f"📝 Changed class to: {self.classes[self.current_class]} ({self.current_class})")
                     self._update_display()
     
     def batch_annotate(self, images_directory: str, output_dir: str = "annotations"):

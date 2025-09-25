@@ -1,21 +1,20 @@
 names:
-- wire
-- switch
-- button
-- battery_holder
-- led
-- speaker
-- music_circuit
-- motor
-- resistor
-- connection_node
-- lamp
-- fan
-- buzzer
-- photoresistor
-- microphone
-- alarm
-nc: 16
+- Wire
+- Battery Holder
+- LED_1 (Yellow)
+- LED_2 (Red)
+- Resistor
+- Lamp
+- Photoresistor
+- U_1 blue music circuit
+- U_2 red alarm circuit
+- U_3 green space war circuit
+- Speaker
+- Slide switch
+- Press switch
+- Whistle chip
+- Green tape
+nc: 15
 path: data/high_camera_training
 test: images/test
 train: images/train

@@ -78,19 +78,19 @@ class CircuitValidator:
             "description": "Basic LED circuit with battery and switch",
             "components": [
                 {
-                    "type": "battery_holder",
+                    "type": "Battery Holder",
                     "position": {"x": 100, "y": 100},
                     "orientation": 0,
                     "required": True
                 },
                 {
-                    "type": "switch",
+                    "type": "Slide switch",
                     "position": {"x": 200, "y": 100},
                     "orientation": 0,
                     "required": True
                 },
                 {
-                    "type": "led",
+                    "type": "LED_1 (Yellow)",
                     "position": {"x": 300, "y": 100},
                     "orientation": 0,
                     "polarity": "correct",
@@ -98,14 +98,14 @@ class CircuitValidator:
                 }
             ],
             "connections": [
-                {"from": "battery_holder", "to": "switch", "type": "positive"},
-                {"from": "switch", "to": "led", "type": "positive"},
-                {"from": "led", "to": "battery_holder", "type": "negative"}
+                {"from": "Battery Holder", "to": "Slide switch", "type": "positive"},
+                {"from": "Slide switch", "to": "LED_1 (Yellow)", "type": "positive"},
+                {"from": "LED_1 (Yellow)", "to": "Battery Holder", "type": "negative"}
             ],
             "electrical_rules": {
                 "voltage_range": {"min": 1.5, "max": 9.0},
                 "current_limit": 0.1,
-                "polarity_sensitive": ["led", "battery_holder"]
+                "polarity_sensitive": ["LED_1 (Yellow)", "LED_2 (Red)", "Battery Holder"]
             },
             "learning_objectives": [
                 "Basic circuit closure",
@@ -132,11 +132,11 @@ class CircuitValidator:
                 "motor": 0.5,
                 "speaker": 0.2
             },
-            "polarity_sensitive": ["led", "battery_holder", "motor"],
+            "polarity_sensitive": ["LED_1 (Yellow)", "LED_2 (Red)", "Battery Holder"],
             "required_components": {
-                "power_source": ["battery_holder"],
-                "control": ["switch", "button"],
-                "output": ["led", "speaker", "motor", "lamp", "buzzer"]
+                "power_source": ["Battery Holder"],
+                "control": ["Slide switch", "Press switch"],
+                "output": ["LED_1 (Yellow)", "LED_2 (Red)", "Speaker", "Lamp", "U_1 blue music circuit", "U_2 red alarm circuit", "U_3 green space war circuit", "Whistle chip"]
             }
         }
     

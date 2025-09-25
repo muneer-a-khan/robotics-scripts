@@ -46,22 +46,21 @@ TRAINING_CONFIG = {
 
 # Component Ontology - All detectable Snap Circuit components
 COMPONENT_CLASSES = [
-    "wire",
-    "switch", 
-    "button",
-    "battery_holder",
-    "led",
-    "speaker",
-    "music_circuit", 
-    "motor",
-    "resistor",
-    "connection_node",
-    "lamp",
-    "fan",
-    "buzzer",
-    "photoresistor",
-    "microphone",
-    "alarm"
+    "Wire",
+    "Battery Holder",
+    "LED_1 (Yellow)",
+    "LED_2 (Red)",
+    "Resistor",
+    "Lamp",
+    "Photoresistor",
+    "U_1 blue music circuit",
+    "U_2 red alarm circuit",
+    "U_3 green space war circuit",
+    "Speaker",
+    "Slide switch",
+    "Press switch",
+    "Whistle chip",
+    "Green tape"
 ]
 
 # Component orientations (in degrees)
@@ -93,10 +92,10 @@ CONNECTION_CONFIG = {
 
 # Circuit Analysis Parameters
 CIRCUIT_CONFIG = {
-    "power_components": ["battery_holder"],
-    "output_components": ["led", "speaker", "motor", "lamp", "fan", "buzzer"],
-    "input_components": ["button", "switch", "photoresistor", "microphone"],
-    "passive_components": ["resistor", "wire", "connection_node"],
+    "power_components": ["Battery Holder"],
+    "output_components": ["LED_1 (Yellow)", "LED_2 (Red)", "Speaker", "Lamp", "U_1 blue music circuit", "U_2 red alarm circuit", "U_3 green space war circuit", "Whistle chip"],
+    "input_components": ["Press switch", "Slide switch", "Photoresistor"],
+    "passive_components": ["Resistor", "Wire"],
     "min_circuit_length": 2  # Minimum components for valid circuit
 }
 
