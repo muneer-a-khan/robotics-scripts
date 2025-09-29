@@ -470,7 +470,7 @@ def test_connection_detector():
             bbox=BoundingBox(180, 180, 220, 220),
             orientation=0,
             confidence=0.8,
-            component_type=ComponentType.LED
+            component_type=ComponentType.LED_1_YELLOW
         )
     ]
     

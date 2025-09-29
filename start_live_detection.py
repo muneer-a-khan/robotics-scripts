@@ -15,9 +15,7 @@ def find_photos_model():
     """Find the trained photos model"""
     model_paths = [
         Path("dual_board_training/photos_model_fixed/weights/best.pt"),
-        Path("dual_board_training/photos_model_fixed/weights/last.pt"),
-        Path("dual_board_training/photos_model/weights/best.pt"),
-        Path("dual_board_training/photos_model/weights/last.pt")
+        Path("dual_board_training/photos_model_fixed/weights/last.pt")
     ]
     
     for model_path in model_paths:
@@ -60,13 +58,18 @@ def main():
         # Initialize dual board live system
         live_system = DualBoardLiveSystem(
             model_path=model_path,
-            camera_id=0,
             split_ratio=0.5,
-            processing_interval=0.5  # Faster processing
+            processing_interval=0.5,  # Faster processing
+            save_outputs=False,      # Don't save for testing
+            display_results=True     # Show live results
         )
         
+        # Set confidence threshold to match working static test (0.3)
+        live_system.board_analyzer.component_detector.confidence_threshold = 0.3
+        print(f"🎯 Set confidence threshold to: {live_system.board_analyzer.component_detector.confidence_threshold}")
+        
         # Start live detection
-        live_system.run()
+        live_system.run_live_detection(camera_id=0)
         
     except KeyboardInterrupt:
         print("\n🛑 Detection stopped by user")

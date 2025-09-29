@@ -34,7 +34,7 @@ from config import VIDEO_CONFIG, OUTPUT_CONFIG, YOLO_CONFIG
 from models.component_detector import ComponentDetector
 from vision.connection_detector import ConnectionDetector
 from circuit.graph_builder import CircuitGraphBuilder
-from data_structures import DetectionResult, ConnectionGraph, CircuitState, ComponentDetection
+from data_structures import DetectionResult, ConnectionGraph, CircuitState, ComponentDetection, BoundingBox
 from graph_output_converter import DetectionToGraphConverter
 from live_circuit_visualizer import create_live_visualization
 from circuit_validator import CircuitValidator
@@ -221,10 +221,10 @@ class GreenTapeDetector:
 class BoardAnalyzer:
     """Analyzer for individual board components and connectivity"""
     
-    def __init__(self):
+    def __init__(self, model_path: Optional[str] = None):
         """Initialize board analyzer"""
         # Detection components
-        self.component_detector = ComponentDetector()
+        self.component_detector = ComponentDetector(model_path)
         self.connection_detector = ConnectionDetector()
         self.graph_builder = CircuitGraphBuilder()
         self.graph_converter = DetectionToGraphConverter()
@@ -411,12 +411,7 @@ class DualBoardLiveSystem:
         # Initialize components
         print("🎯 Initializing Dual Board Live System...")
         self.tape_detector = GreenTapeDetector()
-        self.board_analyzer = BoardAnalyzer()
-        
-        # Load custom model if provided
-        if model_path and Path(model_path).exists():
-            print(f"📥 Loading custom model: {model_path}")
-            self.board_analyzer.component_detector = ComponentDetector(model_path)
+        self.board_analyzer = BoardAnalyzer(model_path)
         
         # Video capture
         self.cap = None
@@ -635,6 +630,9 @@ class DualBoardLiveSystem:
         # Draw split line
         cv2.line(annotated, (split_x, 0), (split_x, height), (255, 255, 255), 2)
         
+        # Add component detection bounding boxes for both sides
+        self._draw_component_detections(annotated, analysis, split_x)
+        
         # Add tape detection overlay if needed
         if analysis.tape_status.should_skip:
             annotated = self.tape_detector.visualize_tape_detection(
@@ -657,6 +655,55 @@ class DualBoardLiveSystem:
                        cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
         
         return annotated
+    
+    def _draw_component_detections(self, image: np.ndarray, 
+                                 analysis: DualBoardAnalysisResult, 
+                                 split_x: int) -> None:
+        """Draw component detection bounding boxes on the full frame"""
+        # Get the original frame dimensions
+        height, width = image.shape[:2]
+        
+        # Extract components from detection results
+        left_components = analysis.left_board.detection_result.connection_graph.components
+        right_components = analysis.right_board.detection_result.connection_graph.components
+        
+        # Draw left side components
+        left_frame = image[:, :split_x]
+        if len(left_components) > 0:
+            left_annotated = self.board_analyzer.component_detector.annotate_image(
+                left_frame, left_components
+            )
+            image[:, :split_x] = left_annotated
+        
+        # Draw right side components (need to adjust coordinates)
+        right_frame = image[:, split_x:]
+        if len(right_components) > 0:
+            # Adjust component coordinates for right side offset
+            adjusted_components = []
+            for comp in right_components:
+                # Create a copy with adjusted coordinates
+                adjusted_comp = ComponentDetection(
+                    id=comp.id,
+                    label=comp.label,
+                    bbox=BoundingBox(
+                        comp.bbox.x1 - split_x,  # Adjust for right side offset
+                        comp.bbox.y1,
+                        comp.bbox.x2 - split_x,
+                        comp.bbox.y2
+                    ),
+                    orientation=comp.orientation,
+                    confidence=comp.confidence,
+                    component_type=comp.component_type,
+                    switch_state=comp.switch_state,
+                    connection_points=comp.connection_points,
+                    metadata=comp.metadata
+                )
+                adjusted_components.append(adjusted_comp)
+            
+            right_annotated = self.board_analyzer.component_detector.annotate_image(
+                right_frame, adjusted_components
+            )
+            image[:, split_x:] = right_annotated
     
     def _add_board_overlay(self, image: np.ndarray, 
                           board_result: BoardAnalysisResult, side: str) -> None:

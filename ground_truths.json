@@ -1,0 +1,17 @@
+{
+  "1": {
+    "circuit_id": 1,
+    "name": "Light Switch Circuit",
+    "difficulty": "easy",
+    "description": "Build a circuit that lights up with the switch",
+    "timestamp": "2025-09-29T18:33:33.160364",
+    "left_detections": {
+      "Slide switch": [
+        {
+          "x1": 4,
+          "y1": 4,
+          "x2": 5,
+          "y2": 5,
+          "confidence": 0.956916332244873,
+          "bbox": [
+            

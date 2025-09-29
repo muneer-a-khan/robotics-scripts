@@ -516,7 +516,7 @@ def test_graph_builder():
             bbox=BoundingBox(100, 100, 150, 150),
             orientation=0,
             confidence=0.8,
-            component_type=ComponentType.LED
+            component_type=ComponentType.LED_1_YELLOW
         ),
         ComponentDetection(
             id="switch-1",
@@ -524,7 +524,7 @@ def test_graph_builder():
             bbox=BoundingBox(50, 50, 100, 100),
             orientation=0,
             confidence=0.85,
-            component_type=ComponentType.SWITCH
+            component_type=ComponentType.SLIDE_SWITCH
         )
     ]
     

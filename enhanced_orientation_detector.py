@@ -40,20 +40,22 @@ class EnhancedOrientationDetector:
     
     def __init__(self):
         self.component_orientation_handlers = {
-            ComponentType.LED: self._detect_led_orientation,
+            ComponentType.LED_1_YELLOW: self._detect_led_orientation,
+            ComponentType.LED_2_RED: self._detect_led_orientation,
             ComponentType.BATTERY_HOLDER: self._detect_battery_holder_orientation,
-            ComponentType.SWITCH: self._detect_switch_orientation,
-            ComponentType.BUTTON: self._detect_button_orientation,
+            ComponentType.SLIDE_SWITCH: self._detect_switch_orientation,
+            ComponentType.PRESS_SWITCH: self._detect_button_orientation,
             ComponentType.RESISTOR: self._detect_resistor_orientation,
-            ComponentType.MOTOR: self._detect_motor_orientation,
             ComponentType.SPEAKER: self._detect_speaker_orientation,
         }
         
         # Expected orientations for different component types
         self.expected_orientations = {
-            ComponentType.LED: [0, 180],  # Forward or reverse
+            ComponentType.LED_1_YELLOW: [0, 180],  # Forward or reverse
+            ComponentType.LED_2_RED: [0, 180],  # Forward or reverse
             ComponentType.BATTERY_HOLDER: [0, 180],  # + on left or right
-            ComponentType.SWITCH: [0, 90, 180, 270],  # 4-way orientation
+            ComponentType.SLIDE_SWITCH: [0, 90, 180, 270],  # 4-way orientation
+            ComponentType.PRESS_SWITCH: [0, 90, 180, 270],  # 4-way orientation
             ComponentType.RESISTOR: [0, 90],  # Horizontal or vertical
         }
     
@@ -111,8 +113,8 @@ class EnhancedOrientationDetector:
         # Detect orientation based on LED shape
         angle = self._detect_component_angle(gray)
         
-        # LED-specific validation
-        expected_angles = self.expected_orientations.get(ComponentType.LED, [0, 180])
+        # LED-specific validation - handle both LED types
+        expected_angles = [0, 180]  # Default for any LED type
         closest_expected = min(expected_angles, key=lambda x: min(abs(angle - x), abs(angle - x + 360), abs(angle - x - 360)))
         
         angle_diff = min(abs(angle - closest_expected), 
@@ -179,7 +181,7 @@ class EnhancedOrientationDetector:
         # Detect switch lever position
         angle = self._detect_switch_lever_angle(gray)
         
-        expected_angles = self.expected_orientations.get(ComponentType.SWITCH, [0, 90, 180, 270])
+        expected_angles = [0, 90, 180, 270]  # Default for any switch type
         closest_expected = min(expected_angles, key=lambda x: min(abs(angle - x), abs(angle - x + 360), abs(angle - x - 360)))
         
         angle_diff = min(abs(angle - closest_expected), 
