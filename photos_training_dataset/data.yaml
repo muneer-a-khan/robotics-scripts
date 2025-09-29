@@ -1,0 +1,20 @@
+path: C:\Users\munee\OneDrive\Desktop\robotics-research\photos_training_dataset
+train: images/train
+val: images/val
+nc: 15
+names:
+  0: Wire
+  1: Battery Holder
+  2: LED_1 (Yellow)
+  3: LED_2 (Red)
+  4: Resistor
+  5: Lamp
+  6: Photoresistor
+  7: U_1 blue music circuit
+  8: U_2 red alarm circuit
+  9: U_3 green space war circuit
+  10: Speaker
+  11: Slide switch
+  12: Press switch
+  13: Whistle chip
+  14: Green tape
