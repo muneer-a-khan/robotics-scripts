@@ -15,7 +15,7 @@ import matplotlib.pyplot as plt
 
 # Import our components
 try:
-    from dual_board_visualizer import DualBoardVisualizer, convert_detections_with_positions
+    from dual_board_visualizer import DualBoardVisualizer, convert_detections_to_7x5_grid
     VISUALIZER_AVAILABLE = True
 except ImportError:
     VISUALIZER_AVAILABLE = False
@@ -35,7 +35,7 @@ class IntegratedCircuitSystem:
         self.ax2 = None 
         
         if VISUALIZER_AVAILABLE:
-            self.visualizer = DualBoardVisualizer(cell_size=25)
+            self.visualizer = DualBoardVisualizer(cell_size=60)  # Larger cells for better visibility
     
     def load_model(self):
         """Load YOLO model"""
@@ -105,8 +105,8 @@ class IntegratedCircuitSystem:
         print("=" * 45)
         print("\n💡 Instructions:")
         print("   • Live detection with dual board splitting")
-        print("   • 🟢 Green tape visible = Processing active (board visualization updates)")
-        print("   • 🔴 Green tape covered = Processing paused (no updates)")
+        print("   • 🟢 Green tape uncovered on BOTH sides = Processing active (board visualization updates)")
+        print("   • 🔴 Green tape covered on EITHER side = Processing paused (no updates)")
         
         print("\n📋 Controls:")
         print("   • 'b': Toggle board visualization")
@@ -159,40 +159,92 @@ class IntegratedCircuitSystem:
                         height, width = frame.shape[:2]
                         split_x = int(width * split_ratio)
                         
-                        # Check for green tape to control processing
-                        green_tape_detected = False
+                        # Check for green tape coverage on both sides
+                        left_green_tape_boxes = []
+                        right_green_tape_boxes = []
+                        left_other_boxes = []
+                        right_other_boxes = []
                         left_boxes = []
                         right_boxes = []
                         
+                        # Separate detections by side and type
                         for i, box in enumerate(result.boxes):
                             x1, y1, x2, y2 = box.xyxy[0].cpu().numpy()
                             center_x = (x1 + x2) / 2
                             class_id = int(box.cls[0])
                             class_name = self.model.names[class_id]
                             
-                            # Check for green tape
-                            if class_name == "Green tape":
-                                green_tape_detected = True
-                            
+                            # Categorize by left/right for processing
                             if center_x < split_x:
                                 left_boxes.append((i, box))
+                                if class_name == "Green tape":
+                                    left_green_tape_boxes.append((x1, y1, x2, y2))
+                                else:
+                                    left_other_boxes.append((x1, y1, x2, y2))
                             else:
                                 right_boxes.append((i, box))
+                                if class_name == "Green tape":
+                                    right_green_tape_boxes.append((x1, y1, x2, y2))
+                                else:
+                                    right_other_boxes.append((x1, y1, x2, y2))
                         
-                        # Update processing status based on green tape
-                        if green_tape_detected:
-                            if self.processing_paused:
-                                print("🟢 Green tape detected - RESUMING processing")
-                                self.processing_paused = False
-                        else:
+                        # Check if green tape is covered on LEFT side
+                        left_tape_covered = False
+                        for tape_box in left_green_tape_boxes:
+                            tape_x1, tape_y1, tape_x2, tape_y2 = tape_box
+                            for other_box in left_other_boxes:
+                                other_x1, other_y1, other_x2, other_y2 = other_box
+                                # Check for bounding box overlap
+                                if (tape_x1 < other_x2 and tape_x2 > other_x1 and 
+                                    tape_y1 < other_y2 and tape_y2 > other_y1):
+                                    left_tape_covered = True
+                                    break
+                            if left_tape_covered:
+                                break
+                        
+                        # Check if green tape is covered on RIGHT side
+                        right_tape_covered = False  
+                        for tape_box in right_green_tape_boxes:
+                            tape_x1, tape_y1, tape_x2, tape_y2 = tape_box
+                            for other_box in right_other_boxes:
+                                other_x1, other_y1, other_x2, other_y2 = other_box
+                                # Check for bounding box overlap
+                                if (tape_x1 < other_x2 and tape_x2 > other_x1 and 
+                                    tape_y1 < other_y2 and tape_y2 > other_y1):
+                                    right_tape_covered = True
+                                    break
+                            if right_tape_covered:
+                                break
+                        
+                        # Update processing status based on green tape coverage on either side
+                        total_left_tapes = len(left_green_tape_boxes)
+                        total_right_tapes = len(right_green_tape_boxes)
+                        
+                        if total_left_tapes == 0 and total_right_tapes == 0:
+                            # No green tape detected on either side
                             if not self.processing_paused:
-                                print("🔴 Green tape covered - PAUSING processing")
+                                print("🔴 No green tape detected on either side - PAUSING processing")
                                 self.processing_paused = True
+                        elif (total_left_tapes > 0 and left_tape_covered) or (total_right_tapes > 0 and right_tape_covered):
+                            # Green tape is covered on at least one side
+                            if not self.processing_paused:
+                                covered_sides = []
+                                if total_left_tapes > 0 and left_tape_covered:
+                                    covered_sides.append("LEFT")
+                                if total_right_tapes > 0 and right_tape_covered:
+                                    covered_sides.append("RIGHT")
+                                print(f"🔴 Green tape covered on {' and '.join(covered_sides)} side(s) - PAUSING processing")
+                                self.processing_paused = True
+                        else:
+                            # Green tape is uncovered on both sides (where it exists)
+                            if self.processing_paused:
+                                print("🟢 Green tape uncovered on both sides - RESUMING processing")
+                                self.processing_paused = False
                         
                         # Only process if not paused (green tape visible)
                         if not self.processing_paused:
-                            # Convert detections
-                            left_detections, right_detections = convert_detections_with_positions(
+                            # Convert detections to 7x5 grid coordinates
+                            left_detections, right_detections = convert_detections_to_7x5_grid(
                                 left_boxes, right_boxes, self.model.names, width, height)
                             
                             # Update visualization
@@ -214,10 +266,10 @@ class IntegratedCircuitSystem:
                 # Add processing status
                 y_offset = 60
                 if self.processing_paused:
-                    status_text = "PROCESSING PAUSED - Uncover green tape"
+                    status_text = "PROCESSING PAUSED - Green tape covered on either side"
                     status_color = (0, 0, 255)  # Red
                 else:
-                    status_text = "PROCESSING ACTIVE - Green tape visible"
+                    status_text = "PROCESSING ACTIVE - Green tape uncovered on both sides"
                     status_color = (0, 255, 0)  # Green
                 
                 cv2.putText(display_frame, status_text, (10, y_offset), 
@@ -244,8 +296,8 @@ def main():
     print("Features:")
     print("• Live component detection with YOLO")
     print("• Dual board splitting (left/right)")
-    print("• Real-time board visualization")
-    print("• Green tape pause/resume control")
+    print("• Real-time board visualization")  
+    print("• Dual-side green tape coverage detection")
     print()
     
     system = IntegratedCircuitSystem()

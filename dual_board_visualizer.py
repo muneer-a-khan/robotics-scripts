@@ -12,12 +12,13 @@ from collections import defaultdict
 import time
 
 class DualBoardVisualizer:
-    def __init__(self, rows=13, cols=15, cell_size=30):
-        self.rows = rows
-        self.cols = cols
+    def __init__(self, cell_size=40):
+        # Fixed board dimensions: 7 columns x 5 rows for each board (matching calibration)
+        self.cols = 7
+        self.rows = 5
         self.cell_size = cell_size
         
-        # Simple, clear colors for components
+        # Simple, clear colors for components (keeping existing colors)
         self.component_colors = {
             'Wire': '#228B22',           # Forest Green
             'Battery Holder': '#DC143C',  # Crimson Red
@@ -32,8 +33,8 @@ class DualBoardVisualizer:
             'Speaker': '#4169E1',        # Royal Blue
             'Slide switch': '#008B8B',   # Dark Cyan
             'Press switch': '#006400',   # Dark Green
-            'Whistle chip': '#DDA0DD',   # Plum
-            'Green tape': '#90EE90'      # Light Green
+            'Whistle chip': '#DDA0DD'    # Plum
+            # Removed Green tape from visualization
         }
         
         # Component abbreviations for labels
@@ -51,8 +52,8 @@ class DualBoardVisualizer:
             'Speaker': 'SPK',
             'Slide switch': 'SW1',
             'Press switch': 'SW2',
-            'Whistle chip': 'WHI',
-            'Green tape': 'TAPE'
+            'Whistle chip': 'WHI'
+            # Removed Green tape from labels
         }
 
     def create_dual_board_visualization(self, left_detections, right_detections):
@@ -80,152 +81,95 @@ class DualBoardVisualizer:
         return fig
 
     def _draw_single_board(self, ax, detections, title):
-        """Draw a single board with components (rotated 90 degrees clockwise)"""
+        """Draw a single 7x5 board with components marking occupied grid spots"""
         ax.set_title(title, fontsize=14, fontweight='bold')
         
-        # Create empty board grid (rotated: cols become rows, rows become cols)
-        board_grid = np.ones((self.cols, self.rows, 3)) * 0.95  # Light gray background
+        # Create empty board grid (7 cols x 5 rows)
+        board_grid = np.ones((self.rows, self.cols, 3)) * 0.95  # Light gray background
         
-        # Track which cells are occupied
-        occupied_cells = set()
+        # Track which grid spots are occupied and their components
+        grid_components = {}  # (row, col) -> [(component_type, confidence), ...]
         
-        # Fill in detected components
-        component_count = 0
+        # Collect all components for each grid spot
         for comp_type, detection_list in detections.items():
-            if comp_type not in self.component_colors:
+            # Skip green tape since we don't visualize it anymore
+            if comp_type == "Green tape" or comp_type not in self.component_colors:
                 continue
+            
+            for detection in detection_list:
+                # Get grid position (expecting simple row, col coordinates)
+                if isinstance(detection, dict):
+                    row = detection.get('row', 0)
+                    col = detection.get('col', 0)
+                    confidence = detection.get('confidence', 1.0)
+                else:
+                    # Fallback for simple format
+                    row = 0
+                    col = 0
+                    confidence = 1.0
                 
-            color_hex = self.component_colors[comp_type]
+                # Ensure bounds
+                row = max(0, min(row, self.rows - 1))
+                col = max(0, min(col, self.cols - 1))
+                
+                # Add to grid components list
+                grid_pos = (row, col)
+                if grid_pos not in grid_components:
+                    grid_components[grid_pos] = []
+                grid_components[grid_pos].append((comp_type, confidence))
+        
+        # Fill grid spots with the topmost (highest confidence) component
+        occupied_spots = {}  # (row, col) -> component_type
+        for (row, col), components in grid_components.items():
+            # Sort by confidence (highest first) to get "topmost" component
+            components.sort(key=lambda x: x[1], reverse=True)
+            topmost_component = components[0][0]  # Get component type with highest confidence
+            
+            color_hex = self.component_colors[topmost_component]
             # Convert hex to RGB
             color_rgb = [int(color_hex[i:i+2], 16)/255 for i in (1, 3, 5)]
             
-            for detection in detection_list:
-                # Get grid position
-                if isinstance(detection, dict):
-                    # Use actual grid coordinates if available
-                    orig_x1 = detection.get('x1', component_count % self.rows)
-                    orig_y1 = detection.get('y1', component_count % self.cols)
-                    orig_x2 = detection.get('x2', orig_x1 + 1)
-                    orig_y2 = detection.get('y2', orig_y1 + 1)
-                    
-                    # Detect component orientation from bounding box (if available)
-                    if 'bbox' in detection:
-                        bbox_x1, bbox_y1, bbox_x2, bbox_y2 = detection['bbox']
-                        bbox_width = bbox_x2 - bbox_x1
-                        bbox_height = bbox_y2 - bbox_y1
-                        is_horizontal = bbox_width > bbox_height
-                    else:
-                        is_horizontal = True  # Default to horizontal
-                    
-                    # All components extend 3 grid pieces in the detected direction
-                    if comp_type == "Green tape":
-                        # Special case: green tape extends full width
-                        orig_y1 = 0  # Start from left edge
-                        orig_y2 = self.cols  # Extend to right edge
-                    elif is_horizontal:
-                        # Horizontal component: extend 3 pieces horizontally (y direction)
-                        orig_y2 = min(orig_y1 + 3, self.cols)
-                    else:
-                        # Vertical component: extend 3 pieces vertically (x direction)
-                        orig_x2 = min(orig_x1 + 3, self.rows)
-                else:
-                    # Simple positioning for demo
-                    orig_x1 = component_count % self.rows
-                    orig_y1 = (component_count // self.rows) % self.cols
-                    orig_x2 = orig_x1 + 1
-                    orig_y2 = orig_y1 + 1
-                    
-                    # Default to horizontal for demo components
-                    if comp_type == "Green tape":
-                        orig_y1 = 0  # Start from left edge
-                        orig_y2 = self.cols  # Extend to right edge
-                    else:
-                        # All components extend 3 pieces horizontally by default
-                        orig_y2 = min(orig_y1 + 3, self.cols)
-                
-                # Rotate coordinates 90 degrees clockwise: (x,y) -> (y, rows-1-x)
-                # But we need to be careful about the mapping
-                x1 = orig_y1  # New x = old y
-                y1 = self.rows - 1 - orig_x2 + 1  # New y = rows - 1 - old x (flipped)
-                x2 = orig_y2
-                y2 = self.rows - 1 - orig_x1 + 1
-                
-                # Ensure bounds for rotated grid (now cols x rows)
-                x1 = max(0, min(x1, self.cols-1))
-                y1 = max(0, min(y1, self.rows-1))
-                x2 = max(x1+1, min(x2, self.cols))
-                y2 = max(y1+1, min(y2, self.rows))
-                
-                # Fill the grid cells
-                for x in range(x1, x2):
-                    for y in range(y1, y2):
-                        if 0 <= x < self.cols and 0 <= y < self.rows:
-                            board_grid[x, y] = color_rgb
-                            occupied_cells.add((x, y))
-                
-                component_count += 1
+            # Mark this grid spot as occupied with the topmost component
+            board_grid[row, col] = color_rgb
+            occupied_spots[(row, col)] = topmost_component
         
-        # Display the rotated board
+        # Display the board
         ax.imshow(board_grid, aspect='equal', origin='upper')
         
-        # Add grid lines (adjusted for rotated dimensions)
-        for i in range(self.cols + 1):
-            ax.axhline(y=i-0.5, color='black', linewidth=0.5)
-        for j in range(self.rows + 1):
-            ax.axvline(x=j-0.5, color='black', linewidth=0.5)
+        # Add grid lines
+        for i in range(self.rows + 1):
+            ax.axhline(y=i-0.5, color='black', linewidth=1)
+        for j in range(self.cols + 1):
+            ax.axvline(x=j-0.5, color='black', linewidth=1)
         
-        # Add component labels on occupied cells
-        label_count = defaultdict(int)
-        for comp_type, detection_list in detections.items():
-            if comp_type not in self.component_labels:
-                continue
-                
-            label = self.component_labels[comp_type]
-            
-            for i, detection in enumerate(detection_list):
-                # Get original position
-                if isinstance(detection, dict):
-                    orig_x1 = detection.get('x1', i % self.rows)
-                    orig_y1 = detection.get('y1', i % self.cols)
-                else:
-                    orig_x1 = i % self.rows
-                    orig_y1 = (i // self.rows) % self.cols
-                
-                # Rotate coordinates for label placement
-                label_x = orig_y1
-                label_y = self.rows - 1 - orig_x1
-                
-                # Ensure bounds
-                label_x = max(0, min(label_x, self.cols-1))
-                label_y = max(0, min(label_y, self.rows-1))
-                
-                # Add label
-                display_label = f"{label}"
-                if len(detection_list) > 1:
-                    display_label = f"{label}{i+1}"
-                
-                ax.text(label_y, label_x, display_label, ha='center', va='center', 
-                       fontsize=8, fontweight='bold', color='white',
+        # Add component labels on occupied spots
+        for (row, col), comp_type in occupied_spots.items():
+            if comp_type in self.component_labels:
+                label = self.component_labels[comp_type]
+                ax.text(col, row, label, ha='center', va='center', 
+                       fontsize=10, fontweight='bold', color='white',
                        bbox=dict(boxstyle='round,pad=0.2', facecolor='black', alpha=0.7))
         
-        # Set axis properties (swapped for rotation)
-        ax.set_xlim(-0.5, self.rows-0.5)
-        ax.set_ylim(self.cols-0.5, -0.5)
+        # Set axis properties
+        ax.set_xlim(-0.5, self.cols-0.5)
+        ax.set_ylim(self.rows-0.5, -0.5)
         ax.set_xlabel('Column', fontweight='bold')
         ax.set_ylabel('Row', fontweight='bold')
         
-        # Add row and column numbers (adjusted for rotation)
-        ax.set_xticks(range(self.rows))
-        ax.set_xticklabels(range(1, self.rows+1))
-        ax.set_yticks(range(self.cols))
-        ax.set_yticklabels(range(1, self.cols+1))
+        # Add row and column numbers
+        ax.set_xticks(range(self.cols))
+        ax.set_xticklabels(range(1, self.cols+1))
+        ax.set_yticks(range(self.rows))
+        ax.set_yticklabels(range(1, self.rows+1))
 
     def _add_legend(self, fig, left_detections, right_detections):
-        """Add component legend"""
-        # Combine all detected components
+        """Add component legend (excluding green tape)"""
+        # Combine all detected components (excluding green tape)
         all_components = set()
         for detections in [left_detections, right_detections]:
-            all_components.update(detections.keys())
+            for comp_type in detections.keys():
+                if comp_type != "Green tape":
+                    all_components.add(comp_type)
         
         # Create legend
         legend_elements = []
@@ -249,14 +193,14 @@ class DualBoardVisualizer:
 
     def create_opencv_visualization(self, left_detections, right_detections):
         """
-        Create OpenCV version for real-time display (rotated layout)
+        Create OpenCV version for real-time display (simple 7x5 grids)
         
         Returns:
             numpy array image that can be displayed with cv2.imshow()
         """
-        # Calculate image dimensions (swapped for rotation)
-        board_width = self.rows * self.cell_size   # Now using rows for width
-        board_height = self.cols * self.cell_size  # Now using cols for height  
+        # Calculate image dimensions
+        board_width = self.cols * self.cell_size   
+        board_height = self.rows * self.cell_size  
         gap = 20  # Gap between boards
         total_width = board_width * 2 + gap
         total_height = board_height + 60  # Extra space for titles
@@ -279,111 +223,84 @@ class DualBoardVisualizer:
         return img
 
     def _draw_opencv_board(self, detections, side):
-        """Draw single board using OpenCV (rotated layout)"""
-        board_width = self.rows * self.cell_size   # Swapped for rotation
-        board_height = self.cols * self.cell_size  # Swapped for rotation
+        """Draw single 7x5 board using OpenCV"""
+        board_width = self.cols * self.cell_size   
+        board_height = self.rows * self.cell_size  
         
         # Create board image
         board = np.ones((board_height, board_width, 3), dtype=np.uint8) * 245  # Light background
         
-        # Draw grid lines (adjusted for rotation)
-        for i in range(self.cols + 1):  # Now using cols for vertical lines
+        # Draw grid lines
+        for i in range(self.rows + 1):
             y = i * self.cell_size
             cv2.line(board, (0, y), (board_width, y), (128, 128, 128), 1)
-        for j in range(self.rows + 1):  # Now using rows for horizontal lines
+        for j in range(self.cols + 1):
             x = j * self.cell_size
             cv2.line(board, (x, 0), (x, board_height), (128, 128, 128), 1)
         
-        # Fill in components
-        component_count = 0
+        # Track which grid spots are occupied and their components
+        grid_components = {}  # (row, col) -> [(component_type, confidence), ...]
+        
+        # Collect all components for each grid spot
         for comp_type, detection_list in detections.items():
-            if comp_type not in self.component_colors:
+            # Skip green tape since we don't visualize it anymore
+            if comp_type == "Green tape" or comp_type not in self.component_colors:
                 continue
+            
+            for detection in detection_list:
+                # Get grid position
+                if isinstance(detection, dict):
+                    row = detection.get('row', 0)
+                    col = detection.get('col', 0)
+                    confidence = detection.get('confidence', 1.0)
+                else:
+                    # Fallback for simple format
+                    row = 0
+                    col = 0
+                    confidence = 1.0
                 
-            color_hex = self.component_colors[comp_type]
+                # Ensure bounds
+                row = max(0, min(row, self.rows - 1))
+                col = max(0, min(col, self.cols - 1))
+                
+                # Add to grid components list
+                grid_pos = (row, col)
+                if grid_pos not in grid_components:
+                    grid_components[grid_pos] = []
+                grid_components[grid_pos].append((comp_type, confidence))
+        
+        # Fill grid spots with the topmost (highest confidence) component
+        for (row, col), components in grid_components.items():
+            # Sort by confidence (highest first) to get "topmost" component
+            components.sort(key=lambda x: x[1], reverse=True)
+            topmost_component = components[0][0]  # Get component type with highest confidence
+            
+            color_hex = self.component_colors[topmost_component]
             # Convert hex to BGR for OpenCV
             color_bgr = tuple(int(color_hex[i:i+2], 16) for i in (5, 3, 1))
             
-            for i, detection in enumerate(detection_list):
-                # Get original grid position
-                if isinstance(detection, dict):
-                    orig_x1 = detection.get('x1', component_count % self.rows)
-                    orig_y1 = detection.get('y1', component_count % self.cols)
-                    orig_x2 = detection.get('x2', orig_x1 + 1)
-                    orig_y2 = detection.get('y2', orig_y1 + 1)
-                    
-                    # Detect component orientation from bounding box (if available)
-                    if 'bbox' in detection:
-                        bbox_x1, bbox_y1, bbox_x2, bbox_y2 = detection['bbox']
-                        bbox_width = bbox_x2 - bbox_x1
-                        bbox_height = bbox_y2 - bbox_y1
-                        is_horizontal = bbox_width > bbox_height
-                    else:
-                        is_horizontal = True  # Default to horizontal
-                    
-                    # All components extend 3 grid pieces in the detected direction
-                    if comp_type == "Green tape":
-                        # Special case: green tape extends full width
-                        orig_y1 = 0  # Start from left edge
-                        orig_y2 = self.cols  # Extend to right edge
-                    elif is_horizontal:
-                        # Horizontal component: extend 3 pieces horizontally (y direction)
-                        orig_y2 = min(orig_y1 + 3, self.cols)
-                    else:
-                        # Vertical component: extend 3 pieces vertically (x direction)
-                        orig_x2 = min(orig_x1 + 3, self.rows)
-                else:
-                    orig_x1 = component_count % self.rows
-                    orig_y1 = (component_count // self.rows) % self.cols
-                    orig_x2 = orig_x1 + 1
-                    orig_y2 = orig_y1 + 1
-                    
-                    # Default to horizontal for demo components
-                    if comp_type == "Green tape":
-                        orig_y1 = 0  # Start from left edge
-                        orig_y2 = self.cols  # Extend to right edge
-                    else:
-                        # All components extend 3 pieces horizontally by default
-                        orig_y2 = min(orig_y1 + 3, self.cols)
-                
-                # Rotate coordinates 90 degrees clockwise for display
-                x1 = orig_y1  # New x = old y
-                y1 = self.rows - 1 - orig_x2 + 1  # New y = rows - 1 - old x (flipped)
-                x2 = orig_y2
-                y2 = self.rows - 1 - orig_x1 + 1
-                
-                # Ensure bounds for rotated grid (now cols x rows)
-                x1 = max(0, min(x1, self.cols-1))
-                y1 = max(0, min(y1, self.rows-1))
-                x2 = max(x1+1, min(x2, self.cols))
-                y2 = max(y1+1, min(y2, self.rows))
-                
-                # Convert grid to pixel coordinates (adjusted for rotation)
-                px1 = y1 * self.cell_size  # Using y for x pixel coordinate 
-                py1 = x1 * self.cell_size  # Using x for y pixel coordinate
-                px2 = y2 * self.cell_size
-                py2 = x2 * self.cell_size
-                
-                # Fill rectangle
-                cv2.rectangle(board, (px1, py1), (px2, py2), color_bgr, -1)
-                
-                # Add label
-                label = self.component_labels.get(comp_type, comp_type[:3])
-                if len(detection_list) > 1:
-                    label = f"{label}{i+1}"
-                
-                # Center text in cell
-                center_x = px1 + (px2 - px1) // 2
-                center_y = py1 + (py2 - py1) // 2
-                
-                text_size = cv2.getTextSize(label, cv2.FONT_HERSHEY_SIMPLEX, 0.4, 1)[0]
-                text_x = center_x - text_size[0] // 2
-                text_y = center_y + text_size[1] // 2
-                
-                cv2.putText(board, label, (text_x, text_y), cv2.FONT_HERSHEY_SIMPLEX, 
-                           0.4, (255, 255, 255), 1, cv2.LINE_AA)
-                
-                component_count += 1
+            # Convert grid to pixel coordinates
+            x1 = col * self.cell_size
+            y1 = row * self.cell_size
+            x2 = x1 + self.cell_size
+            y2 = y1 + self.cell_size
+            
+            # Fill rectangle
+            cv2.rectangle(board, (x1, y1), (x2, y2), color_bgr, -1)
+            
+            # Add label
+            label = self.component_labels.get(topmost_component, topmost_component[:3])
+            
+            # Center text in cell
+            center_x = x1 + self.cell_size // 2
+            center_y = y1 + self.cell_size // 2
+            
+            text_size = cv2.getTextSize(label, cv2.FONT_HERSHEY_SIMPLEX, 0.5, 1)[0]
+            text_x = center_x - text_size[0] // 2
+            text_y = center_y + text_size[1] // 2
+            
+            cv2.putText(board, label, (text_x, text_y), cv2.FONT_HERSHEY_SIMPLEX, 
+                       0.5, (255, 255, 255), 1, cv2.LINE_AA)
         
         return board
 
@@ -431,10 +348,10 @@ def convert_simple_detections_to_grid(left_classes, right_classes):
     
     return left_detections, right_detections
 
-def convert_detections_with_positions(left_boxes, right_boxes, model_names, frame_width, frame_height, split_ratio=0.5):
+def convert_detections_to_7x5_grid(left_boxes, right_boxes, model_names, frame_width, frame_height, split_ratio=0.5):
     """
-    Convert YOLO detection results to grid positions for accurate board visualization
-    (Results will be used with rotated board layout)
+    Convert YOLO detection results to exact 7x5 grid positions for each board
+    Uses calibrated pixel boundaries for precise mapping
     
     Args:
         left_boxes: List of (index, box) for left side detections
@@ -443,27 +360,144 @@ def convert_detections_with_positions(left_boxes, right_boxes, model_names, fram
         frame_width: Camera frame width
         frame_height: Camera frame height
         split_ratio: Split ratio for left/right division
+    
+    Returns:
+        left_detections: Dict of {component_type: [{'row': int, 'col': int}, ...]}
+        right_detections: Dict of {component_type: [{'row': int, 'col': int}, ...]}
     """
     left_detections = {}
     right_detections = {}
     
-    def pixel_to_grid(x, y, side):
-        """Convert pixel coordinates to grid coordinates (before rotation)"""
-        if side == 'left':
-            # Left side: map to original grid coordinates (13 rows x 15 cols)
-            grid_x = int((y / frame_height) * 13)  # y maps to rows
-            grid_y = int((x / (frame_width * split_ratio)) * 7)  # x maps to partial cols
-            grid_x = max(0, min(grid_x, 12))
-            grid_y = max(0, min(grid_y, 6))
-        else:
-            # Right side: map to original grid coordinates
-            relative_x = x - (frame_width * split_ratio)
-            grid_x = int((y / frame_height) * 13)  # y maps to rows
-            grid_y = 7 + int((relative_x / (frame_width * (1 - split_ratio))) * 8)  # x maps to remaining cols
-            grid_x = max(0, min(grid_x, 12))
-            grid_y = max(7, min(grid_y, 14))
+    # Calibrated board boundaries (from your calibration session)
+    left_board_bounds = {
+        'x1': 290, 'y1': 345, 'x2': 850, 'y2': 765
+    }
+    right_board_bounds = {
+        'x1': 1095, 'y1': 325, 'x2': 1705, 'y2': 785
+    }
+    
+    def pixel_to_grid_7x5(x, y, board_bounds):
+        """Convert pixel coordinates to 7x5 grid coordinates using calibrated bounds"""
+        # Check if point is within board bounds
+        if not (board_bounds['x1'] <= x <= board_bounds['x2'] and 
+                board_bounds['y1'] <= y <= board_bounds['y2']):
+            return None, None
         
-        return grid_x, grid_y
+        # Convert to relative coordinates within board
+        rel_x = (x - board_bounds['x1']) / (board_bounds['x2'] - board_bounds['x1'])
+        rel_y = (y - board_bounds['y1']) / (board_bounds['y2'] - board_bounds['y1'])
+        
+        # Map to 7x5 grid: 7 cols x 5 rows
+        grid_col = int(rel_x * 7)  # 0-6
+        grid_row = int(rel_y * 5)  # 0-4
+        
+        # Clamp to bounds
+        grid_col = max(0, min(grid_col, 6))
+        grid_row = max(0, min(grid_row, 4))
+        
+        return grid_row, grid_col
+    
+    def get_component_grid_size(class_name):
+        """Get the standard grid size for each component type"""
+        # Format: (width_across, height_up_down)
+        component_sizes = {
+            'Wire': (2, 1),  # Can be 2x1 or 3x1, we'll use 2x1 as default
+            'Battery Holder': (3, 3),
+            'U_1 blue music circuit': (3, 3),
+            'U_2 red alarm circuit': (3, 3),
+            'U_3 green space war circuit': (3, 3),
+            # Everything else: 3x1
+            'LED_1 (Yellow)': (3, 1),
+            'LED_2 (Red)': (3, 1),
+            'Resistor': (3, 1),
+            'Lamp': (3, 1),
+            'Photoresistor': (3, 1),
+            'Slide switch': (3, 1),
+            'Press switch': (3, 1),
+            'Speaker': (3, 1),
+            'Whistle chip': (3, 1),
+        }
+        
+        # Handle different wire sizes - check if it's a longer wire (basic heuristic)
+        if class_name == 'Wire':
+            return (2, 1)  # Default wire size, could be expanded to (3, 1) based on detection
+        
+        return component_sizes.get(class_name, (3, 1))  # Default to 3x1 for unknown components
+    
+    def get_covered_grid_spots_by_component(center_x, center_y, class_name, board_bounds, bbox=None):
+        """Get grid spots covered by a component based on its standard size"""
+        # Get center grid position
+        result = pixel_to_grid_7x5(center_x, center_y, board_bounds)
+        if result[0] is None:
+            return []
+        
+        center_row, center_col = result
+        width_across, height_up_down = get_component_grid_size(class_name)
+        
+        # Special handling for wires - determine orientation and size based on bounding box
+        if class_name == 'Wire' and bbox is not None:
+            x1, y1, x2, y2 = bbox
+            bbox_width = x2 - x1
+            bbox_height = y2 - y1
+            
+            # Determine if wire is horizontal or vertical
+            is_horizontal = bbox_width > bbox_height
+            aspect_ratio = max(bbox_width, bbox_height) / max(min(bbox_width, bbox_height), 1)
+            
+            if is_horizontal:
+                # Wire is oriented horizontally - spans across columns
+                if aspect_ratio > 2.5:  # Long horizontal wire
+                    width_across = 3
+                    height_up_down = 1
+                else:  # Short horizontal wire
+                    width_across = 2
+                    height_up_down = 1
+            else:
+                # Wire is oriented vertically - spans across rows
+                if aspect_ratio > 2.5:  # Long vertical wire
+                    width_across = 1
+                    height_up_down = 3
+                else:  # Short vertical wire
+                    width_across = 1
+                    height_up_down = 2
+        
+        covered_spots = []
+        
+        # Calculate the span from center
+        half_width = width_across // 2
+        half_height = height_up_down // 2
+        
+        # For even widths/heights, we need to decide which side gets the extra space
+        extra_width_right = width_across % 2 == 0
+        extra_height_down = height_up_down % 2 == 0
+        
+        # Calculate the grid bounds for this component
+        if extra_width_right:
+            col_start = center_col - half_width + 1
+            col_end = center_col + half_width
+        else:
+            col_start = center_col - half_width
+            col_end = center_col + half_width
+            
+        if extra_height_down:
+            row_start = center_row - half_height + 1
+            row_end = center_row + half_height
+        else:
+            row_start = center_row - half_height
+            row_end = center_row + half_height
+        
+        # Clamp to board boundaries (7 cols x 5 rows)
+        col_start = max(0, col_start)
+        col_end = min(6, col_end)
+        row_start = max(0, row_start)
+        row_end = min(4, row_end)
+        
+        # Generate all covered grid spots
+        for row in range(row_start, row_end + 1):
+            for col in range(col_start, col_end + 1):
+                covered_spots.append((row, col))
+        
+        return covered_spots
     
     # Process left side detections
     for i, box in left_boxes:
@@ -472,44 +506,29 @@ def convert_detections_with_positions(left_boxes, right_boxes, model_names, fram
         class_name = model_names[class_id]
         confidence = float(box.conf[0])
         
-        # Convert center point to grid coordinates
+        # Skip green tape for visualization
+        if class_name == "Green tape":
+            continue
+        
+        # Get center point of bounding box
         center_x = (x1 + x2) / 2
         center_y = (y1 + y2) / 2
-        grid_x, grid_y = pixel_to_grid(center_x, center_y, 'left')
         
-        if class_name not in left_detections:
-            left_detections[class_name] = []
+        # Get grid spots covered by this component based on its standard size
+        covered_spots = get_covered_grid_spots_by_component(center_x, center_y, class_name, left_board_bounds, [x1, y1, x2, y2])
         
-        # Detect component orientation from bounding box and extend 3 grid pieces
-        if class_name != "Green tape":
-            bbox_width = x2 - x1
-            bbox_height = y2 - y1
-            is_horizontal = bbox_width > bbox_height
+        if covered_spots:
+            if class_name not in left_detections:
+                left_detections[class_name] = []
             
-            if is_horizontal:
-                # Horizontal component: extend 3 pieces horizontally
-                y2_extent = min(grid_y + 3, 14)
-                x2_extent = grid_x + 1
-            else:
-                # Vertical component: extend 3 pieces vertically
-                y2_extent = grid_y + 1
-                x2_extent = min(grid_x + 3, 12)
-        # Special case: green tape extends full width
-        elif class_name == "Green tape":
-            y2_extent = 14  # Full width
-            grid_y = 0  # Start from edge
-            x2_extent = grid_x + 1
-        else:
-            # Default: all components extend 3 pieces horizontally
-            y2_extent = min(grid_y + 3, 14)
-            x2_extent = grid_x + 1
-            
-        left_detections[class_name].append({
-            'x1': grid_x, 'y1': grid_y,
-            'x2': x2_extent, 'y2': y2_extent,
-            'confidence': confidence,
-            'bbox': [x1, y1, x2, y2]
-        })
+            # Add each covered grid spot as a separate detection entry
+            for grid_row, grid_col in covered_spots:
+                left_detections[class_name].append({
+                    'row': grid_row,
+                    'col': grid_col,
+                    'confidence': confidence,
+                    'bbox': [x1, y1, x2, y2]
+                })
     
     # Process right side detections
     for i, box in right_boxes:
@@ -518,44 +537,29 @@ def convert_detections_with_positions(left_boxes, right_boxes, model_names, fram
         class_name = model_names[class_id]
         confidence = float(box.conf[0])
         
-        # Convert center point to grid coordinates
+        # Skip green tape for visualization
+        if class_name == "Green tape":
+            continue
+        
+        # Get center point of bounding box
         center_x = (x1 + x2) / 2
         center_y = (y1 + y2) / 2
-        grid_x, grid_y = pixel_to_grid(center_x, center_y, 'right')
         
-        if class_name not in right_detections:
-            right_detections[class_name] = []
+        # Get grid spots covered by this component based on its standard size
+        covered_spots = get_covered_grid_spots_by_component(center_x, center_y, class_name, right_board_bounds, [x1, y1, x2, y2])
         
-        # Detect component orientation from bounding box and extend 3 grid pieces
-        if class_name != "Green tape":
-            bbox_width = x2 - x1
-            bbox_height = y2 - y1
-            is_horizontal = bbox_width > bbox_height
+        if covered_spots:
+            if class_name not in right_detections:
+                right_detections[class_name] = []
             
-            if is_horizontal:
-                # Horizontal component: extend 3 pieces horizontally
-                y2_extent = min(grid_y + 3, 14)
-                x2_extent = grid_x + 1
-            else:
-                # Vertical component: extend 3 pieces vertically
-                y2_extent = grid_y + 1
-                x2_extent = min(grid_x + 3, 12)
-        # Special case: green tape extends full width
-        elif class_name == "Green tape":
-            y2_extent = 14  # Full width  
-            grid_y = 0  # Start from edge
-            x2_extent = grid_x + 1
-        else:
-            # Default: all components extend 3 pieces horizontally
-            y2_extent = min(grid_y + 3, 14)
-            x2_extent = grid_x + 1
-            
-        right_detections[class_name].append({
-            'x1': grid_x, 'y1': grid_y,
-            'x2': x2_extent, 'y2': y2_extent,
-            'confidence': confidence,
-            'bbox': [x1, y1, x2, y2]
-        })
+            # Add each covered grid spot as a separate detection entry
+            for grid_row, grid_col in covered_spots:
+                right_detections[class_name].append({
+                    'row': grid_row,
+                    'col': grid_col,
+                    'confidence': confidence,
+                    'bbox': [x1, y1, x2, y2]
+                })
     
     return left_detections, right_detections
 
