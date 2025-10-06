@@ -1,0 +1,22 @@
+=== CIRCUIT CONNECTIVITY ANALYSIS ===
+Total components: 10
+Total connections: 11
+
+Components by type:
+  Slide switch: 1
+  Lamp: 1
+  Battery Holder: 2
+  Wire: 6
+
+Connections:
+  Slide switch (left) --[direct]--> Lamp (left) [distance: 164.4px]
+  Slide switch (left) --[direct]--> Wire (left) [distance: 119.5px]
+  Slide switch (left) --[direct]--> Wire (left) [distance: 170.5px]
+  Slide switch (left) --[direct]--> Wire (left) [distance: 228.6px]
+  Lamp (left) --[direct]--> Wire (left) [distance: 120.9px]
+  Lamp (left) --[direct]--> Wire (left) [distance: 163.9px]
+  Battery Holder (left) --[direct]--> Wire (left) [distance: 183.6px]
+  Battery Holder (left) --[direct]--> Wire (left) [distance: 190.6px]
+  Wire (left) --[direct]--> Wire (left) [distance: 162.9px]
+  Battery Holder (right) --[direct]--> Wire (right) [distance: 177.6px]
+  Battery Holder (right) --[direct]--> Wire (right) [distance: 181.2px]

@@ -1,0 +1,76 @@
+=== CIRCUIT CONNECTIVITY ANALYSIS ===
+Total components: 10
+Total connections: 11
+
+Components by type:
+  Slide switch: 1
+  Lamp: 1
+  Battery Holder: 2
+  Wire: 6
+
+All Components:
+  L_0_Slide switch: Slide switch (left) [conf: 0.93]
+  L_1_Lamp: Lamp (left) [conf: 0.93]
+  L_2_Battery Holder: Battery Holder (left) [conf: 0.92]
+  L_3_Wire: Wire (left) [conf: 0.81]
+  L_4_Wire: Wire (left) [conf: 0.80]
+  L_5_Wire: Wire (left) [conf: 0.80]
+  R_6_Battery Holder: Battery Holder (right) [conf: 0.92]
+  R_7_Wire: Wire (right) [conf: 0.86]
+  R_8_Wire: Wire (right) [conf: 0.85]
+  R_9_Wire: Wire (right) [conf: 0.85]
+
+Connected Components:
+  Slide switch (left) --[direct]--> Lamp (left) [distance: 163.9px]
+  Slide switch (left) --[direct]--> Wire (left) [distance: 171.0px]
+  Slide switch (left) --[direct]--> Wire (left) [distance: 119.8px]
+  Slide switch (left) --[direct]--> Wire (left) [distance: 228.8px]
+  Lamp (left) --[direct]--> Wire (left) [distance: 120.3px]
+  Lamp (left) --[direct]--> Wire (left) [distance: 165.0px]
+  Battery Holder (left) --[direct]--> Wire (left) [distance: 182.6px]
+  Battery Holder (left) --[direct]--> Wire (left) [distance: 189.9px]
+  Wire (left) --[direct]--> Wire (left) [distance: 162.5px]
+  Battery Holder (right) --[direct]--> Wire (right) [distance: 178.2px]
+  Battery Holder (right) --[direct]--> Wire (right) [distance: 180.7px]
+
+Disconnected Components:
+  Slide switch (left) --[NO CONNECTION]--> Battery Holder (left) [distance: 343.9px]
+  Slide switch (left) --[NO CONNECTION]--> Battery Holder (right) [distance: 525.5px]
+  Slide switch (left) --[NO CONNECTION]--> Wire (right) [distance: 688.2px]
+  Slide switch (left) --[NO CONNECTION]--> Wire (right) [distance: 689.1px]
+  Slide switch (left) --[NO CONNECTION]--> Wire (right) [distance: 955.6px]
+  Lamp (left) --[NO CONNECTION]--> Battery Holder (left) [distance: 347.1px]
+  Lamp (left) --[NO CONNECTION]--> Wire (left) [distance: 239.5px]
+  Lamp (left) --[NO CONNECTION]--> Battery Holder (right) [distance: 547.6px]
+  Lamp (left) --[NO CONNECTION]--> Wire (right) [distance: 684.8px]
+  Lamp (left) --[NO CONNECTION]--> Wire (right) [distance: 725.5px]
+  Lamp (left) --[NO CONNECTION]--> Wire (right) [distance: 967.6px]
+  Battery Holder (left) --[NO CONNECTION]--> Wire (left) [distance: 423.4px]
+  Battery Holder (left) --[NO CONNECTION]--> Battery Holder (right) [distance: 863.5px]
+  Battery Holder (left) --[NO CONNECTION]--> Wire (right) [distance: 1017.2px]
+  Battery Holder (left) --[NO CONNECTION]--> Wire (right) [distance: 1031.6px]
+  Battery Holder (left) --[NO CONNECTION]--> Wire (right) [distance: 1292.7px]
+  Wire (left) --[NO CONNECTION]--> Wire (left) [distance: 272.4px]
+  Wire (left) --[NO CONNECTION]--> Battery Holder (right) [distance: 696.5px]
+  Wire (left) --[NO CONNECTION]--> Wire (right) [distance: 858.2px]
+  Wire (left) --[NO CONNECTION]--> Wire (right) [distance: 858.9px]
+  Wire (left) --[NO CONNECTION]--> Wire (right) [distance: 1126.6px]
+  Wire (left) --[NO CONNECTION]--> Wire (left) [distance: 264.1px]
+  Wire (left) --[NO CONNECTION]--> Battery Holder (right) [distance: 443.6px]
+  Wire (left) --[NO CONNECTION]--> Wire (right) [distance: 593.9px]
+  Wire (left) --[NO CONNECTION]--> Wire (right) [distance: 617.5px]
+  Wire (left) --[NO CONNECTION]--> Wire (right) [distance: 870.6px]
+  Wire (left) --[NO CONNECTION]--> Battery Holder (right) [distance: 706.2px]
+  Wire (left) --[NO CONNECTION]--> Wire (right) [distance: 848.7px]
+  Wire (left) --[NO CONNECTION]--> Wire (right) [distance: 881.5px]
+  Wire (left) --[NO CONNECTION]--> Wire (right) [distance: 1130.1px]
+  Battery Holder (right) --[NO CONNECTION]--> Wire (right) [distance: 430.1px]
+  Wire (right) --[NO CONNECTION]--> Wire (right) [distance: 171.0px]
+  Wire (right) --[NO CONNECTION]--> Wire (right) [distance: 286.8px]
+  Wire (right) --[NO CONNECTION]--> Wire (right) [distance: 284.0px]
+
+Connection Statistics:
+  Total possible connections: 45
+  Actual connections: 11
+  Disconnected pairs: 34
+  Connection density: 24.4%

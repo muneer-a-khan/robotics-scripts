@@ -231,18 +231,63 @@ class CircuitGraphAnalyzer:
             summary_lines.append(f"  {comp_type}: {len(nodes)}")
         summary_lines.append("")
         
-        # Connection details
-        summary_lines.append("Connections:")
-        for connection in self.connections:
-            node1 = self.nodes[connection.component1_id]
-            node2 = self.nodes[connection.component2_id]
-            summary_lines.append(
-                f"  {node1.type} ({node1.board_side}) --[{connection.connection_type}]--> "
-                f"{node2.type} ({node2.board_side}) [distance: {connection.distance:.1f}px]"
-            )
+        # All components list
+        summary_lines.append("All Components:")
+        for node_id, node in self.nodes.items():
+            summary_lines.append(f"  {node_id}: {node.type} ({node.board_side}) [conf: {node.confidence:.2f}]")
+        summary_lines.append("")
         
-        if not self.connections:
+        # Connected pairs
+        summary_lines.append("Connected Components:")
+        if self.connections:
+            for connection in self.connections:
+                node1 = self.nodes[connection.component1_id]
+                node2 = self.nodes[connection.component2_id]
+                summary_lines.append(
+                    f"  {node1.type} ({node1.board_side}) --[{connection.connection_type}]--> "
+                    f"{node2.type} ({node2.board_side}) [distance: {connection.distance:.1f}px]"
+                )
+        else:
             summary_lines.append("  No connections detected")
+        summary_lines.append("")
+        
+        # Disconnected pairs (components that are NOT connected)
+        summary_lines.append("Disconnected Components:")
+        connected_pairs = set()
+        for connection in self.connections:
+            # Add both directions since connections are bidirectional
+            connected_pairs.add((connection.component1_id, connection.component2_id))
+            connected_pairs.add((connection.component2_id, connection.component1_id))
+        
+        disconnected_count = 0
+        node_list = list(self.nodes.values())
+        for i in range(len(node_list)):
+            for j in range(i + 1, len(node_list)):
+                node1 = node_list[i]
+                node2 = node_list[j]
+                
+                # Check if this pair is NOT connected
+                if (node1.id, node2.id) not in connected_pairs:
+                    distance = self.calculate_distance(node1, node2)
+                    summary_lines.append(
+                        f"  {node1.type} ({node1.board_side}) --[NO CONNECTION]--> "
+                        f"{node2.type} ({node2.board_side}) [distance: {distance:.1f}px]"
+                    )
+                    disconnected_count += 1
+        
+        if disconnected_count == 0:
+            summary_lines.append("  All components are connected to each other!")
+        summary_lines.append("")
+        
+        # Connection statistics
+        total_possible_connections = len(self.nodes) * (len(self.nodes) - 1) // 2
+        connection_percentage = (len(self.connections) / total_possible_connections * 100) if total_possible_connections > 0 else 0
+        
+        summary_lines.append("Connection Statistics:")
+        summary_lines.append(f"  Total possible connections: {total_possible_connections}")
+        summary_lines.append(f"  Actual connections: {len(self.connections)}")
+        summary_lines.append(f"  Disconnected pairs: {disconnected_count}")
+        summary_lines.append(f"  Connection density: {connection_percentage:.1f}%")
         
         return "\n".join(summary_lines)
     
