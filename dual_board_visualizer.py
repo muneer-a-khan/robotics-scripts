@@ -108,13 +108,26 @@ class DualBoardVisualizer:
                     orig_x2 = detection.get('x2', orig_x1 + 1)
                     orig_y2 = detection.get('y2', orig_y1 + 1)
                     
-                    # Make wires extend 2 boxes horizontally (parallel to tape)
-                    if comp_type == "Wire":
-                        orig_y2 = min(orig_y1 + 2, self.cols)  # Extend by 2 in y direction (horizontal)
-                    # Make tape extend full width of board
-                    elif comp_type == "Green tape":
+                    # Detect component orientation from bounding box (if available)
+                    if 'bbox' in detection:
+                        bbox_x1, bbox_y1, bbox_x2, bbox_y2 = detection['bbox']
+                        bbox_width = bbox_x2 - bbox_x1
+                        bbox_height = bbox_y2 - bbox_y1
+                        is_horizontal = bbox_width > bbox_height
+                    else:
+                        is_horizontal = True  # Default to horizontal
+                    
+                    # All components extend 3 grid pieces in the detected direction
+                    if comp_type == "Green tape":
+                        # Special case: green tape extends full width
                         orig_y1 = 0  # Start from left edge
                         orig_y2 = self.cols  # Extend to right edge
+                    elif is_horizontal:
+                        # Horizontal component: extend 3 pieces horizontally (y direction)
+                        orig_y2 = min(orig_y1 + 3, self.cols)
+                    else:
+                        # Vertical component: extend 3 pieces vertically (x direction)
+                        orig_x2 = min(orig_x1 + 3, self.rows)
                 else:
                     # Simple positioning for demo
                     orig_x1 = component_count % self.rows
@@ -122,13 +135,13 @@ class DualBoardVisualizer:
                     orig_x2 = orig_x1 + 1
                     orig_y2 = orig_y1 + 1
                     
-                    # Make wires extend 2 boxes horizontally (parallel to tape)
-                    if comp_type == "Wire":
-                        orig_y2 = min(orig_y1 + 2, self.cols)  # Extend by 2 in y direction (horizontal)
-                    # Make tape extend full width of board
-                    elif comp_type == "Green tape":
+                    # Default to horizontal for demo components
+                    if comp_type == "Green tape":
                         orig_y1 = 0  # Start from left edge
                         orig_y2 = self.cols  # Extend to right edge
+                    else:
+                        # All components extend 3 pieces horizontally by default
+                        orig_y2 = min(orig_y1 + 3, self.cols)
                 
                 # Rotate coordinates 90 degrees clockwise: (x,y) -> (y, rows-1-x)
                 # But we need to be careful about the mapping
@@ -299,26 +312,39 @@ class DualBoardVisualizer:
                     orig_x2 = detection.get('x2', orig_x1 + 1)
                     orig_y2 = detection.get('y2', orig_y1 + 1)
                     
-                    # Make wires extend 2 boxes horizontally (parallel to tape)
-                    if comp_type == "Wire":
-                        orig_y2 = min(orig_y1 + 2, self.cols)  # Extend by 2 in y direction (horizontal)
-                    # Make tape extend full width of board
-                    elif comp_type == "Green tape":
+                    # Detect component orientation from bounding box (if available)
+                    if 'bbox' in detection:
+                        bbox_x1, bbox_y1, bbox_x2, bbox_y2 = detection['bbox']
+                        bbox_width = bbox_x2 - bbox_x1
+                        bbox_height = bbox_y2 - bbox_y1
+                        is_horizontal = bbox_width > bbox_height
+                    else:
+                        is_horizontal = True  # Default to horizontal
+                    
+                    # All components extend 3 grid pieces in the detected direction
+                    if comp_type == "Green tape":
+                        # Special case: green tape extends full width
                         orig_y1 = 0  # Start from left edge
                         orig_y2 = self.cols  # Extend to right edge
+                    elif is_horizontal:
+                        # Horizontal component: extend 3 pieces horizontally (y direction)
+                        orig_y2 = min(orig_y1 + 3, self.cols)
+                    else:
+                        # Vertical component: extend 3 pieces vertically (x direction)
+                        orig_x2 = min(orig_x1 + 3, self.rows)
                 else:
                     orig_x1 = component_count % self.rows
                     orig_y1 = (component_count // self.rows) % self.cols
                     orig_x2 = orig_x1 + 1
                     orig_y2 = orig_y1 + 1
                     
-                    # Make wires extend 2 boxes horizontally (parallel to tape)
-                    if comp_type == "Wire":
-                        orig_y2 = min(orig_y1 + 2, self.cols)  # Extend by 2 in y direction (horizontal)
-                    # Make tape extend full width of board
-                    elif comp_type == "Green tape":
+                    # Default to horizontal for demo components
+                    if comp_type == "Green tape":
                         orig_y1 = 0  # Start from left edge
                         orig_y2 = self.cols  # Extend to right edge
+                    else:
+                        # All components extend 3 pieces horizontally by default
+                        orig_y2 = min(orig_y1 + 3, self.cols)
                 
                 # Rotate coordinates 90 degrees clockwise for display
                 x1 = orig_y1  # New x = old y
@@ -454,17 +480,28 @@ def convert_detections_with_positions(left_boxes, right_boxes, model_names, fram
         if class_name not in left_detections:
             left_detections[class_name] = []
         
-        # Make wires extend 2 boxes horizontally (parallel to tape)
-        if class_name == "Wire":
-            y2_extent = min(grid_y + 2, 14)  # Extend by 2 horizontally for wires
-            x2_extent = grid_x + 1
-        # Make tape extend full width
+        # Detect component orientation from bounding box and extend 3 grid pieces
+        if class_name != "Green tape":
+            bbox_width = x2 - x1
+            bbox_height = y2 - y1
+            is_horizontal = bbox_width > bbox_height
+            
+            if is_horizontal:
+                # Horizontal component: extend 3 pieces horizontally
+                y2_extent = min(grid_y + 3, 14)
+                x2_extent = grid_x + 1
+            else:
+                # Vertical component: extend 3 pieces vertically
+                y2_extent = grid_y + 1
+                x2_extent = min(grid_x + 3, 12)
+        # Special case: green tape extends full width
         elif class_name == "Green tape":
             y2_extent = 14  # Full width
             grid_y = 0  # Start from edge
             x2_extent = grid_x + 1
         else:
-            y2_extent = grid_y + 1
+            # Default: all components extend 3 pieces horizontally
+            y2_extent = min(grid_y + 3, 14)
             x2_extent = grid_x + 1
             
         left_detections[class_name].append({
@@ -489,17 +526,28 @@ def convert_detections_with_positions(left_boxes, right_boxes, model_names, fram
         if class_name not in right_detections:
             right_detections[class_name] = []
         
-        # Make wires extend 2 boxes horizontally (parallel to tape)
-        if class_name == "Wire":
-            y2_extent = min(grid_y + 2, 14)  # Extend by 2 horizontally for wires
-            x2_extent = grid_x + 1
-        # Make tape extend full width
+        # Detect component orientation from bounding box and extend 3 grid pieces
+        if class_name != "Green tape":
+            bbox_width = x2 - x1
+            bbox_height = y2 - y1
+            is_horizontal = bbox_width > bbox_height
+            
+            if is_horizontal:
+                # Horizontal component: extend 3 pieces horizontally
+                y2_extent = min(grid_y + 3, 14)
+                x2_extent = grid_x + 1
+            else:
+                # Vertical component: extend 3 pieces vertically
+                y2_extent = grid_y + 1
+                x2_extent = min(grid_x + 3, 12)
+        # Special case: green tape extends full width
         elif class_name == "Green tape":
             y2_extent = 14  # Full width  
             grid_y = 0  # Start from edge
             x2_extent = grid_x + 1
         else:
-            y2_extent = grid_y + 1
+            # Default: all components extend 3 pieces horizontally
+            y2_extent = min(grid_y + 3, 14)
             x2_extent = grid_x + 1
             
         right_detections[class_name].append({

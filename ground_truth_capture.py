@@ -91,11 +91,29 @@ class GroundTruthCapture:
     def save_ground_truths(self):
         """Save ground truth data to file"""
         try:
+            # Convert numpy types to Python native types for JSON serialization
+            def convert_numpy_types(obj):
+                """Recursively convert numpy types to native Python types"""
+                if isinstance(obj, dict):
+                    return {key: convert_numpy_types(value) for key, value in obj.items()}
+                elif isinstance(obj, list):
+                    return [convert_numpy_types(item) for item in obj]
+                elif hasattr(obj, 'item'):  # numpy scalar
+                    return obj.item()
+                elif hasattr(obj, 'tolist'):  # numpy array
+                    return obj.tolist()
+                else:
+                    return obj
+            
+            json_safe_data = convert_numpy_types(self.ground_truths)
+            
             with open("ground_truths.json", 'w') as f:
-                json.dump(self.ground_truths, f, indent=2)
+                json.dump(json_safe_data, f, indent=2)
             print("💾 Ground truths saved successfully")
         except Exception as e:
             print(f"❌ Error saving ground truths: {e}")
+            import traceback
+            traceback.print_exc()
     
     def capture_ground_truth(self, circuit_id, frame, left_boxes, right_boxes):
         """Capture a ground truth circuit"""
