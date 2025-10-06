@@ -16,6 +16,7 @@ import matplotlib.pyplot as plt
 # Import our components
 try:
     from dual_board_visualizer import DualBoardVisualizer, convert_detections_to_7x5_grid
+    from circuit_graph_analyzer import CircuitGraphAnalyzer
     VISUALIZER_AVAILABLE = True
 except ImportError:
     VISUALIZER_AVAILABLE = False
@@ -24,6 +25,7 @@ class IntegratedCircuitSystem:
     def __init__(self):
         self.model = None
         self.visualizer = None
+        self.graph_analyzer = None
         
         # System state
         self.show_board_viz = False
@@ -36,6 +38,7 @@ class IntegratedCircuitSystem:
         
         if VISUALIZER_AVAILABLE:
             self.visualizer = DualBoardVisualizer(cell_size=60)  # Larger cells for better visibility
+            self.graph_analyzer = CircuitGraphAnalyzer(connection_threshold=50.0)
     
     def load_model(self):
         """Load YOLO model"""
@@ -64,6 +67,37 @@ class IntegratedCircuitSystem:
             print(f"❌ Error loading model: {e}")
             return False
 
+    def analyze_circuit_graph(self, left_boxes, right_boxes, frame_width, frame_height):
+        """Analyze circuit connectivity and save results"""
+        if not VISUALIZER_AVAILABLE or not self.graph_analyzer:
+            print("⚠️ Graph analyzer not available")
+            return
+        
+        try:
+            # Perform circuit analysis
+            graph_data = self.graph_analyzer.analyze_circuit(
+                left_boxes, right_boxes, self.model.names, frame_width, frame_height
+            )
+            
+            # Generate timestamp for filenames
+            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+            
+            # Save to JSON
+            json_filepath = f"circuit_graph_{timestamp}.json"
+            self.graph_analyzer.save_to_json(json_filepath)
+            
+            # Save summary to text
+            txt_filepath = f"circuit_summary_{timestamp}.txt"
+            self.graph_analyzer.save_summary_to_text(txt_filepath)
+            
+            # Print summary to console
+            print("\n" + "="*60)
+            print(self.graph_analyzer.get_connection_summary())
+            print("="*60 + "\n")
+            
+        except Exception as e:
+            print(f"❌ Error analyzing circuit graph: {e}")
+    
     def update_board_visualization(self, left_detections, right_detections):
         """Update board visualization"""
         if not self.show_board_viz or not VISUALIZER_AVAILABLE:
@@ -110,12 +144,17 @@ class IntegratedCircuitSystem:
         
         print("\n📋 Controls:")
         print("   • 'b': Toggle board visualization")
+        print("   • 'g': Analyze circuit graph and save results")
         print("   • 's': Save current frame") 
         print("   • 'q': Quit")
         print()
         
         split_ratio = 0.5
         frame_count = 0
+        
+        # Initialize detection variables
+        left_boxes = []
+        right_boxes = []
         
         try:
             while True:
@@ -138,6 +177,14 @@ class IntegratedCircuitSystem:
                             self.ax1 = None
                             self.ax2 = None
                         print("🎨 Board visualization disabled")
+                
+                elif key == ord('g'):
+                    # Analyze circuit graph with current detections
+                    if left_boxes or right_boxes:
+                        print("🔍 Analyzing circuit connectivity...")
+                        self.analyze_circuit_graph(left_boxes, right_boxes, width, height)
+                    else:
+                        print("⚠️ No detections available for graph analysis - ensure components are visible on camera")
                 
                 elif key == ord('s'):
                     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
