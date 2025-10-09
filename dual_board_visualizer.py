@@ -403,9 +403,9 @@ def convert_detections_to_7x5_grid(left_boxes, right_boxes, model_names, frame_w
         component_sizes = {
             'Wire': (2, 1),  # Can be 2x1 or 3x1, we'll use 2x1 as default
             'Battery Holder': (3, 3),
-            'U_1 blue music circuit': (3, 3),
-            'U_2 red alarm circuit': (3, 3),
-            'U_3 green space war circuit': (3, 3),
+            'U_1 blue music circuit': (3, 2),
+            'U_2 red alarm circuit': (3, 2),
+            'U_3 green space war circuit': (3, 2),
             # Everything else: 3x1
             'LED_1 (Yellow)': (3, 1),
             'LED_2 (Red)': (3, 1),

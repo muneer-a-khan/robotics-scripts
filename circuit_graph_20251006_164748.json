@@ -1,0 +1,354 @@
+{
+  "timestamp": 1759783668.297788,
+  "nodes": {
+    "L_0_Slide switch": {
+      "type": "Slide switch",
+      "confidence": 0.9379720091819763,
+      "bbox": [
+        518.7013549804688,
+        515.6748657226562,
+        738.3387451171875,
+        584.9301147460938
+      ],
+      "center": [
+        628.52001953125,
+        550.302490234375
+      ],
+      "board_side": "left"
+    },
+    "L_1_Lamp": {
+      "type": "Lamp",
+      "confidence": 0.9208215475082397,
+      "bbox": [
+        522.0862426757812,
+        350.61126708984375,
+        740.279296875,
+        421.68896484375
+      ],
+      "center": [
+        631.1827392578125,
+        386.1501159667969
+      ],
+      "board_side": "left"
+    },
+    "L_2_Battery Holder": {
+      "type": "Battery Holder",
+      "confidence": 0.9166415929794312,
+      "bbox": [
+        157.16116333007812,
+        355.68878173828125,
+        431.62005615234375,
+        581.9901123046875
+      ],
+      "center": [
+        294.390625,
+        468.8394470214844
+      ],
+      "board_side": "left"
+    },
+    "L_3_Wire": {
+      "type": "Wire",
+      "confidence": 0.8096214532852173,
+      "bbox": [
+        353.75714111328125,
+        525.2567138671875,
+        560.1256713867188,
+        576.5742797851562
+      ],
+      "center": [
+        456.94140625,
+        550.91552734375
+      ],
+      "board_side": "left"
+    },
+    "L_4_Wire": {
+      "type": "Wire",
+      "confidence": 0.8041195273399353,
+      "bbox": [
+        696.096923828125,
+        367.7749328613281,
+        739.0756225585938,
+        572.1656494140625
+      ],
+      "center": [
+        717.5863037109375,
+        469.97027587890625
+      ],
+      "board_side": "left"
+    },
+    "L_5_Wire": {
+      "type": "Wire",
+      "confidence": 0.7965844869613647,
+      "bbox": [
+        357.11505126953125,
+        362.5293273925781,
+        576.353271484375,
+        414.8035583496094
+      ],
+      "center": [
+        466.7341613769531,
+        388.66644287109375
+      ],
+      "board_side": "left"
+    },
+    "R_6_Battery Holder": {
+      "type": "Battery Holder",
+      "confidence": 0.9149290323257446,
+      "bbox": [
+        1027.9248046875,
+        436.6549987792969,
+        1279.654541015625,
+        663.3069458007812
+      ],
+      "center": [
+        1153.7896728515625,
+        549.98095703125
+      ],
+      "board_side": "right"
+    },
+    "R_7_Wire": {
+      "type": "Wire",
+      "confidence": 0.8605825304985046,
+      "bbox": [
+        1200.169921875,
+        443.06854248046875,
+        1421.515869140625,
+        489.68865966796875
+      ],
+      "center": [
+        1310.8428955078125,
+        466.37860107421875
+      ],
+      "board_side": "right"
+    },
+    "R_8_Wire": {
+      "type": "Wire",
+      "confidence": 0.8498407602310181,
+      "bbox": [
+        1202.2581787109375,
+        614.2125244140625,
+        1422.16455078125,
+        661.2232055664062
+      ],
+      "center": [
+        1312.21142578125,
+        637.7178955078125
+      ],
+      "board_side": "right"
+    },
+    "R_9_Wire": {
+      "type": "Wire",
+      "confidence": 0.847842276096344,
+      "bbox": [
+        1555.30517578125,
+        447.78131103515625,
+        1610.30712890625,
+        663.801513671875
+      ],
+      "center": [
+        1582.80615234375,
+        555.7913818359375
+      ],
+      "board_side": "right"
+    }
+  },
+  "adjacency_list": {
+    "L_0_Slide switch": [
+      {
+        "connected_to": "L_1_Lamp",
+        "distance": 164.17396886846973,
+        "connection_type": "direct"
+      },
+      {
+        "connected_to": "L_3_Wire",
+        "distance": 171.57970844483393,
+        "connection_type": "direct"
+      },
+      {
+        "connected_to": "L_4_Wire",
+        "distance": 119.94193445509302,
+        "connection_type": "direct"
+      },
+      {
+        "connected_to": "L_5_Wire",
+        "distance": 228.69384710994558,
+        "connection_type": "direct"
+      }
+    ],
+    "L_1_Lamp": [
+      {
+        "connected_to": "L_0_Slide switch",
+        "distance": 164.17396886846973,
+        "connection_type": "direct"
+      },
+      {
+        "connected_to": "L_4_Wire",
+        "distance": 120.38021082344437,
+        "connection_type": "direct"
+      },
+      {
+        "connected_to": "L_5_Wire",
+        "distance": 164.4678286721338,
+        "connection_type": "direct"
+      }
+    ],
+    "L_2_Battery Holder": [
+      {
+        "connected_to": "L_3_Wire",
+        "distance": 182.0967859300442,
+        "connection_type": "direct"
+      },
+      {
+        "connected_to": "L_5_Wire",
+        "distance": 190.07894445575164,
+        "connection_type": "direct"
+      }
+    ],
+    "L_3_Wire": [
+      {
+        "connected_to": "L_0_Slide switch",
+        "distance": 171.57970844483393,
+        "connection_type": "direct"
+      },
+      {
+        "connected_to": "L_2_Battery Holder",
+        "distance": 182.0967859300442,
+        "connection_type": "direct"
+      },
+      {
+        "connected_to": "L_5_Wire",
+        "distance": 162.5443430734875,
+        "connection_type": "direct"
+      }
+    ],
+    "L_4_Wire": [
+      {
+        "connected_to": "L_0_Slide switch",
+        "distance": 119.94193445509302,
+        "connection_type": "direct"
+      },
+      {
+        "connected_to": "L_1_Lamp",
+        "distance": 120.38021082344437,
+        "connection_type": "direct"
+      }
+    ],
+    "L_5_Wire": [
+      {
+        "connected_to": "L_0_Slide switch",
+        "distance": 228.69384710994558,
+        "connection_type": "direct"
+      },
+      {
+        "connected_to": "L_1_Lamp",
+        "distance": 164.4678286721338,
+        "connection_type": "direct"
+      },
+      {
+        "connected_to": "L_2_Battery Holder",
+        "distance": 190.07894445575164,
+        "connection_type": "direct"
+      },
+      {
+        "connected_to": "L_3_Wire",
+        "distance": 162.5443430734875,
+        "connection_type": "direct"
+      }
+    ],
+    "R_6_Battery Holder": [
+      {
+        "connected_to": "R_7_Wire",
+        "distance": 177.91871365395997,
+        "connection_type": "direct"
+      },
+      {
+        "connected_to": "R_8_Wire",
+        "distance": 181.09451171848104,
+        "connection_type": "direct"
+      }
+    ],
+    "R_7_Wire": [
+      {
+        "connected_to": "R_6_Battery Holder",
+        "distance": 177.91871365395997,
+        "connection_type": "direct"
+      }
+    ],
+    "R_8_Wire": [
+      {
+        "connected_to": "R_6_Battery Holder",
+        "distance": 181.09451171848104,
+        "connection_type": "direct"
+      }
+    ],
+    "R_9_Wire": []
+  },
+  "connections": [
+    {
+      "component1": "L_0_Slide switch",
+      "component2": "L_1_Lamp",
+      "distance": 164.17396886846973,
+      "type": "direct"
+    },
+    {
+      "component1": "L_0_Slide switch",
+      "component2": "L_3_Wire",
+      "distance": 171.57970844483393,
+      "type": "direct"
+    },
+    {
+      "component1": "L_0_Slide switch",
+      "component2": "L_4_Wire",
+      "distance": 119.94193445509302,
+      "type": "direct"
+    },
+    {
+      "component1": "L_0_Slide switch",
+      "component2": "L_5_Wire",
+      "distance": 228.69384710994558,
+      "type": "direct"
+    },
+    {
+      "component1": "L_1_Lamp",
+      "component2": "L_4_Wire",
+      "distance": 120.38021082344437,
+      "type": "direct"
+    },
+    {
+      "component1": "L_1_Lamp",
+      "component2": "L_5_Wire",
+      "distance": 164.4678286721338,
+      "type": "direct"
+    },
+    {
+      "component1": "L_2_Battery Holder",
+      "component2": "L_3_Wire",
+      "distance": 182.0967859300442,
+      "type": "direct"
+    },
+    {
+      "component1": "L_2_Battery Holder",
+      "component2": "L_5_Wire",
+      "distance": 190.07894445575164,
+      "type": "direct"
+    },
+    {
+      "component1": "L_3_Wire",
+      "component2": "L_5_Wire",
+      "distance": 162.5443430734875,
+      "type": "direct"
+    },
+    {
+      "component1": "R_6_Battery Holder",
+      "component2": "R_7_Wire",
+      "distance": 177.91871365395997,
+      "type": "direct"
+    },
+    {
+      "component1": "R_6_Battery Holder",
+      "component2": "R_8_Wire",
+      "distance": 181.09451171848104,
+      "type": "direct"
+    }
+  ]
+}
