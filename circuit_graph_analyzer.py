@@ -144,7 +144,7 @@ class CircuitGraphAnalyzer:
         return 'none'
     
     def analyze_connections(self):
-        """Analyze all components and determine connections"""
+        """Analyze all components and determine connections (only within same side)"""
         self.connections.clear()
         
         # Compare every pair of components
@@ -153,6 +153,10 @@ class CircuitGraphAnalyzer:
             for j in range(i + 1, len(node_list)):
                 node1 = node_list[i]
                 node2 = node_list[j]
+                
+                # Only check connections if both components are on the same side
+                if node1.board_side != node2.board_side:
+                    continue
                 
                 distance = self.calculate_distance(node1, node2)
                 connection_type = self.determine_connection_type(node1, node2, distance)

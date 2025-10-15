@@ -425,7 +425,7 @@ def convert_detections_to_7x5_grid(left_boxes, right_boxes, model_names, frame_w
         return component_sizes.get(class_name, (3, 1))  # Default to 3x1 for unknown components
     
     def get_covered_grid_spots_by_component(center_x, center_y, class_name, board_bounds, bbox=None):
-        """Get grid spots covered by a component based on its standard size"""
+        """Get grid spots covered by a component based on its standard size and actual orientation"""
         # Get center grid position
         result = pixel_to_grid_7x5(center_x, center_y, board_bounds)
         if result[0] is None:
@@ -434,32 +434,41 @@ def convert_detections_to_7x5_grid(left_boxes, right_boxes, model_names, frame_w
         center_row, center_col = result
         width_across, height_up_down = get_component_grid_size(class_name)
         
-        # Special handling for wires - determine orientation and size based on bounding box
-        if class_name == 'Wire' and bbox is not None:
+        # Determine actual orientation from bounding box
+        if bbox is not None:
             x1, y1, x2, y2 = bbox
             bbox_width = x2 - x1
             bbox_height = y2 - y1
             
-            # Determine if wire is horizontal or vertical
+            # Determine if component is horizontal or vertical based on bounding box
             is_horizontal = bbox_width > bbox_height
-            aspect_ratio = max(bbox_width, bbox_height) / max(min(bbox_width, bbox_height), 1)
             
-            if is_horizontal:
-                # Wire is oriented horizontally - spans across columns
-                if aspect_ratio > 2.5:  # Long horizontal wire
-                    width_across = 3
-                    height_up_down = 1
-                else:  # Short horizontal wire
-                    width_across = 2
-                    height_up_down = 1
+            # Special handling for wires - determine size based on aspect ratio
+            if class_name == 'Wire':
+                aspect_ratio = max(bbox_width, bbox_height) / max(min(bbox_width, bbox_height), 1)
+                
+                if is_horizontal:
+                    # Wire is oriented horizontally - spans across columns
+                    if aspect_ratio > 2.5:  # Long horizontal wire
+                        width_across = 3
+                        height_up_down = 1
+                    else:  # Short horizontal wire
+                        width_across = 2
+                        height_up_down = 1
+                else:
+                    # Wire is oriented vertically - spans across rows
+                    if aspect_ratio > 2.5:  # Long vertical wire
+                        width_across = 1
+                        height_up_down = 3
+                    else:  # Short vertical wire
+                        width_across = 1
+                        height_up_down = 2
             else:
-                # Wire is oriented vertically - spans across rows
-                if aspect_ratio > 2.5:  # Long vertical wire
-                    width_across = 1
-                    height_up_down = 3
-                else:  # Short vertical wire
-                    width_across = 1
-                    height_up_down = 2
+                # For all other components, swap dimensions if oriented vertically
+                # The default sizes are for horizontal orientation
+                if not is_horizontal:  # Component is vertical
+                    # Swap width and height to match actual orientation
+                    width_across, height_up_down = height_up_down, width_across
         
         covered_spots = []
         

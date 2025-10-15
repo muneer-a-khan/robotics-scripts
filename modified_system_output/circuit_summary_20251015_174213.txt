@@ -1,0 +1,164 @@
+=== CIRCUIT CONNECTIVITY ANALYSIS (BY SIDE) ===
+
+LEFT SIDE: 7 components, 9 connections
+RIGHT SIDE: 8 components, 15 connections
+TOTAL: 15 components, 24 connections
+
+============================================================
+LEFT SIDE CIRCUIT STATUS:
+  Status: CLOSED
+  Reason: Circuit forms a closed loop with 7 connected components on LEFT side
+  Components: 7/7 connected
+
+============================================================
+RIGHT SIDE CIRCUIT STATUS:
+  Status: CLOSED
+  Reason: Circuit forms a closed loop with 8 connected components on RIGHT side
+  Components: 8/8 connected
+
+============================================================
+
+=== CIRCUIT CONNECTIVITY ANALYSIS ===
+Total components: 15
+Total connections: 24
+
+Components by type:
+  Battery Holder: 2
+  LED_2 (Red): 1
+  Press switch: 2
+  Wire: 7
+  Resistor: 1
+  Photoresistor: 1
+  U_3 green space war circuit: 1
+
+All Components:
+  L_0_Battery Holder: Battery Holder (left) [conf: 0.94]
+  L_1_LED_2 (Red): LED_2 (Red) (left) [conf: 0.88]
+  L_2_Press switch: Press switch (left) [conf: 0.88]
+  L_3_Wire: Wire (left) [conf: 0.85]
+  L_4_Wire: Wire (left) [conf: 0.82]
+  L_5_Wire: Wire (left) [conf: 0.80]
+  L_6_Wire: Wire (left) [conf: 0.70]
+  R_7_Resistor: Resistor (right) [conf: 0.93]
+  R_8_Battery Holder: Battery Holder (right) [conf: 0.91]
+  R_9_Photoresistor: Photoresistor (right) [conf: 0.88]
+  R_10_Press switch: Press switch (right) [conf: 0.87]
+  R_11_Wire: Wire (right) [conf: 0.79]
+  R_12_Wire: Wire (right) [conf: 0.75]
+  R_13_Wire: Wire (right) [conf: 0.71]
+  R_14_U_3 green space war circuit: U_3 green space war circuit (right) [conf: 0.63]
+
+Connected Components:
+  Battery Holder (left) --[direct]--> Wire (left) [distance: 242.9px]
+  Battery Holder (left) --[direct]--> Wire (left) [distance: 197.5px]
+  LED_2 (Red) (left) --[direct]--> Press switch (left) [distance: 194.5px]
+  LED_2 (Red) (left) --[direct]--> Wire (left) [distance: 120.5px]
+  Press switch (left) --[direct]--> Wire (left) [distance: 185.0px]
+  Wire (left) --[direct]--> Wire (left) [distance: 179.6px]
+  Wire (left) --[direct]--> Wire (left) [distance: 223.5px]
+  Wire (left) --[direct]--> Wire (left) [distance: 85.9px]
+  Wire (left) --[direct]--> Wire (left) [distance: 137.6px]
+  Resistor (right) --[direct]--> Battery Holder (right) [distance: 173.0px]
+  Resistor (right) --[direct]--> Photoresistor (right) [distance: 201.7px]
+  Resistor (right) --[direct]--> Wire (right) [distance: 91.5px]
+  Resistor (right) --[direct]--> Wire (right) [distance: 89.1px]
+  Battery Holder (right) --[direct]--> Wire (right) [distance: 191.6px]
+  Battery Holder (right) --[direct]--> Wire (right) [distance: 196.6px]
+  Photoresistor (right) --[direct]--> Wire (right) [distance: 287.6px]
+  Photoresistor (right) --[direct]--> Wire (right) [distance: 224.0px]
+  Photoresistor (right) --[direct]--> Wire (right) [distance: 127.3px]
+  Photoresistor (right) --[direct]--> U_3 green space war circuit (right) [distance: 191.9px]
+  Press switch (right) --[direct]--> Wire (right) [distance: 94.3px]
+  Press switch (right) --[direct]--> U_3 green space war circuit (right) [distance: 135.6px]
+  Wire (right) --[direct]--> U_3 green space war circuit (right) [distance: 182.9px]
+  Wire (right) --[direct]--> U_3 green space war circuit (right) [distance: 171.6px]
+  Wire (right) --[direct]--> U_3 green space war circuit (right) [distance: 177.5px]
+
+Disconnected Components:
+  Battery Holder (left) --[NO CONNECTION]--> LED_2 (Red) (left) [distance: 534.9px]
+  Battery Holder (left) --[NO CONNECTION]--> Press switch (left) [distance: 373.6px]
+  Battery Holder (left) --[NO CONNECTION]--> Wire (left) [distance: 458.6px]
+  Battery Holder (left) --[NO CONNECTION]--> Wire (left) [distance: 324.8px]
+  Battery Holder (left) --[NO CONNECTION]--> Resistor (right) [distance: 1030.5px]
+  Battery Holder (left) --[NO CONNECTION]--> Battery Holder (right) [distance: 857.6px]
+  Battery Holder (left) --[NO CONNECTION]--> Photoresistor (right) [distance: 1132.5px]
+  Battery Holder (left) --[NO CONNECTION]--> Press switch (right) [distance: 1320.9px]
+  Battery Holder (left) --[NO CONNECTION]--> Wire (right) [distance: 1032.3px]
+  Battery Holder (left) --[NO CONNECTION]--> Wire (right) [distance: 1330.1px]
+  Battery Holder (left) --[NO CONNECTION]--> Wire (right) [distance: 1034.4px]
+  Battery Holder (left) --[NO CONNECTION]--> U_3 green space war circuit (right) [distance: 1185.3px]
+  LED_2 (Red) (left) --[NO CONNECTION]--> Wire (left) [distance: 319.7px]
+  LED_2 (Red) (left) --[NO CONNECTION]--> Wire (left) [distance: 367.6px]
+  LED_2 (Red) (left) --[NO CONNECTION]--> Wire (left) [distance: 238.4px]
+  LED_2 (Red) (left) --[NO CONNECTION]--> Resistor (right) [distance: 495.7px]
+  LED_2 (Red) (left) --[NO CONNECTION]--> Battery Holder (right) [distance: 322.8px]
+  LED_2 (Red) (left) --[NO CONNECTION]--> Photoresistor (right) [distance: 608.9px]
+  LED_2 (Red) (left) --[NO CONNECTION]--> Press switch (right) [distance: 785.9px]
+  LED_2 (Red) (left) --[NO CONNECTION]--> Wire (right) [distance: 502.8px]
+  LED_2 (Red) (left) --[NO CONNECTION]--> Wire (right) [distance: 797.0px]
+  LED_2 (Red) (left) --[NO CONNECTION]--> Wire (right) [distance: 502.5px]
+  LED_2 (Red) (left) --[NO CONNECTION]--> U_3 green space war circuit (right) [distance: 650.4px]
+  Press switch (left) --[NO CONNECTION]--> Wire (left) [distance: 222.4px]
+  Press switch (left) --[NO CONNECTION]--> Wire (left) [distance: 196.7px]
+  Press switch (left) --[NO CONNECTION]--> Wire (left) [distance: 183.9px]
+  Press switch (left) --[NO CONNECTION]--> Resistor (right) [distance: 672.5px]
+  Press switch (left) --[NO CONNECTION]--> Battery Holder (right) [distance: 500.7px]
+  Press switch (left) --[NO CONNECTION]--> Photoresistor (right) [distance: 800.4px]
+  Press switch (left) --[NO CONNECTION]--> Press switch (right) [distance: 961.7px]
+  Press switch (left) --[NO CONNECTION]--> Wire (right) [distance: 664.7px]
+  Press switch (left) --[NO CONNECTION]--> Wire (right) [distance: 980.6px]
+  Press switch (left) --[NO CONNECTION]--> Wire (right) [distance: 689.5px]
+  Press switch (left) --[NO CONNECTION]--> U_3 green space war circuit (right) [distance: 826.4px]
+  Wire (left) --[NO CONNECTION]--> Resistor (right) [distance: 809.4px]
+  Wire (left) --[NO CONNECTION]--> Battery Holder (right) [distance: 638.3px]
+  Wire (left) --[NO CONNECTION]--> Photoresistor (right) [distance: 896.6px]
+  Wire (left) --[NO CONNECTION]--> Press switch (right) [distance: 1097.9px]
+  Wire (left) --[NO CONNECTION]--> Wire (right) [distance: 822.2px]
+  Wire (left) --[NO CONNECTION]--> Wire (right) [distance: 1100.4px]
+  Wire (left) --[NO CONNECTION]--> Wire (right) [distance: 804.4px]
+  Wire (left) --[NO CONNECTION]--> U_3 green space war circuit (right) [distance: 963.1px]
+  Wire (left) --[NO CONNECTION]--> Wire (left) [distance: 322.7px]
+  Wire (left) --[NO CONNECTION]--> Wire (left) [distance: 219.9px]
+  Wire (left) --[NO CONNECTION]--> Resistor (right) [distance: 856.1px]
+  Wire (left) --[NO CONNECTION]--> Battery Holder (right) [distance: 683.7px]
+  Wire (left) --[NO CONNECTION]--> Photoresistor (right) [distance: 976.2px]
+  Wire (left) --[NO CONNECTION]--> Press switch (right) [distance: 1145.8px]
+  Wire (left) --[NO CONNECTION]--> Wire (right) [distance: 849.6px]
+  Wire (left) --[NO CONNECTION]--> Wire (right) [distance: 1162.5px]
+  Wire (left) --[NO CONNECTION]--> Wire (right) [distance: 869.4px]
+  Wire (left) --[NO CONNECTION]--> U_3 green space war circuit (right) [distance: 1010.4px]
+  Wire (left) --[NO CONNECTION]--> Resistor (right) [distance: 588.1px]
+  Wire (left) --[NO CONNECTION]--> Battery Holder (right) [distance: 419.0px]
+  Wire (left) --[NO CONNECTION]--> Photoresistor (right) [distance: 674.5px]
+  Wire (left) --[NO CONNECTION]--> Press switch (right) [distance: 875.5px]
+  Wire (left) --[NO CONNECTION]--> Wire (right) [distance: 606.8px]
+  Wire (left) --[NO CONNECTION]--> Wire (right) [distance: 876.9px]
+  Wire (left) --[NO CONNECTION]--> Wire (right) [distance: 581.0px]
+  Wire (left) --[NO CONNECTION]--> U_3 green space war circuit (right) [distance: 741.1px]
+  Wire (left) --[NO CONNECTION]--> Resistor (right) [distance: 724.3px]
+  Wire (left) --[NO CONNECTION]--> Battery Holder (right) [distance: 553.8px]
+  Wire (left) --[NO CONNECTION]--> Photoresistor (right) [distance: 811.1px]
+  Wire (left) --[NO CONNECTION]--> Press switch (right) [distance: 1012.5px]
+  Wire (left) --[NO CONNECTION]--> Wire (right) [distance: 739.0px]
+  Wire (left) --[NO CONNECTION]--> Wire (right) [distance: 1014.5px]
+  Wire (left) --[NO CONNECTION]--> Wire (right) [distance: 718.6px]
+  Wire (left) --[NO CONNECTION]--> U_3 green space war circuit (right) [distance: 877.8px]
+  Resistor (right) --[NO CONNECTION]--> Press switch (right) [distance: 290.4px]
+  Resistor (right) --[NO CONNECTION]--> Wire (right) [distance: 312.2px]
+  Resistor (right) --[NO CONNECTION]--> U_3 green space war circuit (right) [distance: 154.8px]
+  Battery Holder (right) --[NO CONNECTION]--> Photoresistor (right) [distance: 320.0px]
+  Battery Holder (right) --[NO CONNECTION]--> Press switch (right) [distance: 463.4px]
+  Battery Holder (right) --[NO CONNECTION]--> Wire (right) [distance: 480.2px]
+  Battery Holder (right) --[NO CONNECTION]--> U_3 green space war circuit (right) [distance: 327.8px]
+  Photoresistor (right) --[NO CONNECTION]--> Press switch (right) [distance: 268.6px]
+  Press switch (right) --[NO CONNECTION]--> Wire (right) [distance: 308.4px]
+  Press switch (right) --[NO CONNECTION]--> Wire (right) [distance: 302.1px]
+  Wire (right) --[NO CONNECTION]--> Wire (right) [distance: 354.3px]
+  Wire (right) --[NO CONNECTION]--> Wire (right) [distance: 180.6px]
+  Wire (right) --[NO CONNECTION]--> Wire (right) [distance: 296.0px]
+
+Connection Statistics:
+  Total possible connections: 105
+  Actual connections: 24
+  Disconnected pairs: 81
+  Connection density: 22.9%
