@@ -67,16 +67,16 @@ class IntegratedCircuitSystem:
             print(f"❌ Error loading model: {e}")
             return False
 
-    def analyze_circuit_graph(self, left_boxes, right_boxes, frame_width, frame_height):
+    def analyze_circuit_graph(self, left_boxes, right_boxes, frame_width, frame_height, frame=None):
         """Analyze circuit connectivity and save results"""
         if not VISUALIZER_AVAILABLE or not self.graph_analyzer:
             print("⚠️ Graph analyzer not available")
             return
         
         try:
-            # Perform circuit analysis
+            # Perform circuit analysis (with frame for LED orientation detection)
             graph_data = self.graph_analyzer.analyze_circuit(
-                left_boxes, right_boxes, self.model.names, frame_width, frame_height
+                left_boxes, right_boxes, self.model.names, frame_width, frame_height, frame=frame
             )
             
             # Generate timestamp for filenames
@@ -182,7 +182,7 @@ class IntegratedCircuitSystem:
                     # Analyze circuit graph with current detections
                     if left_boxes or right_boxes:
                         print("🔍 Analyzing circuit connectivity...")
-                        self.analyze_circuit_graph(left_boxes, right_boxes, width, height)
+                        self.analyze_circuit_graph(left_boxes, right_boxes, width, height, frame=frame)
                     else:
                         print("⚠️ No detections available for graph analysis - ensure components are visible on camera")
                 

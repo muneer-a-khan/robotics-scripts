@@ -223,9 +223,11 @@ class IntegratedCircuitSystem:
         try:
             print(f"   Analyzing {len(left_boxes)} left components and {len(right_boxes)} right components...")
             
-            # Perform circuit analysis
+            # Perform circuit analysis (with frame for LED orientation detection)
+            # Note: We don't have the frame here in analyze_circuit_graph, so LED orientation
+            # will only work in analyze_saved_final_detection where we have the frame
             graph_data = self.graph_analyzer.analyze_circuit(
-                left_boxes, right_boxes, self.model.names, frame_width, frame_height
+                left_boxes, right_boxes, self.model.names, frame_width, frame_height, frame=None
             )
             
             if not graph_data or 'nodes' not in graph_data:
@@ -371,9 +373,9 @@ class IntegratedCircuitSystem:
         print("🔍 Analyzing circuit connectivity...")
         
         try:
-            # Use the graph analyzer directly
+            # Use the graph analyzer directly (with frame for LED orientation detection)
             graph_data = self.graph_analyzer.analyze_circuit(
-                left_boxes, right_boxes, self.model.names, width, height
+                left_boxes, right_boxes, self.model.names, width, height, frame=image
             )
             
             # Check circuit completion by side

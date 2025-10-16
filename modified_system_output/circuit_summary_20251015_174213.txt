@@ -1,164 +1,138 @@
 === CIRCUIT CONNECTIVITY ANALYSIS (BY SIDE) ===
 
-LEFT SIDE: 7 components, 9 connections
-RIGHT SIDE: 8 components, 15 connections
-TOTAL: 15 components, 24 connections
+LEFT SIDE: 3 components, 1 connections
+RIGHT SIDE: 9 components, 15 connections
+TOTAL: 12 components, 16 connections
 
 ============================================================
 LEFT SIDE CIRCUIT STATUS:
-  Status: CLOSED
-  Reason: Circuit forms a closed loop with 7 connected components on LEFT side
-  Components: 7/7 connected
+  Status: OPEN
+  Reason: Battery holder has 0 connection(s) on LEFT side (need at least 2 for a circuit)
+  Components: 1/3 connected
 
 ============================================================
 RIGHT SIDE CIRCUIT STATUS:
   Status: CLOSED
-  Reason: Circuit forms a closed loop with 8 connected components on RIGHT side
-  Components: 8/8 connected
+  Reason: Circuit forms a closed loop with 9 connected components on RIGHT side
+  Components: 9/9 connected
 
 ============================================================
 
 === CIRCUIT CONNECTIVITY ANALYSIS ===
-Total components: 15
-Total connections: 24
+Total components: 12
+Total connections: 16
 
 Components by type:
-  Battery Holder: 2
-  LED_2 (Red): 1
+  Battery Holder: 4
   Press switch: 2
-  Wire: 7
+  LED_2 (Red): 4
   Resistor: 1
-  Photoresistor: 1
-  U_3 green space war circuit: 1
+  Wire: 1
 
 All Components:
-  L_0_Battery Holder: Battery Holder (left) [conf: 0.94]
-  L_1_LED_2 (Red): LED_2 (Red) (left) [conf: 0.88]
-  L_2_Press switch: Press switch (left) [conf: 0.88]
-  L_3_Wire: Wire (left) [conf: 0.85]
-  L_4_Wire: Wire (left) [conf: 0.82]
-  L_5_Wire: Wire (left) [conf: 0.80]
-  L_6_Wire: Wire (left) [conf: 0.70]
-  R_7_Resistor: Resistor (right) [conf: 0.93]
-  R_8_Battery Holder: Battery Holder (right) [conf: 0.91]
-  R_9_Photoresistor: Photoresistor (right) [conf: 0.88]
-  R_10_Press switch: Press switch (right) [conf: 0.87]
-  R_11_Wire: Wire (right) [conf: 0.79]
-  R_12_Wire: Wire (right) [conf: 0.75]
-  R_13_Wire: Wire (right) [conf: 0.71]
-  R_14_U_3 green space war circuit: U_3 green space war circuit (right) [conf: 0.63]
+  L_0_Battery Holder: Battery Holder (left) [conf: 0.90]
+  L_1_Press switch: Press switch (left) [conf: 0.82]
+  L_2_LED_2 (Red): LED_2 (Red) (left) [conf: 0.64] - Orientation: UNKNOWN
+  R_3_Press switch: Press switch (right) [conf: 0.91]
+  R_4_Battery Holder: Battery Holder (right) [conf: 0.84]
+  R_5_LED_2 (Red): LED_2 (Red) (right) [conf: 0.83] - Orientation: UNKNOWN
+  R_6_Resistor: Resistor (right) [conf: 0.81]
+  R_7_Wire: Wire (right) [conf: 0.74]
+  R_8_LED_2 (Red): LED_2 (Red) (right) [conf: 0.72] - Orientation: UNKNOWN
+  R_9_LED_2 (Red): LED_2 (Red) (right) [conf: 0.68] - Orientation: UNKNOWN
+  R_10_Battery Holder: Battery Holder (right) [conf: 0.66]
+  R_11_Battery Holder: Battery Holder (right) [conf: 0.62]
+
+LED Orientation Summary:
+  L_2_LED_2 (Red):
+    Status: UNKNOWN
+    Confidence: 0.00
+    Details: Low confidence match (0.00 < 0.5)
+  R_5_LED_2 (Red):
+    Status: UNKNOWN
+    Confidence: 0.00
+    Details: Low confidence match (0.00 < 0.5)
+  R_8_LED_2 (Red):
+    Status: UNKNOWN
+    Confidence: 0.00
+    Details: Low confidence match (0.00 < 0.5)
+  R_9_LED_2 (Red):
+    Status: UNKNOWN
+    Confidence: 0.00
+    Details: Low confidence match (0.00 < 0.5)
 
 Connected Components:
-  Battery Holder (left) --[direct]--> Wire (left) [distance: 242.9px]
-  Battery Holder (left) --[direct]--> Wire (left) [distance: 197.5px]
-  LED_2 (Red) (left) --[direct]--> Press switch (left) [distance: 194.5px]
-  LED_2 (Red) (left) --[direct]--> Wire (left) [distance: 120.5px]
-  Press switch (left) --[direct]--> Wire (left) [distance: 185.0px]
-  Wire (left) --[direct]--> Wire (left) [distance: 179.6px]
-  Wire (left) --[direct]--> Wire (left) [distance: 223.5px]
-  Wire (left) --[direct]--> Wire (left) [distance: 85.9px]
-  Wire (left) --[direct]--> Wire (left) [distance: 137.6px]
-  Resistor (right) --[direct]--> Battery Holder (right) [distance: 173.0px]
-  Resistor (right) --[direct]--> Photoresistor (right) [distance: 201.7px]
-  Resistor (right) --[direct]--> Wire (right) [distance: 91.5px]
-  Resistor (right) --[direct]--> Wire (right) [distance: 89.1px]
-  Battery Holder (right) --[direct]--> Wire (right) [distance: 191.6px]
-  Battery Holder (right) --[direct]--> Wire (right) [distance: 196.6px]
-  Photoresistor (right) --[direct]--> Wire (right) [distance: 287.6px]
-  Photoresistor (right) --[direct]--> Wire (right) [distance: 224.0px]
-  Photoresistor (right) --[direct]--> Wire (right) [distance: 127.3px]
-  Photoresistor (right) --[direct]--> U_3 green space war circuit (right) [distance: 191.9px]
-  Press switch (right) --[direct]--> Wire (right) [distance: 94.3px]
-  Press switch (right) --[direct]--> U_3 green space war circuit (right) [distance: 135.6px]
-  Wire (right) --[direct]--> U_3 green space war circuit (right) [distance: 182.9px]
-  Wire (right) --[direct]--> U_3 green space war circuit (right) [distance: 171.6px]
-  Wire (right) --[direct]--> U_3 green space war circuit (right) [distance: 177.5px]
+  Press switch (left) --[direct]--> LED_2 (Red) (left) [distance: 207.2px]
+  Press switch (right) --[direct]--> LED_2 (Red) (right) [distance: 182.6px]
+  Press switch (right) --[direct]--> Wire (right) [distance: 105.7px]
+  Press switch (right) --[direct]--> LED_2 (Red) (right) [distance: 127.6px]
+  Battery Holder (right) --[direct]--> Resistor (right) [distance: 179.5px]
+  Battery Holder (right) --[direct]--> Battery Holder (right) [distance: 205.5px]
+  Battery Holder (right) --[direct]--> Battery Holder (right) [distance: 124.6px]
+  LED_2 (Red) (right) --[direct]--> LED_2 (Red) (right) [distance: 120.5px]
+  LED_2 (Red) (right) --[direct]--> Battery Holder (right) [distance: 286.5px]
+  LED_2 (Red) (right) --[direct]--> Battery Holder (right) [distance: 345.9px]
+  Resistor (right) --[direct]--> Battery Holder (right) [distance: 91.5px]
+  Resistor (right) --[direct]--> Battery Holder (right) [distance: 130.3px]
+  Wire (right) --[direct]--> LED_2 (Red) (right) [distance: 70.8px]
+  Wire (right) --[direct]--> LED_2 (Red) (right) [distance: 75.3px]
+  LED_2 (Red) (right) --[direct]--> LED_2 (Red) (right) [distance: 128.8px]
+  Battery Holder (right) --[direct]--> Battery Holder (right) [distance: 98.4px]
 
 Disconnected Components:
-  Battery Holder (left) --[NO CONNECTION]--> LED_2 (Red) (left) [distance: 534.9px]
-  Battery Holder (left) --[NO CONNECTION]--> Press switch (left) [distance: 373.6px]
-  Battery Holder (left) --[NO CONNECTION]--> Wire (left) [distance: 458.6px]
-  Battery Holder (left) --[NO CONNECTION]--> Wire (left) [distance: 324.8px]
-  Battery Holder (left) --[NO CONNECTION]--> Resistor (right) [distance: 1030.5px]
-  Battery Holder (left) --[NO CONNECTION]--> Battery Holder (right) [distance: 857.6px]
-  Battery Holder (left) --[NO CONNECTION]--> Photoresistor (right) [distance: 1132.5px]
-  Battery Holder (left) --[NO CONNECTION]--> Press switch (right) [distance: 1320.9px]
-  Battery Holder (left) --[NO CONNECTION]--> Wire (right) [distance: 1032.3px]
-  Battery Holder (left) --[NO CONNECTION]--> Wire (right) [distance: 1330.1px]
-  Battery Holder (left) --[NO CONNECTION]--> Wire (right) [distance: 1034.4px]
-  Battery Holder (left) --[NO CONNECTION]--> U_3 green space war circuit (right) [distance: 1185.3px]
-  LED_2 (Red) (left) --[NO CONNECTION]--> Wire (left) [distance: 319.7px]
-  LED_2 (Red) (left) --[NO CONNECTION]--> Wire (left) [distance: 367.6px]
-  LED_2 (Red) (left) --[NO CONNECTION]--> Wire (left) [distance: 238.4px]
-  LED_2 (Red) (left) --[NO CONNECTION]--> Resistor (right) [distance: 495.7px]
-  LED_2 (Red) (left) --[NO CONNECTION]--> Battery Holder (right) [distance: 322.8px]
-  LED_2 (Red) (left) --[NO CONNECTION]--> Photoresistor (right) [distance: 608.9px]
-  LED_2 (Red) (left) --[NO CONNECTION]--> Press switch (right) [distance: 785.9px]
-  LED_2 (Red) (left) --[NO CONNECTION]--> Wire (right) [distance: 502.8px]
-  LED_2 (Red) (left) --[NO CONNECTION]--> Wire (right) [distance: 797.0px]
-  LED_2 (Red) (left) --[NO CONNECTION]--> Wire (right) [distance: 502.5px]
-  LED_2 (Red) (left) --[NO CONNECTION]--> U_3 green space war circuit (right) [distance: 650.4px]
-  Press switch (left) --[NO CONNECTION]--> Wire (left) [distance: 222.4px]
-  Press switch (left) --[NO CONNECTION]--> Wire (left) [distance: 196.7px]
-  Press switch (left) --[NO CONNECTION]--> Wire (left) [distance: 183.9px]
-  Press switch (left) --[NO CONNECTION]--> Resistor (right) [distance: 672.5px]
-  Press switch (left) --[NO CONNECTION]--> Battery Holder (right) [distance: 500.7px]
-  Press switch (left) --[NO CONNECTION]--> Photoresistor (right) [distance: 800.4px]
-  Press switch (left) --[NO CONNECTION]--> Press switch (right) [distance: 961.7px]
-  Press switch (left) --[NO CONNECTION]--> Wire (right) [distance: 664.7px]
-  Press switch (left) --[NO CONNECTION]--> Wire (right) [distance: 980.6px]
-  Press switch (left) --[NO CONNECTION]--> Wire (right) [distance: 689.5px]
-  Press switch (left) --[NO CONNECTION]--> U_3 green space war circuit (right) [distance: 826.4px]
-  Wire (left) --[NO CONNECTION]--> Resistor (right) [distance: 809.4px]
-  Wire (left) --[NO CONNECTION]--> Battery Holder (right) [distance: 638.3px]
-  Wire (left) --[NO CONNECTION]--> Photoresistor (right) [distance: 896.6px]
-  Wire (left) --[NO CONNECTION]--> Press switch (right) [distance: 1097.9px]
-  Wire (left) --[NO CONNECTION]--> Wire (right) [distance: 822.2px]
-  Wire (left) --[NO CONNECTION]--> Wire (right) [distance: 1100.4px]
-  Wire (left) --[NO CONNECTION]--> Wire (right) [distance: 804.4px]
-  Wire (left) --[NO CONNECTION]--> U_3 green space war circuit (right) [distance: 963.1px]
-  Wire (left) --[NO CONNECTION]--> Wire (left) [distance: 322.7px]
-  Wire (left) --[NO CONNECTION]--> Wire (left) [distance: 219.9px]
-  Wire (left) --[NO CONNECTION]--> Resistor (right) [distance: 856.1px]
-  Wire (left) --[NO CONNECTION]--> Battery Holder (right) [distance: 683.7px]
-  Wire (left) --[NO CONNECTION]--> Photoresistor (right) [distance: 976.2px]
-  Wire (left) --[NO CONNECTION]--> Press switch (right) [distance: 1145.8px]
-  Wire (left) --[NO CONNECTION]--> Wire (right) [distance: 849.6px]
-  Wire (left) --[NO CONNECTION]--> Wire (right) [distance: 1162.5px]
-  Wire (left) --[NO CONNECTION]--> Wire (right) [distance: 869.4px]
-  Wire (left) --[NO CONNECTION]--> U_3 green space war circuit (right) [distance: 1010.4px]
-  Wire (left) --[NO CONNECTION]--> Resistor (right) [distance: 588.1px]
-  Wire (left) --[NO CONNECTION]--> Battery Holder (right) [distance: 419.0px]
-  Wire (left) --[NO CONNECTION]--> Photoresistor (right) [distance: 674.5px]
-  Wire (left) --[NO CONNECTION]--> Press switch (right) [distance: 875.5px]
-  Wire (left) --[NO CONNECTION]--> Wire (right) [distance: 606.8px]
-  Wire (left) --[NO CONNECTION]--> Wire (right) [distance: 876.9px]
-  Wire (left) --[NO CONNECTION]--> Wire (right) [distance: 581.0px]
-  Wire (left) --[NO CONNECTION]--> U_3 green space war circuit (right) [distance: 741.1px]
-  Wire (left) --[NO CONNECTION]--> Resistor (right) [distance: 724.3px]
-  Wire (left) --[NO CONNECTION]--> Battery Holder (right) [distance: 553.8px]
-  Wire (left) --[NO CONNECTION]--> Photoresistor (right) [distance: 811.1px]
-  Wire (left) --[NO CONNECTION]--> Press switch (right) [distance: 1012.5px]
-  Wire (left) --[NO CONNECTION]--> Wire (right) [distance: 739.0px]
-  Wire (left) --[NO CONNECTION]--> Wire (right) [distance: 1014.5px]
-  Wire (left) --[NO CONNECTION]--> Wire (right) [distance: 718.6px]
-  Wire (left) --[NO CONNECTION]--> U_3 green space war circuit (right) [distance: 877.8px]
-  Resistor (right) --[NO CONNECTION]--> Press switch (right) [distance: 290.4px]
-  Resistor (right) --[NO CONNECTION]--> Wire (right) [distance: 312.2px]
-  Resistor (right) --[NO CONNECTION]--> U_3 green space war circuit (right) [distance: 154.8px]
-  Battery Holder (right) --[NO CONNECTION]--> Photoresistor (right) [distance: 320.0px]
-  Battery Holder (right) --[NO CONNECTION]--> Press switch (right) [distance: 463.4px]
-  Battery Holder (right) --[NO CONNECTION]--> Wire (right) [distance: 480.2px]
-  Battery Holder (right) --[NO CONNECTION]--> U_3 green space war circuit (right) [distance: 327.8px]
-  Photoresistor (right) --[NO CONNECTION]--> Press switch (right) [distance: 268.6px]
-  Press switch (right) --[NO CONNECTION]--> Wire (right) [distance: 308.4px]
-  Press switch (right) --[NO CONNECTION]--> Wire (right) [distance: 302.1px]
-  Wire (right) --[NO CONNECTION]--> Wire (right) [distance: 354.3px]
-  Wire (right) --[NO CONNECTION]--> Wire (right) [distance: 180.6px]
-  Wire (right) --[NO CONNECTION]--> Wire (right) [distance: 296.0px]
+  Battery Holder (left) --[NO CONNECTION]--> Press switch (left) [distance: 365.4px]
+  Battery Holder (left) --[NO CONNECTION]--> LED_2 (Red) (left) [distance: 538.1px]
+  Battery Holder (left) --[NO CONNECTION]--> Press switch (right) [distance: 1320.0px]
+  Battery Holder (left) --[NO CONNECTION]--> Battery Holder (right) [distance: 851.3px]
+  Battery Holder (left) --[NO CONNECTION]--> LED_2 (Red) (right) [distance: 1195.4px]
+  Battery Holder (left) --[NO CONNECTION]--> Resistor (right) [distance: 1030.6px]
+  Battery Holder (left) --[NO CONNECTION]--> Wire (right) [distance: 1374.1px]
+  Battery Holder (left) --[NO CONNECTION]--> LED_2 (Red) (right) [distance: 1315.4px]
+  Battery Holder (left) --[NO CONNECTION]--> LED_2 (Red) (right) [distance: 1443.6px]
+  Battery Holder (left) --[NO CONNECTION]--> Battery Holder (right) [distance: 1035.1px]
+  Battery Holder (left) --[NO CONNECTION]--> Battery Holder (right) [distance: 936.8px]
+  Press switch (left) --[NO CONNECTION]--> Press switch (right) [distance: 964.2px]
+  Press switch (left) --[NO CONNECTION]--> Battery Holder (right) [distance: 496.9px]
+  Press switch (left) --[NO CONNECTION]--> LED_2 (Red) (right) [distance: 853.5px]
+  Press switch (left) --[NO CONNECTION]--> Resistor (right) [distance: 673.9px]
+  Press switch (left) --[NO CONNECTION]--> Wire (right) [distance: 1025.6px]
+  Press switch (left) --[NO CONNECTION]--> LED_2 (Red) (right) [distance: 971.2px]
+  Press switch (left) --[NO CONNECTION]--> LED_2 (Red) (right) [distance: 1097.6px]
+  Press switch (left) --[NO CONNECTION]--> Battery Holder (right) [distance: 671.9px]
+  Press switch (left) --[NO CONNECTION]--> Battery Holder (right) [distance: 573.5px]
+  LED_2 (Red) (left) --[NO CONNECTION]--> Press switch (right) [distance: 783.8px]
+  LED_2 (Red) (left) --[NO CONNECTION]--> Battery Holder (right) [distance: 317.1px]
+  LED_2 (Red) (left) --[NO CONNECTION]--> LED_2 (Red) (right) [distance: 658.3px]
+  LED_2 (Red) (left) --[NO CONNECTION]--> Resistor (right) [distance: 496.3px]
+  LED_2 (Red) (left) --[NO CONNECTION]--> Wire (right) [distance: 836.0px]
+  LED_2 (Red) (left) --[NO CONNECTION]--> LED_2 (Red) (right) [distance: 777.8px]
+  LED_2 (Red) (left) --[NO CONNECTION]--> LED_2 (Red) (right) [distance: 905.8px]
+  LED_2 (Red) (left) --[NO CONNECTION]--> Battery Holder (right) [distance: 513.1px]
+  LED_2 (Red) (left) --[NO CONNECTION]--> Battery Holder (right) [distance: 417.5px]
+  Press switch (right) --[NO CONNECTION]--> Battery Holder (right) [distance: 468.8px]
+  Press switch (right) --[NO CONNECTION]--> Resistor (right) [distance: 290.3px]
+  Press switch (right) --[NO CONNECTION]--> LED_2 (Red) (right) [distance: 173.2px]
+  Press switch (right) --[NO CONNECTION]--> Battery Holder (right) [distance: 311.4px]
+  Press switch (right) --[NO CONNECTION]--> Battery Holder (right) [distance: 402.6px]
+  Battery Holder (right) --[NO CONNECTION]--> LED_2 (Red) (right) [distance: 363.4px]
+  Battery Holder (right) --[NO CONNECTION]--> Wire (right) [distance: 529.3px]
+  Battery Holder (right) --[NO CONNECTION]--> LED_2 (Red) (right) [distance: 477.5px]
+  Battery Holder (right) --[NO CONNECTION]--> LED_2 (Red) (right) [distance: 602.1px]
+  LED_2 (Red) (right) --[NO CONNECTION]--> Resistor (right) [distance: 215.7px]
+  LED_2 (Red) (right) --[NO CONNECTION]--> Wire (right) [distance: 185.4px]
+  LED_2 (Red) (right) --[NO CONNECTION]--> LED_2 (Red) (right) [distance: 249.3px]
+  Resistor (right) --[NO CONNECTION]--> Wire (right) [distance: 358.5px]
+  Resistor (right) --[NO CONNECTION]--> LED_2 (Red) (right) [distance: 315.1px]
+  Resistor (right) --[NO CONNECTION]--> LED_2 (Red) (right) [distance: 433.1px]
+  Wire (right) --[NO CONNECTION]--> Battery Holder (right) [distance: 397.9px]
+  Wire (right) --[NO CONNECTION]--> Battery Holder (right) [distance: 481.8px]
+  LED_2 (Red) (right) --[NO CONNECTION]--> Battery Holder (right) [distance: 367.7px]
+  LED_2 (Red) (right) --[NO CONNECTION]--> Battery Holder (right) [distance: 443.2px]
+  LED_2 (Red) (right) --[NO CONNECTION]--> Battery Holder (right) [distance: 473.1px]
+  LED_2 (Red) (right) --[NO CONNECTION]--> Battery Holder (right) [distance: 557.0px]
 
 Connection Statistics:
-  Total possible connections: 105
-  Actual connections: 24
-  Disconnected pairs: 81
-  Connection density: 22.9%
+  Total possible connections: 66
+  Actual connections: 16
+  Disconnected pairs: 50
+  Connection density: 24.2%
