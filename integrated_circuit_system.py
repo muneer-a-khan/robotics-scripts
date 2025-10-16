@@ -21,6 +21,12 @@ try:
 except ImportError:
     VISUALIZER_AVAILABLE = False
 
+try:
+    from model_class_renamer import rename_model_classes
+    RENAMER_AVAILABLE = True
+except ImportError:
+    RENAMER_AVAILABLE = False
+
 class IntegratedCircuitSystem:
     def __init__(self):
         self.model = None
@@ -61,6 +67,11 @@ class IntegratedCircuitSystem:
             
         try:
             self.model = YOLO(str(model_path))
+            
+            # Rename mislabeled classes (Photoresistor → Horn)
+            if RENAMER_AVAILABLE:
+                rename_model_classes(self.model)
+            
             print(f"✅ Model loaded: {model_path}")
             return True
         except Exception as e:

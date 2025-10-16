@@ -1,0 +1,316 @@
+{
+  "timestamp": 1760657406.0040529,
+  "nodes": {
+    "L_0_Battery Holder": {
+      "type": "Battery Holder",
+      "confidence": 0.9264621734619141,
+      "bbox": [
+        172.2301025390625,
+        443.6205139160156,
+        457.7463684082031,
+        673.135498046875
+      ],
+      "center": [
+        314.98822021484375,
+        558.3779907226562
+      ],
+      "board_side": "left"
+    },
+    "L_1_LED_2 (Red)": {
+      "type": "LED_2 (Red)",
+      "confidence": 0.9050248265266418,
+      "bbox": [
+        535.5240478515625,
+        451.4039611816406,
+        617.954833984375,
+        674.7955322265625
+      ],
+      "center": [
+        576.7394409179688,
+        563.0997314453125
+      ],
+      "board_side": "left",
+      "led_orientation": {
+        "orientation": "CORRECT",
+        "confidence": 0.8786944150924683,
+        "plus_position": "BOTTOM",
+        "plus_x_relative": 32.0,
+        "plus_y_relative": 158.5,
+        "bbox_center_x": 51.0,
+        "bbox_center_y": 121.5,
+        "bbox_width": 102.0,
+        "bbox_height": 243.0,
+        "led_orientation": "vertical",
+        "template_used": "plus_tiny.png"
+      }
+    },
+    "L_2_Lamp": {
+      "type": "Lamp",
+      "confidence": 0.7371017932891846,
+      "bbox": [
+        636.0682983398438,
+        440.9425964355469,
+        861.2622680664062,
+        515.5719604492188
+      ],
+      "center": [
+        748.665283203125,
+        478.25726318359375
+      ],
+      "board_side": "left",
+      "horn_orientation": {
+        "orientation": "CORRECT",
+        "confidence": 0.7259906530380249,
+        "plus_position": "RIGHT",
+        "plus_x_relative": 189.5,
+        "plus_y_relative": 63.5,
+        "bbox_center_x": 122.5,
+        "bbox_center_y": 47.5,
+        "bbox_width": 245.0,
+        "bbox_height": 95.0,
+        "horn_orientation": "horizontal",
+        "template_used": "plus_tiny.png"
+      }
+    },
+    "R_3_Battery Holder": {
+      "type": "Battery Holder",
+      "confidence": 0.9153504967689514,
+      "bbox": [
+        1017.3896484375,
+        436.1324157714844,
+        1273.9600830078125,
+        669.7081298828125
+      ],
+      "center": [
+        1145.6748046875,
+        552.9202880859375
+      ],
+      "board_side": "right"
+    },
+    "R_4_Wire": {
+      "type": "Wire",
+      "confidence": 0.8638978600502014,
+      "bbox": [
+        1203.7691650390625,
+        438.37994384765625,
+        1443.856689453125,
+        491.15350341796875
+      ],
+      "center": [
+        1323.81298828125,
+        464.7667236328125
+      ],
+      "board_side": "right"
+    },
+    "R_5_Wire": {
+      "type": "Wire",
+      "confidence": 0.8158817887306213,
+      "bbox": [
+        1203.844482421875,
+        619.4202270507812,
+        1444.2568359375,
+        676.5004272460938
+      ],
+      "center": [
+        1324.0506591796875,
+        647.9603271484375
+      ],
+      "board_side": "right"
+    },
+    "R_6_U_3 green space war circuit": {
+      "type": "U_3 green space war circuit",
+      "confidence": 0.8004326820373535,
+      "bbox": [
+        1372.795166015625,
+        435.147705078125,
+        1543.3289794921875,
+        685.3775024414062
+      ],
+      "center": [
+        1458.06201171875,
+        560.2625732421875
+      ],
+      "board_side": "right"
+    }
+  },
+  "adjacency_list": {
+    "L_0_Battery Holder": [],
+    "L_1_LED_2 (Red)": [
+      {
+        "connected_to": "L_2_Lamp",
+        "distance": 191.7204727362239,
+        "connection_type": "direct"
+      }
+    ],
+    "L_2_Lamp": [
+      {
+        "connected_to": "L_1_LED_2 (Red)",
+        "distance": 191.7204727362239,
+        "connection_type": "direct"
+      }
+    ],
+    "R_3_Battery Holder": [
+      {
+        "connected_to": "R_4_Wire",
+        "distance": 198.7567945502036,
+        "connection_type": "direct"
+      },
+      {
+        "connected_to": "R_5_Wire",
+        "distance": 202.11520103846613,
+        "connection_type": "direct"
+      }
+    ],
+    "R_4_Wire": [
+      {
+        "connected_to": "R_3_Battery Holder",
+        "distance": 198.7567945502036,
+        "connection_type": "direct"
+      },
+      {
+        "connected_to": "R_6_U_3 green space war circuit",
+        "distance": 164.74907461512126,
+        "connection_type": "direct"
+      }
+    ],
+    "R_5_Wire": [
+      {
+        "connected_to": "R_3_Battery Holder",
+        "distance": 202.11520103846613,
+        "connection_type": "direct"
+      },
+      {
+        "connected_to": "R_6_U_3 green space war circuit",
+        "distance": 160.15598224715205,
+        "connection_type": "direct"
+      }
+    ],
+    "R_6_U_3 green space war circuit": [
+      {
+        "connected_to": "R_4_Wire",
+        "distance": 164.74907461512126,
+        "connection_type": "direct"
+      },
+      {
+        "connected_to": "R_5_Wire",
+        "distance": 160.15598224715205,
+        "connection_type": "direct"
+      }
+    ]
+  },
+  "connections": [
+    {
+      "component1": "L_1_LED_2 (Red)",
+      "component2": "L_2_Lamp",
+      "distance": 191.7204727362239,
+      "type": "direct"
+    },
+    {
+      "component1": "R_3_Battery Holder",
+      "component2": "R_4_Wire",
+      "distance": 198.7567945502036,
+      "type": "direct"
+    },
+    {
+      "component1": "R_3_Battery Holder",
+      "component2": "R_5_Wire",
+      "distance": 202.11520103846613,
+      "type": "direct"
+    },
+    {
+      "component1": "R_4_Wire",
+      "component2": "R_6_U_3 green space war circuit",
+      "distance": 164.74907461512126,
+      "type": "direct"
+    },
+    {
+      "component1": "R_5_Wire",
+      "component2": "R_6_U_3 green space war circuit",
+      "distance": 160.15598224715205,
+      "type": "direct"
+    }
+  ],
+  "led_orientations": {
+    "L_1_LED_2 (Red)": {
+      "orientation": "CORRECT",
+      "confidence": 0.8786944150924683,
+      "plus_position": "BOTTOM",
+      "plus_x_relative": 32.0,
+      "plus_y_relative": 158.5,
+      "bbox_center_x": 51.0,
+      "bbox_center_y": 121.5,
+      "bbox_width": 102.0,
+      "bbox_height": 243.0,
+      "led_orientation": "vertical",
+      "template_used": "plus_tiny.png"
+    }
+  },
+  "horn_orientations": {
+    "L_2_Lamp": {
+      "orientation": "CORRECT",
+      "confidence": 0.7259906530380249,
+      "plus_position": "RIGHT",
+      "plus_x_relative": 189.5,
+      "plus_y_relative": 63.5,
+      "bbox_center_x": 122.5,
+      "bbox_center_y": 47.5,
+      "bbox_width": 245.0,
+      "bbox_height": 95.0,
+      "horn_orientation": "horizontal",
+      "template_used": "plus_tiny.png"
+    }
+  },
+  "terminal_analysis": {
+    "connections": [
+      {
+        "from_component": "R_3_Battery Holder",
+        "from_terminal": "positive",
+        "to_component": "R_5_Wire",
+        "to_terminal": "left",
+        "overlap_percentage": 51.388496436974606,
+        "distance": 123.81991480439248
+      },
+      {
+        "from_component": "R_3_Battery Holder",
+        "from_terminal": "negative",
+        "to_component": "R_4_Wire",
+        "to_terminal": "left",
+        "overlap_percentage": 58.47110810114109,
+        "distance": 121.80750017632634
+      },
+      {
+        "from_component": "R_4_Wire",
+        "from_terminal": "right",
+        "to_component": "R_6_U_3 green space war circuit",
+        "to_terminal": "left",
+        "overlap_percentage": 59.19634817421422,
+        "distance": 81.20730880652468
+      },
+      {
+        "from_component": "R_5_Wire",
+        "from_terminal": "right",
+        "to_component": "R_6_U_3 green space war circuit",
+        "to_terminal": "right",
+        "overlap_percentage": 59.44924948894569,
+        "distance": 78.0671115923802
+      },
+      {
+        "from_component": "R_6_U_3 green space war circuit",
+        "from_terminal": "left",
+        "to_component": "R_4_Wire",
+        "to_terminal": "right",
+        "overlap_percentage": 59.19634817421422,
+        "distance": 81.20730880652468
+      },
+      {
+        "from_component": "R_6_U_3 green space war circuit",
+        "from_terminal": "right",
+        "to_component": "R_5_Wire",
+        "to_terminal": "right",
+        "overlap_percentage": 59.44924948894569,
+        "distance": 78.0671115923802
+      }
+    ],
+    "summary": "=== TERMINAL-BASED CIRCUIT ANALYSIS ===\nTotal components: 7\nTotal terminal connections: 6\n\nLEFT BOARD: 0 terminal connections\nRIGHT BOARD: 6 terminal connections\n\n\nCircuit Completeness Analysis:\n  LEFT BOARD: OPEN \u2717\n    No complete path from Battery+ to Battery- (checked 1 component terminals)\n    Path length: 0 steps\n  RIGHT BOARD: OPEN \u2717\n    No complete path from Battery+ to Battery- (checked 4 component terminals)\n    Path length: 0 steps\n\nComponent Terminals:\n  LEFT BOARD:\n    L_0_Battery Holder (Battery Holder):\n      negative: bbox ['172', '444', '458', '558']\n      positive: bbox ['172', '558', '458', '673']\n    L_1_LED_2 (Red) (LED_2 (Red)):\n      left: bbox ['536', '451', '618', '563']\n      right: bbox ['536', '563', '618', '675']\n    L_2_Lamp (Lamp):\n      left: bbox ['636', '441', '749', '516']\n      right: bbox ['749', '441', '861', '516']\n  RIGHT BOARD:\n    R_3_Battery Holder (Battery Holder):\n      negative: bbox ['1017', '436', '1274', '553']\n      positive: bbox ['1017', '553', '1274', '670']\n    R_4_Wire (Wire):\n      left: bbox ['1204', '438', '1324', '491']\n      right: bbox ['1324', '438', '1444', '491']\n    R_5_Wire (Wire):\n      left: bbox ['1204', '619', '1324', '677']\n      right: bbox ['1324', '619', '1444', '677']\n    R_6_U_3 green space war circuit (U_3 green space war circuit):\n      left: bbox ['1373', '435', '1543', '560']\n      right: bbox ['1373', '560', '1543', '685']\n\nTerminal Connections:\n  LEFT BOARD:\n    No connections on left board\n  RIGHT BOARD:\n    Battery Holder[positive] \u2192 Wire #1[left] (overlap: 51.4%, dist: 123.8px)\n    Battery Holder[negative] \u2192 Wire #2[left] (overlap: 58.5%, dist: 121.8px)\n    Wire #2[right] \u2192 U_3 green space war circuit[left] (overlap: 59.2%, dist: 81.2px)\n    Wire #1[right] \u2192 U_3 green space war circuit[right] (overlap: 59.4%, dist: 78.1px)\n    U_3 green space war circuit[left] \u2192 Wire #2[right] (overlap: 59.2%, dist: 81.2px)\n    U_3 green space war circuit[right] \u2192 Wire #1[right] (overlap: 59.4%, dist: 78.1px)"
+  }
+}

@@ -21,6 +21,14 @@ except ImportError:
     LED_DETECTOR_AVAILABLE = False
     print("⚠️ LED orientation detector not available")
 
+# Import Horn orientation detector (using simple grayscale version like LED)
+try:
+    from horn_orientation_detector_simple import SimpleHornOrientationDetector as HornOrientationDetector
+    HORN_DETECTOR_AVAILABLE = True
+except ImportError:
+    HORN_DETECTOR_AVAILABLE = False
+    print("⚠️ Horn orientation detector not available")
+
 # Import terminal-based analyzer
 try:
     from terminal_based_circuit_analyzer import TerminalBasedCircuitAnalyzer
@@ -71,6 +79,8 @@ class CircuitGraphAnalyzer:
         self.connections: List[Connection] = []
         self.graph_data = {}
         self.led_orientations = {}  # Store LED orientation results
+        self.horn_orientations = {}  # Store Horn orientation results
+        self.horn_reclassifications = {}  # Track which box indices should be reclassified as Horn
         self.frame = None  # Store frame for orientation detection
         
         # Initialize LED orientation detector if available
@@ -82,6 +92,16 @@ class CircuitGraphAnalyzer:
                 self.led_detector = None
         else:
             self.led_detector = None
+        
+        # Initialize Horn orientation detector if available
+        if HORN_DETECTOR_AVAILABLE:
+            try:
+                self.horn_detector = HornOrientationDetector()
+            except Exception as e:
+                print(f"⚠️ Could not initialize Horn detector: {e}")
+                self.horn_detector = None
+        else:
+            self.horn_detector = None
         
         # Initialize terminal-based analyzer if available
         if TERMINAL_ANALYZER_AVAILABLE:
@@ -120,7 +140,18 @@ class CircuitGraphAnalyzer:
             bbox = [float(x1), float(y1), float(x2), float(y2)]
             center = (float(center_x), float(center_y))
             
+            # Check if this component was reclassified as Horn based on red plus detection
+            reclass_key = f"L_{component_counter}"
+            if reclass_key in self.horn_reclassifications:
+                class_name = 'Horn'
+            
+            # Create node ID with the (possibly reclassified) class name
             node_id = f"L_{component_counter}_{class_name}"
+            
+            # Store orientation with the final node_id if we had a reclassification
+            if reclass_key in self.horn_reclassifications and 'orientation' in self.horn_reclassifications[reclass_key]:
+                self.horn_orientations[node_id] = self.horn_reclassifications[reclass_key]['orientation']
+            
             component_counter += 1
             
             self.nodes[node_id] = ComponentNode(
@@ -137,13 +168,16 @@ class CircuitGraphAnalyzer:
             # Add to terminal analyzer
             if self.terminal_analyzer:
                 led_orientation = self.led_orientations.get(node_id)
+                horn_orientation = self.horn_orientations.get(node_id)
+                # Pass orientation data (either LED or Horn)
+                orientation_data = led_orientation if led_orientation else horn_orientation
                 self.terminal_analyzer.add_component(
                     component_id=node_id,
                     component_type=class_name,
                     bbox=bbox,
                     confidence=confidence,
                     board_side='left',
-                    led_orientation=led_orientation
+                    led_orientation=orientation_data
                 )
         
         # Process right side detections
@@ -165,7 +199,18 @@ class CircuitGraphAnalyzer:
             bbox = [float(x1), float(y1), float(x2), float(y2)]
             center = (float(center_x), float(center_y))
             
+            # Check if this component was reclassified as Horn based on red plus detection
+            reclass_key = f"R_{component_counter}"
+            if reclass_key in self.horn_reclassifications:
+                class_name = 'Horn'
+            
+            # Create node ID with the (possibly reclassified) class name
             node_id = f"R_{component_counter}_{class_name}"
+            
+            # Store orientation with the final node_id if we had a reclassification
+            if reclass_key in self.horn_reclassifications and 'orientation' in self.horn_reclassifications[reclass_key]:
+                self.horn_orientations[node_id] = self.horn_reclassifications[reclass_key]['orientation']
+            
             component_counter += 1
             
             self.nodes[node_id] = ComponentNode(
@@ -182,13 +227,16 @@ class CircuitGraphAnalyzer:
             # Add to terminal analyzer
             if self.terminal_analyzer:
                 led_orientation = self.led_orientations.get(node_id)
+                horn_orientation = self.horn_orientations.get(node_id)
+                # Pass orientation data (either LED or Horn)
+                orientation_data = led_orientation if led_orientation else horn_orientation
                 self.terminal_analyzer.add_component(
                     component_id=node_id,
                     component_type=class_name,
                     bbox=bbox,
                     confidence=confidence,
                     board_side='right',
-                    led_orientation=led_orientation
+                    led_orientation=orientation_data
                 )
     
     def calculate_distance(self, node1: ComponentNode, node2: ComponentNode) -> float:
@@ -291,6 +339,10 @@ class CircuitGraphAnalyzer:
             if node_id in self.led_orientations:
                 node_data['led_orientation'] = self.led_orientations[node_id]
             
+            # Add Horn orientation if available
+            if node_id in self.horn_orientations:
+                node_data['horn_orientation'] = self.horn_orientations[node_id]
+            
             nodes_dict[node_id] = node_data
         
         # Add terminal-based analysis data if available
@@ -327,6 +379,7 @@ class CircuitGraphAnalyzer:
                 for conn in self.connections
             ],
             'led_orientations': self.led_orientations,  # Add summary of all LED orientations
+            'horn_orientations': self.horn_orientations,  # Add summary of all Horn orientations
             'terminal_analysis': terminal_data  # Add terminal-based analysis results
         }
     
@@ -378,6 +431,13 @@ class CircuitGraphAnalyzer:
                         if orientation_info['orientation'] != 'UNKNOWN':
                             comp_line += f" ({orientation_info['led_orientation']}, +{orientation_info['plus_position']})"
                     
+                    # Add Horn orientation if available
+                    if node_id in self.horn_orientations:
+                        orientation_info = self.horn_orientations[node_id]
+                        comp_line += f" - Horn: {orientation_info['orientation']}"
+                        if orientation_info['orientation'] != 'UNKNOWN':
+                            comp_line += f" ({orientation_info['horn_orientation']}, +{orientation_info['plus_position']})"
+                    
                     summary_lines.append(comp_line)
             
             # Show right board components
@@ -393,6 +453,13 @@ class CircuitGraphAnalyzer:
                         if orientation_info['orientation'] != 'UNKNOWN':
                             comp_line += f" ({orientation_info['led_orientation']}, +{orientation_info['plus_position']})"
                     
+                    # Add Horn orientation if available
+                    if node_id in self.horn_orientations:
+                        orientation_info = self.horn_orientations[node_id]
+                        comp_line += f" - Horn: {orientation_info['orientation']}"
+                        if orientation_info['orientation'] != 'UNKNOWN':
+                            comp_line += f" ({orientation_info['horn_orientation']}, +{orientation_info['plus_position']})"
+                    
                     summary_lines.append(comp_line)
             summary_lines.append("")
             
@@ -405,6 +472,24 @@ class CircuitGraphAnalyzer:
                     summary_lines.append(f"    Confidence: {orientation_info['confidence']:.2f}")
                     if 'led_orientation' in orientation_info:
                         summary_lines.append(f"    LED Position: {orientation_info['led_orientation']}")
+                    if 'plus_position' in orientation_info and orientation_info['plus_position']:
+                        summary_lines.append(f"    '+' Position: {orientation_info['plus_position']}")
+                    if 'bbox_width' in orientation_info and 'bbox_height' in orientation_info:
+                        summary_lines.append(f"    Bounding Box: {orientation_info['bbox_width']:.0f}x{orientation_info['bbox_height']:.0f} pixels")
+                    if 'reason' in orientation_info:
+                        summary_lines.append(f"    Details: {orientation_info['reason']}")
+                summary_lines.append("")
+            
+            # Horn Orientation Summary (if any Horns detected)
+            # Note: This includes Photoresistors since they're actually Horns
+            if self.horn_orientations:
+                summary_lines.append("Horn Orientation Details (includes Photoresistor/Lamp if detected):")
+                for horn_id, orientation_info in self.horn_orientations.items():
+                    summary_lines.append(f"  {horn_id}:")
+                    summary_lines.append(f"    Status: {orientation_info['orientation']}")
+                    summary_lines.append(f"    Confidence: {orientation_info['confidence']:.2f}")
+                    if 'horn_orientation' in orientation_info:
+                        summary_lines.append(f"    Horn Position: {orientation_info['horn_orientation']}")
                     if 'plus_position' in orientation_info and orientation_info['plus_position']:
                         summary_lines.append(f"    '+' Position: {orientation_info['plus_position']}")
                     if 'bbox_width' in orientation_info and 'bbox_height' in orientation_info:
@@ -456,20 +541,25 @@ class CircuitGraphAnalyzer:
         Complete circuit analysis workflow
         
         Args:
-            frame: Optional - original frame for LED orientation detection
+            frame: Optional - original frame for LED and Horn orientation detection
         """
         print("🔍 Analyzing circuit connectivity...")
         
         # Store frame for orientation detection
         self.frame = frame
         
-        # Detect LED orientations FIRST (before adding detections)
-        # This way LED orientations are available when adding components to terminal analyzer
-        if frame is not None and self.led_detector is not None:
-            print("   Detecting LED orientations...")
+        # STEP 1: Detect and reclassify horns based on red plus sign (post-processing)
+        # This must happen FIRST so reclassifications are available during node creation
+        if frame is not None and self.horn_detector is not None:
+            self.detect_and_reclassify_horns(left_boxes, right_boxes, model_names, frame)
+        
+        # STEP 2: Detect LED and Horn orientations (before adding detections)
+        # This way orientations are available when adding components to terminal analyzer
+        if frame is not None and (self.led_detector is not None or self.horn_detector is not None):
+            print("   Detecting component orientations (LED and Horn)...")
             self.detect_led_orientations_from_boxes(left_boxes, right_boxes, model_names, frame)
         
-        # Add detections (will also add to terminal analyzer with LED orientations)
+        # Add detections (will also add to terminal analyzer with LED/Horn orientations)
         self.add_detections(left_boxes, right_boxes, model_names, frame_width, frame_height)
         print(f"   Added {len(self.nodes)} components")
         
@@ -489,13 +579,105 @@ class CircuitGraphAnalyzer:
         
         return self.graph_data
     
+    def detect_and_reclassify_horns(self, left_boxes, right_boxes, model_names, frame):
+        """
+        Post-process detection: Look for red plus signs to identify and reclassify horns.
+        If Lamp, Photoresistor, or Horn is detected, check for red plus. If found, it's a Horn.
+        Stores reclassifications for use during node creation.
+        """
+        if frame is None or self.horn_detector is None:
+            return
+        
+        print("   Post-processing: Checking for red plus signs to identify Horns...")
+        
+        # Clear previous reclassifications
+        self.horn_reclassifications.clear()
+        
+        # Components that might be horns (if they have a red plus)
+        horn_candidate_types = ['Lamp', 'Photoresistor', 'Horn']
+        
+        reclassified_count = 0
+        component_counter = 0
+        
+        # Process left boxes
+        for i, box in left_boxes:
+            x1, y1, x2, y2 = box.xyxy[0].cpu().numpy()
+            class_id = int(box.cls[0])
+            raw_class_name = model_names[class_id]
+            
+            if raw_class_name == "Green tape":
+                component_counter += 1
+                continue
+            
+            # Check if this is a potential horn candidate (based on RAW model output)
+            if raw_class_name in horn_candidate_types:
+                bbox = [float(x1), float(y1), float(x2), float(y2)]
+                # Try to detect red plus sign
+                result = self.horn_detector.detect_orientation(frame, bbox, debug=True)  # Enable debug
+                
+                # If we found a red plus with good confidence, it's a Horn!
+                if result['confidence'] >= 0.5:
+                    # Store reclassification using component_counter as key
+                    # This key will be used in add_detections to match the same component
+                    reclass_key = f"L_{component_counter}"
+                    self.horn_reclassifications[reclass_key] = {
+                        'original_type': raw_class_name,
+                        'new_type': 'Horn',
+                        'confidence': result['confidence'],
+                        'orientation': result
+                    }
+                    if raw_class_name != 'Horn':
+                        print(f"   ✓ Reclassified {raw_class_name} → Horn (red plus detected, conf: {result['confidence']:.2f})")
+                        reclassified_count += 1
+            
+            component_counter += 1
+        
+        # Process right boxes  
+        for i, box in right_boxes:
+            x1, y1, x2, y2 = box.xyxy[0].cpu().numpy()
+            class_id = int(box.cls[0])
+            raw_class_name = model_names[class_id]
+            
+            if raw_class_name == "Green tape":
+                component_counter += 1
+                continue
+            
+            # Check if this is a potential horn candidate (based on RAW model output)
+            if raw_class_name in horn_candidate_types:
+                bbox = [float(x1), float(y1), float(x2), float(y2)]
+                # Try to detect red plus sign
+                result = self.horn_detector.detect_orientation(frame, bbox, debug=True)  # Enable debug
+                
+                # If we found a red plus with good confidence, it's a Horn!
+                if result['confidence'] >= 0.5:
+                    # Store reclassification using component_counter as key
+                    # This key will be used in add_detections to match the same component
+                    reclass_key = f"R_{component_counter}"
+                    self.horn_reclassifications[reclass_key] = {
+                        'original_type': raw_class_name,
+                        'new_type': 'Horn',
+                        'confidence': result['confidence'],
+                        'orientation': result
+                    }
+                    if raw_class_name != 'Horn':
+                        print(f"   ✓ Reclassified {raw_class_name} → Horn (red plus detected, conf: {result['confidence']:.2f})")
+                        reclassified_count += 1
+            
+            component_counter += 1
+        
+        if reclassified_count > 0:
+            print(f"   Reclassified {reclassified_count} component(s) as Horn based on red plus detection")
+    
     def detect_led_orientations_from_boxes(self, left_boxes, right_boxes, model_names, frame):
-        """Detect orientation of all LED_2 (Red) components from raw boxes (before creating nodes)"""
-        if frame is None or self.led_detector is None:
+        """Detect orientation of all LED_2 (Red) and Horn components from raw boxes (before creating nodes)"""
+        if frame is None:
             return
         
         self.led_orientations.clear()
+        self.horn_orientations.clear()
         led_count = 0
+        horn_count = 0
+        horn_reclassified_count = 0
         component_counter = 0
         
         # Process left boxes
@@ -511,7 +693,8 @@ class CircuitGraphAnalyzer:
             node_id = f"L_{component_counter}_{class_name}"
             component_counter += 1
             
-            if 'LED_2 (Red)' in class_name:
+            # Detect LED orientation
+            if 'LED_2 (Red)' in class_name and self.led_detector is not None:
                 led_count += 1
                 bbox = [float(x1), float(y1), float(x2), float(y2)]
                 result = self.led_detector.detect_orientation(frame, bbox, debug=False)
@@ -519,6 +702,25 @@ class CircuitGraphAnalyzer:
                 
                 if result['orientation'] != 'UNKNOWN':
                     print(f"   LED {node_id}: {result['orientation']} (confidence: {result['confidence']:.2f})")
+            
+            # Detect Horn orientation (skip if already processed during reclassification)
+            # Note: Reclassified horns already have their orientation in self.horn_orientations
+            # Also check for Photoresistor and Lamp since they could be Horns
+            if ('Horn' in class_name or 'Photoresistor' in class_name or 'Lamp' in class_name) and self.horn_detector is not None and node_id not in self.horn_orientations:
+                horn_count += 1
+                bbox = [float(x1), float(y1), float(x2), float(y2)]
+                result = self.horn_detector.detect_orientation(frame, bbox, debug=True)  # Enable debug
+                self.horn_orientations[node_id] = result
+                
+                if result['orientation'] != 'UNKNOWN':
+                    # Show as "Horn" if it's Photoresistor or Lamp (with high confidence red plus)
+                    if 'Photoresistor' in class_name and result['confidence'] >= 0.5:
+                        display_name = 'Horn (detected as Photoresistor)'
+                    elif 'Lamp' in class_name and result['confidence'] >= 0.5:
+                        display_name = 'Horn (detected as Lamp)'
+                    else:
+                        display_name = class_name
+                    print(f"   {display_name} {node_id}: {result['orientation']} (confidence: {result['confidence']:.2f})")
         
         # Process right boxes
         for i, box in right_boxes:
@@ -533,7 +735,8 @@ class CircuitGraphAnalyzer:
             node_id = f"R_{component_counter}_{class_name}"
             component_counter += 1
             
-            if 'LED_2 (Red)' in class_name:
+            # Detect LED orientation
+            if 'LED_2 (Red)' in class_name and self.led_detector is not None:
                 led_count += 1
                 bbox = [float(x1), float(y1), float(x2), float(y2)]
                 result = self.led_detector.detect_orientation(frame, bbox, debug=False)
@@ -541,27 +744,62 @@ class CircuitGraphAnalyzer:
                 
                 if result['orientation'] != 'UNKNOWN':
                     print(f"   LED {node_id}: {result['orientation']} (confidence: {result['confidence']:.2f})")
+            
+            # Detect Horn orientation (skip if already processed during reclassification)
+            # Note: Reclassified horns already have their orientation in self.horn_orientations
+            # Also check for Photoresistor and Lamp since they could be Horns
+            if ('Horn' in class_name or 'Photoresistor' in class_name or 'Lamp' in class_name) and self.horn_detector is not None and node_id not in self.horn_orientations:
+                horn_count += 1
+                bbox = [float(x1), float(y1), float(x2), float(y2)]
+                result = self.horn_detector.detect_orientation(frame, bbox, debug=True)  # Enable debug
+                self.horn_orientations[node_id] = result
+                
+                if result['orientation'] != 'UNKNOWN':
+                    # Show as "Horn" if it's Photoresistor or Lamp (with high confidence red plus)
+                    if 'Photoresistor' in class_name and result['confidence'] >= 0.5:
+                        display_name = 'Horn (detected as Photoresistor)'
+                    elif 'Lamp' in class_name and result['confidence'] >= 0.5:
+                        display_name = 'Horn (detected as Lamp)'
+                    else:
+                        display_name = class_name
+                    print(f"   {display_name} {node_id}: {result['orientation']} (confidence: {result['confidence']:.2f})")
         
         if led_count > 0:
             print(f"   Detected orientation for {led_count} LED component(s)")
+        if horn_count > 0:
+            print(f"   Detected orientation for {horn_count} Horn component(s)")
     
     def detect_led_orientations(self):
-        """Detect orientation of all LED_2 (Red) components (from existing nodes)"""
-        if self.frame is None or self.led_detector is None:
+        """Detect orientation of all LED_2 (Red) and Horn components (from existing nodes)"""
+        if self.frame is None:
             return
         
         led_count = 0
+        horn_count = 0
+        
         for node_id, node in self.nodes.items():
-            if 'LED_2 (Red)' in node.type:
+            # Detect LED orientation
+            if 'LED_2 (Red)' in node.type and self.led_detector is not None:
                 led_count += 1
                 result = self.led_detector.detect_orientation(self.frame, node.bbox, debug=False)
                 self.led_orientations[node_id] = result
                 
                 if result['orientation'] != 'UNKNOWN':
                     print(f"   LED {node_id}: {result['orientation']} (confidence: {result['confidence']:.2f})")
+            
+            # Detect Horn orientation
+            if 'Horn' in node.type and self.horn_detector is not None:
+                horn_count += 1
+                result = self.horn_detector.detect_orientation(self.frame, node.bbox, debug=False)
+                self.horn_orientations[node_id] = result
+                
+                if result['orientation'] != 'UNKNOWN':
+                    print(f"   Horn {node_id}: {result['orientation']} (confidence: {result['confidence']:.2f})")
         
         if led_count > 0:
             print(f"   Detected orientation for {led_count} LED component(s)")
+        if horn_count > 0:
+            print(f"   Detected orientation for {horn_count} Horn component(s)")
 
 if __name__ == "__main__":
     # Demo usage

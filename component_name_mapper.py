@@ -2,12 +2,14 @@
 """
 Component Name Mapper
 Maps component names from model output to display names
+
+NOTE: Photoresistor → Horn mapping has been moved to model_class_renamer.py
+This now happens at model load time instead of during name mapping.
 """
 
 # Mapping from model class names to display names
-COMPONENT_NAME_MAP = {
-    'Photoresistor': 'Horn',  # Mislabeled during training, should be Horn
-}
+# (Currently empty - Photoresistor renaming now happens at model load time)
+COMPONENT_NAME_MAP = {}
 
 def map_component_name(model_name: str) -> str:
     """

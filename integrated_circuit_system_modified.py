@@ -21,6 +21,12 @@ try:
 except ImportError:
     VISUALIZER_AVAILABLE = False
 
+try:
+    from model_class_renamer import rename_model_classes
+    RENAMER_AVAILABLE = True
+except ImportError:
+    RENAMER_AVAILABLE = False
+
 class IntegratedCircuitSystem:
     def __init__(self):
         self.model = None
@@ -74,6 +80,11 @@ class IntegratedCircuitSystem:
             
         try:
             self.model = YOLO(str(model_path))
+            
+            # Rename mislabeled classes (Photoresistor → Horn)
+            if RENAMER_AVAILABLE:
+                rename_model_classes(self.model)
+            
             print(f"✅ Model loaded: {model_path}")
             return True
         except Exception as e:
@@ -209,7 +220,7 @@ class IntegratedCircuitSystem:
                 'battery_connections': battery_connections
             }
     
-    def analyze_circuit_graph(self, left_boxes, right_boxes, frame_width, frame_height, save_files=True, timestamp=None):
+    def analyze_circuit_graph(self, left_boxes, right_boxes, frame_width, frame_height, frame=None, save_files=True, timestamp=None):
         """Analyze circuit connectivity and save results"""
         if not VISUALIZER_AVAILABLE or not self.graph_analyzer:
             print("⚠️ Graph analyzer not available")
@@ -223,11 +234,9 @@ class IntegratedCircuitSystem:
         try:
             print(f"   Analyzing {len(left_boxes)} left components and {len(right_boxes)} right components...")
             
-            # Perform circuit analysis (with frame for LED orientation detection)
-            # Note: We don't have the frame here in analyze_circuit_graph, so LED orientation
-            # will only work in analyze_saved_final_detection where we have the frame
+            # Perform circuit analysis (with frame for LED and Horn orientation detection)
             graph_data = self.graph_analyzer.analyze_circuit(
-                left_boxes, right_boxes, self.model.names, frame_width, frame_height, frame=None
+                left_boxes, right_boxes, self.model.names, frame_width, frame_height, frame=frame
             )
             
             if not graph_data or 'nodes' not in graph_data:
@@ -534,7 +543,7 @@ class IntegratedCircuitSystem:
                             # Generate circuit graph JSON with completion status
                             print("🔍 Analyzing circuit connectivity and completion...")
                             graph_data = self.analyze_circuit_graph(last_left_boxes, last_right_boxes, 
-                                                                   width, height, save_files=True, timestamp=timestamp)
+                                                                   width, height, frame=last_frame, save_files=True, timestamp=timestamp)
                             
                             # If graph analysis failed, try to re-analyze from the saved image
                             if not graph_data:
@@ -561,7 +570,7 @@ class IntegratedCircuitSystem:
                                             
                                             # Try graph analysis again
                                             graph_data = self.analyze_circuit_graph(retry_left_boxes, retry_right_boxes,
-                                                                                   width, height, save_files=True, timestamp=timestamp)
+                                                                                   width, height, frame=last_frame, save_files=True, timestamp=timestamp)
                                 except Exception as e:
                                     print(f"❌ Re-analysis also failed: {e}")
                             
@@ -605,7 +614,7 @@ class IntegratedCircuitSystem:
                     # Analyze circuit graph with current detections
                     if left_boxes or right_boxes:
                         print("🔍 Analyzing circuit connectivity...")
-                        self.analyze_circuit_graph(left_boxes, right_boxes, width, height, save_files=True)
+                        self.analyze_circuit_graph(left_boxes, right_boxes, width, height, frame=frame, save_files=True)
                     else:
                         print("⚠️ No detections available for graph analysis - ensure components are visible on camera")
                 
