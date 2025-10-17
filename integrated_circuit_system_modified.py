@@ -508,76 +508,72 @@ class IntegratedCircuitSystem:
                         if self.last_detection_data:
                             print("\n🔍 Performing final circuit analysis...")
                             
-                            # Extract data from last detection
-                            last_left_boxes = self.last_detection_data['left_boxes']
-                            last_right_boxes = self.last_detection_data['right_boxes']
+                            # Extract frame data
                             last_frame = self.last_detection_data['frame']
-                            last_frame_with_boxes = self.last_detection_data['frame_with_boxes']
                             width = self.last_detection_data['width']
                             height = self.last_detection_data['height']
-                            
-                            # Debug: show component counts
-                            if 'component_count' in self.last_detection_data:
-                                left_count, right_count = self.last_detection_data['component_count']
-                                print(f"   Components detected: {left_count} left, {right_count} right (excluding green tape)")
-                            print(f"   Total detections: {len(last_left_boxes)} left boxes, {len(last_right_boxes)} right boxes")
-                            
-                            # Save final frame with bounding boxes
                             timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-                            final_frame_path = self.output_dir / f"final_detection_{timestamp}.jpg"
-                            cv2.imwrite(str(final_frame_path), last_frame_with_boxes)
-                            print(f"📸 Final detection frame saved: {final_frame_path}")
                             
-                            # Generate board visualization
-                            left_detections, right_detections = convert_detections_to_7x5_grid(
-                                last_left_boxes, last_right_boxes, self.model.names, width, height)
+                            # RE-RUN detection on the final frame to ensure perfect alignment
+                            print("   Re-running detection on final frame for accurate analysis...")
+                            results = self.model(last_frame, conf=0.6, iou=0.5)
                             
-                            if VISUALIZER_AVAILABLE:
-                                print("🎨 Generating board visualization...")
-                                fig = self.visualizer.create_dual_board_visualization(left_detections, right_detections)
-                                viz_path = self.output_dir / f"board_visualization_{timestamp}.png"
-                                fig.savefig(str(viz_path), dpi=150, bbox_inches='tight')
-                                print(f"📊 Board visualization saved: {viz_path}")
-                                plt.close(fig)
-                            
-                            # Generate circuit graph JSON with completion status
-                            print("🔍 Analyzing circuit connectivity and completion...")
-                            graph_data = self.analyze_circuit_graph(last_left_boxes, last_right_boxes, 
-                                                                   width, height, frame=last_frame, save_files=True, timestamp=timestamp)
-                            
-                            # If graph analysis failed, try to re-analyze from the saved image
-                            if not graph_data:
-                                print("\n⚠️ Initial graph analysis failed - attempting to re-analyze from saved image...")
-                                try:
-                                    # Re-run detection on the saved final frame
-                                    results = self.model(last_frame, conf=0.6, iou=0.5)
-                                    if results and len(results) > 0:
-                                        result = results[0]
-                                        if result.boxes is not None:
-                                            # Re-split boxes by side
-                                            split_x = int(width * 0.5)
-                                            retry_left_boxes = []
-                                            retry_right_boxes = []
-                                            
-                                            for i, box in enumerate(result.boxes):
-                                                x1, y1, x2, y2 = box.xyxy[0].cpu().numpy()
-                                                center_x = (x1 + x2) / 2
-                                                
-                                                if center_x < split_x:
-                                                    retry_left_boxes.append((i, box))
-                                                else:
-                                                    retry_right_boxes.append((i, box))
-                                            
-                                            # Try graph analysis again
-                                            graph_data = self.analyze_circuit_graph(retry_left_boxes, retry_right_boxes,
-                                                                                   width, height, frame=last_frame, save_files=True, timestamp=timestamp)
-                                except Exception as e:
-                                    print(f"❌ Re-analysis also failed: {e}")
-                            
-                            if graph_data:
-                                print(f"\n✅ Analysis complete! Total frames captured: {len(self.captured_frames)}")
+                            if not results or len(results) == 0 or results[0].boxes is None:
+                                print("❌ No detections in final frame")
                             else:
-                                print(f"\n⚠️ Graph analysis could not be completed, but {len(self.captured_frames)} frames were captured")
+                                result = results[0]
+                                final_frame_with_boxes = result.plot()
+                                
+                                # Save final frame with bounding boxes
+                                final_frame_path = self.output_dir / f"final_detection_{timestamp}.jpg"
+                                cv2.imwrite(str(final_frame_path), final_frame_with_boxes)
+                                print(f"📸 Final detection frame saved: {final_frame_path}")
+                                
+                                # Split boxes by side using the same logic as main loop
+                                split_x = int(width * 0.5)
+                                last_left_boxes = []
+                                last_right_boxes = []
+                                
+                                for i, box in enumerate(result.boxes):
+                                    x1, y1, x2, y2 = box.xyxy[0].cpu().numpy()
+                                    center_x = (x1 + x2) / 2
+                                    
+                                    if center_x < split_x:
+                                        last_left_boxes.append((i, box))
+                                    else:
+                                        last_right_boxes.append((i, box))
+                                
+                                # Debug: show component counts
+                                left_count = sum(1 for i, box in last_left_boxes 
+                                               if self.model.names[int(box.cls[0])] != "Green tape")
+                                right_count = sum(1 for i, box in last_right_boxes 
+                                                if self.model.names[int(box.cls[0])] != "Green tape")
+                                
+                                print(f"   Components detected in final frame: {left_count} left, {right_count} right (excluding green tape)")
+                                print(f"   Total detections: {len(last_left_boxes)} left boxes, {len(last_right_boxes)} right boxes")
+                                
+                                # Generate board visualization
+                                left_detections, right_detections = convert_detections_to_7x5_grid(
+                                    last_left_boxes, last_right_boxes, self.model.names, width, height)
+                                
+                                if VISUALIZER_AVAILABLE:
+                                    print("🎨 Generating board visualization...")
+                                    fig = self.visualizer.create_dual_board_visualization(left_detections, right_detections)
+                                    viz_path = self.output_dir / f"board_visualization_{timestamp}.png"
+                                    fig.savefig(str(viz_path), dpi=150, bbox_inches='tight')
+                                    print(f"📊 Board visualization saved: {viz_path}")
+                                    plt.close(fig)
+                                
+                                # Generate circuit graph JSON with completion status
+                                # Using fresh detections from the final frame
+                                print("🔍 Analyzing circuit connectivity and completion...")
+                                graph_data = self.analyze_circuit_graph(last_left_boxes, last_right_boxes, 
+                                                                       width, height, frame=last_frame, save_files=True, timestamp=timestamp)
+                                
+                                if graph_data:
+                                    print(f"\n✅ Analysis complete! Total frames captured: {len(self.captured_frames)}")
+                                else:
+                                    print(f"\n⚠️ Graph analysis could not be completed, but {len(self.captured_frames)} frames were captured")
                             
                         else:
                             print("⚠️ No detection data available for final analysis")
